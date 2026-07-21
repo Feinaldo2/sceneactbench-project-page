@@ -2235,6 +2235,33 @@ pre {
   object-fit: cover;
 }
 
+.explorer-image-open {
+  display: block;
+  height: 100%;
+  cursor: zoom-in;
+}
+
+.explorer-image-open img {
+  transition: transform 180ms ease;
+}
+
+.explorer-image-open:hover img,
+.explorer-image-open:focus-visible img {
+  transform: scale(1.015);
+}
+
+.explorer-open-badge {
+  position: absolute;
+  bottom: 9px;
+  left: 9px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--blue);
+  font-size: 0.52rem;
+  font-weight: 750;
+}
+
 .explorer-image figcaption {
   position: absolute;
   right: 9px;
@@ -2292,6 +2319,20 @@ pre {
   color: white;
   font-size: 0.53rem;
   transform: translateX(-50%);
+}
+
+.viewer-download {
+  position: absolute;
+  z-index: 4;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 9px;
+  border: 1px solid rgba(203, 214, 223, 0.85);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--blue);
+  font-size: 0.53rem;
+  font-weight: 750;
 }
 
 .scene-output-grid > .explorer-image,

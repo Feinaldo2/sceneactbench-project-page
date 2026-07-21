@@ -62,7 +62,16 @@ function ImageSlot({
   }
   return (
     <figure className="explorer-image">
-      <img src={asset.src} alt={asset.alt} loading="lazy" onError={() => setFailed(true)} />
+      <a
+        className="explorer-image-open"
+        href={asset.src}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Open full-size ${label.toLowerCase()}`}
+      >
+        <img src={asset.src} alt={asset.alt} loading="lazy" onError={() => setFailed(true)} />
+        <span className="explorer-open-badge">Open ↗</span>
+      </a>
       <figcaption>{label}</figcaption>
     </figure>
   );
@@ -174,6 +183,11 @@ function ModelViewer({
         />
       )}
       {asset && status === 'loading' && <span className="viewer-status">Loading geometry…</span>}
+      {asset && (
+        <a className="viewer-download" href={asset.src} download>
+          Download GLB
+        </a>
+      )}
     </div>
   );
 }
