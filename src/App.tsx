@@ -303,14 +303,9 @@ function AnalysisSection() {
           eyebrow="Analysis"
           title="Analysis"
         >
-          Decompositions, sensitivity slices, budget traces, and stage-tagged failures make the
-          benchmark useful beyond a single ordering.
+          Move from aggregate rankings to input effects, failure stages, budgets, scaling curves,
+          and representative action traces.
         </SectionHeading>
-        <div className="figure-sync-note">
-          <span>Figure provenance</span>
-          Web-optimized previews are generated from the current manuscript exports; open any
-          panel to inspect the canonical figure at a larger scale.
-        </div>
         <AnalysisGallery />
       </div>
     </section>

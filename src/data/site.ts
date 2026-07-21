@@ -54,8 +54,12 @@ export const analysisItems = [
   {
     id: 'ranking',
     kicker: '01 · Result structure',
+    tab: 'Ranking',
+    accent: '#2f6bb2',
     title: 'Ranking decomposition',
-    description: 'Overall separates into five fixed, task-normalized components.',
+    headline: 'Overall rankings hide sharply different task profiles.',
+    description:
+      'The same aggregate score can come from very different strengths. Decomposing Overall shows which tasks create each model’s advantage—and where that advantage disappears.',
     kind: 'stacked' as const,
     image: withBase('assets/paper/top3_analysis.webp'),
     width: 841,
@@ -65,8 +69,12 @@ export const analysisItems = [
   {
     id: 'sensitivity',
     kicker: '02 · Observation',
+    tab: 'Inputs',
+    accent: '#6d6fc4',
     title: 'Input sensitivity',
-    description: 'Additional views or visual realism help some configurations and hurt others.',
+    headline: 'More visual evidence does not help every agent equally.',
+    description:
+      'Multi-view evidence and photo-realistic inputs change models in different directions. The benchmark therefore reports paired conditions rather than assuming richer input is always easier.',
     kind: 'sensitivity' as const,
     image: withBase('assets/paper/input_conditions.webp'),
     width: 748,
@@ -76,8 +84,12 @@ export const analysisItems = [
   {
     id: 'failures',
     kicker: '03 · Diagnosis',
+    tab: 'Failures',
+    accent: '#1f9c91',
     title: 'Failure stages',
-    description: 'Conditional diagnostics separate target, geometry, coverage, and motion failures.',
+    headline: 'Failures emerge at different stages of the action pipeline.',
+    description:
+      'Stage-aware diagnostics separate target selection, geometry, coverage, and motion errors, making similar endpoint scores technically distinguishable.',
     kind: 'stages' as const,
     image: withBase('assets/paper/failure_stages.webp'),
     width: 866,
@@ -87,8 +99,12 @@ export const analysisItems = [
   {
     id: 'budget',
     kicker: '04 · Efficiency',
+    tab: 'Budget',
+    accent: '#d7903d',
     title: 'Effective budget',
-    description: 'Allocated interactions and interactions actually used tell different stories.',
+    headline: 'Allocated steps and useful steps are not the same.',
+    description:
+      'Agents often stop early, repeat actions, or spend calls without improving the artifact. Effective budget exposes how much of the available interaction window becomes useful work.',
     kind: 'budget' as const,
     image: withBase('assets/paper/effective_budget.webp'),
     width: 830,
@@ -98,8 +114,12 @@ export const analysisItems = [
   {
     id: 'steps',
     kicker: '05 · Scaling',
+    tab: 'Step curves',
+    accent: '#8b61cf',
     title: 'Step curves',
-    description: 'Task quality is read against agent steps rather than endpoint alone.',
+    headline: 'More steps help—until the agent saturates or regresses.',
+    description:
+      'The animated Overall curves replay the exact frozen checkpoints from 10 to 150 agent steps. They reveal fast gains, plateaus, and late-stage instability that endpoint tables conceal.',
     kind: 'curves' as const,
     image: withBase('assets/paper/step_curve.webp'),
     width: 839,
@@ -109,8 +129,12 @@ export const analysisItems = [
   {
     id: 'traces',
     kicker: '06 · Behavior',
+    tab: 'Traces',
+    accent: '#cf5f72',
     title: 'Representative traces',
-    description: 'Compact action traces reveal recovery, repetition, and premature stopping.',
+    headline: 'The same score can come from very different behavior.',
+    description:
+      'Representative traces expose recovery, repetition, verification, and premature stopping, linking final artifacts back to the actions that produced them.',
     kind: 'trace' as const,
     image: withBase('assets/paper/agent_traces.webp'),
     width: 880,

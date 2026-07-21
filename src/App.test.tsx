@@ -11,6 +11,14 @@ const emptyManifest = {
 
 beforeEach(() => {
   vi.stubGlobal(
+    'matchMedia',
+    vi.fn().mockReturnValue({
+      matches: true,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }),
+  );
+  vi.stubGlobal(
     'fetch',
     vi.fn().mockResolvedValue({
       ok: true,
@@ -78,6 +86,24 @@ describe('SceneActBench project page', () => {
     expect(dialog).toBeInTheDocument();
     fireEvent.click(within(dialog).getByRole('button', { name: 'Close figure' }));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('switches analysis panels and exposes the animated step curve', () => {
+    render(<App />);
+    const analysisTabs = screen.getByRole('tablist', { name: 'Analysis figures' });
+    const tabs = within(analysisTabs).getAllByRole('tab');
+    expect(tabs).toHaveLength(6);
+    fireEvent.click(within(analysisTabs).getByRole('tab', { name: 'Step curves' }));
+    expect(
+      screen.getByRole('heading', {
+        level: 3,
+        name: /More steps help—until the agent saturates or regresses/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'Animated Overall score curves from 10 to 150 agent steps' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Replay' })).toBeInTheDocument();
   });
 
   it('does not expose superseded metric labels', () => {

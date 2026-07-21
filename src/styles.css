@@ -2644,66 +2644,96 @@ pre {
   background: #f6f8fa;
 }
 
-.figure-sync-note {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin: -22px 0 28px;
-  color: var(--ink-faint);
-  font-size: 0.65rem;
+.analysis-navigator {
+  max-width: 1060px;
+  margin-inline: auto;
 }
 
-.figure-sync-note span {
-  flex: 0 0 auto;
-  padding: 5px 8px;
-  border-radius: 4px;
-  background: #e8eef3;
-  color: var(--ink-soft);
-  font-size: 0.52rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.analysis-gallery {
+.analysis-tabs {
   display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(2, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background: #eef2f6;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
-.analysis-card {
+.analysis-tabs button {
+  min-height: 58px;
+  padding: 12px 8px 9px;
+  border-right: 1px solid rgba(18, 53, 99, 0.08);
+  border-bottom: 4px solid transparent;
+  background: color-mix(in srgb, var(--analysis-accent) 11%, white);
+  color: color-mix(in srgb, var(--analysis-accent) 76%, #10253d);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 760;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.analysis-tabs button:last-child {
+  border-right: 0;
+}
+
+.analysis-tabs button[aria-selected="true"] {
+  border-bottom-color: var(--analysis-accent);
+  background: color-mix(in srgb, var(--analysis-accent) 20%, white);
+  color: #10253d;
+}
+
+.analysis-panel {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--analysis-accent);
+  background: white;
+  box-shadow: 0 16px 42px rgba(16, 37, 61, 0.06);
+}
+
+.analysis-panel-copy {
+  max-width: 980px;
+  padding: 34px 40px 25px;
+}
+
+.analysis-panel-copy h3 {
+  max-width: 900px;
+  margin: 12px 0 14px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(2.15rem, 3.4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.analysis-panel-copy p {
+  max-width: 920px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.analysis-panel-visual {
+  padding: 0 32px 24px;
+}
+
+.analysis-panel-visual-button {
+  position: relative;
+  display: block;
+  width: 100%;
   overflow: hidden;
   border: 1px solid var(--line);
   background: white;
-  transition: box-shadow 180ms ease, transform 180ms ease;
-}
-
-.analysis-card:hover {
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-2px);
-}
-
-.analysis-visual-button {
-  position: relative;
-  width: 100%;
-  min-height: 310px;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  background: #f8fafb;
   cursor: zoom-in;
-}
-
-.analysis-visual-button > svg {
-  width: 100%;
-  height: 310px;
-  padding: 13px 22px;
 }
 
 .analysis-paper-image {
   display: block;
   width: 100%;
-  height: 310px;
-  padding: 16px;
+  height: auto;
+  max-height: 680px;
+  padding: 12px;
   background: white;
   object-fit: contain;
 }
@@ -2738,27 +2768,174 @@ pre {
 }
 
 .analysis-visual-button:hover .expand-control,
-.analysis-visual-button:focus-visible .expand-control {
+.analysis-visual-button:focus-visible .expand-control,
+.analysis-panel-visual-button:hover .expand-control,
+.analysis-panel-visual-button:focus-visible .expand-control {
   opacity: 1;
   transform: none;
 }
 
-.analysis-card-copy {
-  padding: 25px 27px 28px;
+.analysis-panel-foot {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 13px 30px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
 }
 
-.analysis-card-copy h3 {
-  margin: 8px 0 7px;
-  font-family: var(--serif);
-  font-size: 1.32rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+.analysis-panel-foot > span {
+  font-size: 0.7rem;
+  font-weight: 750;
 }
 
-.analysis-card-copy p {
+.analysis-panel-foot > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.analysis-panel-foot button,
+.step-curve-controls button {
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+.analysis-panel-foot button:hover,
+.analysis-panel-foot button:focus-visible,
+.step-curve-controls button:hover,
+.step-curve-controls button:focus-visible {
+  background: var(--blue-pale);
+}
+
+.analysis-panel-foot strong {
+  color: var(--ink-faint);
+  font-size: 0.62rem;
+}
+
+.step-curve-animation {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+}
+
+.step-curve-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 20px;
+  padding: 18px 25px 5px;
+  color: var(--ink-soft);
+  font-size: 0.67rem;
+}
+
+.step-curve-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.step-curve-legend i {
+  display: block;
+  width: 17px;
+  height: 3px;
+  border-radius: 99px;
+}
+
+.step-curve-animation svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.step-grid-line {
+  fill: none;
+  stroke: #e1e8ed;
+  stroke-width: 1;
+}
+
+.step-axis-line {
+  fill: none;
+  stroke: #aebdc8;
+  stroke-width: 1.2;
+}
+
+.step-axis-label,
+.step-axis-title,
+.step-cursor-label text {
+  fill: #708397;
+  font-family: var(--sans);
+  font-size: 12px;
+}
+
+.step-axis-title {
+  fill: #40576d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.animated-step-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.3;
+  transition: stroke-dashoffset 90ms linear;
+}
+
+.animated-step-point {
+  stroke: white;
+  stroke-width: 1.5;
+  transition: opacity 100ms linear;
+}
+
+.step-cursor {
+  fill: none;
+  stroke: #9db0bf;
+  stroke-dasharray: 4 6;
+  stroke-width: 1;
+}
+
+.step-cursor-label rect {
+  fill: #102a45;
+}
+
+.step-cursor-label text {
+  fill: white;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.step-curve-controls {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 22px;
+  border-top: 1px solid var(--line);
+}
+
+.step-curve-controls p {
   margin: 0;
   color: var(--ink-faint);
   font-size: 0.68rem;
+}
+
+.step-curve-controls p strong {
+  display: block;
+  color: var(--ink);
+  font-size: 0.78rem;
+}
+
+.step-curve-controls > div {
+  display: flex;
+  gap: 6px;
 }
 
 .plot-axis {
@@ -4236,7 +4413,7 @@ body {
   max-width: none;
   margin: 0;
   padding-left: 18px;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   line-height: 1.55;
 }
 
@@ -4278,7 +4455,7 @@ body {
 }
 
 .contribution-grid p {
-  font-size: 0.76rem;
+  font-size: 0.84rem;
   line-height: 1.55;
 }
 
@@ -4292,7 +4469,7 @@ body {
 .leaderboard-shell,
 .tasks-module,
 .explorer-shell,
-.analysis-gallery,
+.analysis-navigator,
 .citation-grid {
   max-width: 1060px;
   margin-inline: auto;
@@ -4300,6 +4477,27 @@ body {
 
 .section-citation .citation-grid {
   max-width: 900px;
+}
+
+.leaderboard-footnotes p {
+  font-size: 0.76rem;
+}
+
+.task-description {
+  font-size: 0.9rem;
+}
+
+.task-specs dd {
+  font-size: 0.74rem;
+}
+
+.metric-card > p,
+.metric-card details p {
+  font-size: 0.78rem;
+}
+
+.explorer-context p {
+  font-size: 0.78rem;
 }
 
 @media (max-width: 980px) {
@@ -4336,6 +4534,18 @@ body {
   .section-heading > p {
     margin-left: 58px;
     grid-column: 1 / -1;
+  }
+
+  .analysis-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .analysis-panel-copy {
+    padding: 30px 30px 22px;
+  }
+
+  .analysis-panel-visual {
+    padding: 0 22px 22px;
   }
 }
 
@@ -4401,6 +4611,54 @@ body {
   .section-heading > p {
     margin-left: 0;
     grid-column: auto;
+  }
+
+  .analysis-tabs {
+    overflow-x: auto;
+    border-radius: 8px 8px 0 0;
+    grid-template-columns: repeat(6, minmax(112px, 1fr));
+  }
+
+  .analysis-tabs button {
+    min-height: 52px;
+  }
+
+  .analysis-panel-copy {
+    padding: 25px 20px 20px;
+  }
+
+  .analysis-panel-copy h3 {
+    font-size: clamp(1.85rem, 9vw, 2.45rem);
+  }
+
+  .analysis-panel-copy p {
+    font-size: 0.88rem;
+  }
+
+  .analysis-panel-visual {
+    padding: 0 10px 14px;
+  }
+
+  .analysis-panel-foot {
+    align-items: flex-start;
+    padding: 13px 18px;
+    flex-direction: column;
+  }
+
+  .analysis-panel-foot > div {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .step-curve-legend {
+    gap: 7px 12px;
+    padding-inline: 14px;
+  }
+
+  .step-curve-controls {
+    align-items: flex-start;
+    padding: 12px 14px;
+    flex-direction: column;
   }
 
   .reference-video-grid {
