@@ -1,5 +1,7 @@
 # SceneActBench project page
 
+[![Deploy GitHub Pages](https://github.com/Feinaldo2/sceneactbench-project-page/actions/workflows/pages.yml/badge.svg)](https://github.com/Feinaldo2/sceneactbench-project-page/actions/workflows/pages.yml)
+
 Production GitHub Pages site for **SceneActBench: Can Agents Act on the 3D Scenes They See?**
 
 Deployed project page: <https://feinaldo2.github.io/sceneactbench-project-page/>
