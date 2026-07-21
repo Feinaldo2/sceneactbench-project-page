@@ -29,13 +29,13 @@ describe('SceneActBench project page', () => {
         name: /SceneActBench: Can Agents Act on the 3D Scenes They See\?/i,
       }),
     ).toBeInTheDocument();
-    const statistics = screen.getByLabelText('Benchmark statistics');
-    expect(within(statistics).getByText('210')).toBeInTheDocument();
-    expect(within(statistics).getByText('520')).toBeInTheDocument();
-    expect(within(statistics).getByText('11')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Benchmark statistics')).not.toBeInTheDocument();
 
     const navigation = screen.getByRole('navigation', { name: 'Page sections' });
-    expect(within(navigation).getAllByRole('link')).toHaveLength(9);
+    expect(within(navigation).getAllByRole('link')).toHaveLength(8);
+    expect(within(navigation).queryByRole('link', { name: 'Resources' })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Citation' })).toBeInTheDocument();
+    expect(screen.queryByText('Authors & citation')).not.toBeInTheDocument();
     expect(screen.getAllByText('Doubao Seed 2.0 Pro').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Claude Sonnet 5').length).toBeGreaterThan(0);
     expect(screen.getByText('Maximum Part Error')).toBeInTheDocument();

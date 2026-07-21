@@ -36,25 +36,18 @@ export const contributions = [
   {
     number: '01',
     title: 'From seeing to doing',
-    text: 'Five executable 3D tasks test whether multimodal agents can convert visual evidence into layouts, cameras, articulated states, geometry, and motion.',
+    text: 'Five executable tasks turn visual evidence into layouts, cameras, geometry, and motion.',
   },
   {
     number: '02',
-    title: 'Measured in native space',
-    text: 'Every task keeps its physically meaningful metrics and artifacts. Rendered similarity alone cannot conceal unusable geometry or broken motion.',
+    title: 'Native metrics',
+    text: 'Task-native metrics expose geometric and temporal errors directly.',
   },
   {
     number: '03',
-    title: 'Traces, not just totals',
-    text: 'The protocol records intermediate actions, effective budget, failure stage, and final assets so aggregate rankings remain diagnosable.',
+    title: 'Diagnosable traces',
+    text: 'Action traces reveal where agents recover, repeat, or stop early.',
   },
-] as const;
-
-export const stats = [
-  { value: '210', label: 'source instances' },
-  { value: '520', label: 'task cases' },
-  { value: '11', label: 'configurations' },
-  { value: '5', label: 'tasks' },
 ] as const;
 
 export const analysisItems = [
@@ -124,13 +117,6 @@ export const analysisItems = [
     height: 911,
     alt: 'Representative agent-completion traces for three episodes.',
   },
-] as const;
-
-export const limitations = [
-  'SceneActBench measures performance under fixed task protocols and tool budgets; it does not establish unrestricted real-world autonomy.',
-  'Closed model APIs and reasoning configurations can change after evaluation. Configuration names and snapshot provenance are therefore part of each result.',
-  'Overall is a compact normalized summary, not a significance test. Native metrics and per-case artifacts should drive technical conclusions.',
-  'Curated examples illustrate behavior and are not a substitute for the complete evaluation set or distributional analysis.',
 ] as const;
 
 export const bibtex = `@misc{sceneactbench2026,

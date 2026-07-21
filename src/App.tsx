@@ -11,12 +11,9 @@ import {
   authors,
   bibtex,
   contributions,
-  limitations,
   links,
-  stats,
 } from './data/site';
 import { tasks } from './data/tasks';
-import { withBase } from './data/assetPath';
 
 const navItems = [
   ['tldr', 'TL;DR'],
@@ -26,7 +23,6 @@ const navItems = [
   ['tasks', 'Tasks'],
   ['metrics', 'Metrics'],
   ['analysis', 'Analysis'],
-  ['resources', 'Resources'],
   ['citation', 'Citation'],
 ] as const;
 
@@ -150,7 +146,7 @@ function Hero() {
           <div className="author-line" aria-label="Authors">
             {authors.map((author, index) => (
               <span key={author.name}>
-                <a href="#authors">{author.name}</a>
+                <a href="#citation">{author.name}</a>
                 <sup>
                   {author.affiliations.join(',')}
                   {'equal' in author && author.equal ? ',*' : ''}
@@ -181,18 +177,6 @@ function Hero() {
         </div>
         <HeroScene />
       </div>
-      <div className="stat-strip page-shell" aria-label="Benchmark statistics">
-        {stats.map((stat) => (
-          <div key={stat.label}>
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
-          </div>
-        ))}
-        <p>
-          one benchmark
-          <span>from static perception to temporal action</span>
-        </p>
-      </div>
     </section>
   );
 }
@@ -206,34 +190,16 @@ function Tldr() {
           eyebrow="TL;DR"
           title="Why action?"
         >
-          Acting on a scene tests spatial understanding more strongly than describing it because
-          the result must remain geometrically correct.
+          Action turns visual understanding into geometry that can be directly verified.
         </SectionHeading>
         <div className="contribution-grid">
           {contributions.map((item) => (
             <article key={item.number}>
-              <div className="contribution-top">
-                <span>{item.number}</span>
-                <div className="contribution-mark" aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
-                </div>
-              </div>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>
           ))}
         </div>
-        <blockquote className="thesis-line">
-          <span>See</span>
-          <i />
-          <span>reason</span>
-          <i />
-          <span>act</span>
-          <i />
-          <strong>verify in 3D.</strong>
-        </blockquote>
       </div>
     </section>
   );
@@ -375,66 +341,6 @@ function AnalysisSection() {
   );
 }
 
-function ResourcesSection() {
-  return (
-    <section className="section section-resources" id="resources">
-      <div className="page-shell">
-        <SectionHeading
-          index="08"
-          eyebrow="Resources & scope"
-          title="Resources & limitations"
-        >
-          Source, evaluation code, snapshots, and curated assets are separated so every claim
-          can be traced back to the artifact that supports it.
-        </SectionHeading>
-        <div className="resources-grid">
-          <div className="resource-links">
-            <a href={links.code}>
-              <span>01</span>
-              <div>
-                <small>Code & evaluation</small>
-                <strong>SceneActBench repository</strong>
-                <p>Benchmark tasks, shared agent loop, evaluators, and release materials.</p>
-              </div>
-              <ArrowUpRight />
-            </a>
-            <a href={links.dataset}>
-              <span>02</span>
-              <div>
-                <small>Dataset</small>
-                <strong>Hugging Face</strong>
-                <p>Source instances, task inputs, supplied assets, and release metadata.</p>
-              </div>
-              <ArrowUpRight />
-            </a>
-            <a href={withBase('data/examples.json')}>
-              <span>03</span>
-              <div>
-                <small>Website data</small>
-                <strong>Examples manifest</strong>
-                <p>Stable schema for curated images, poses, metrics, and GLB assets.</p>
-              </div>
-              <ArrowUpRight />
-            </a>
-          </div>
-          <div className="limitations-card">
-            <span className="micro-label">Limitations</span>
-            <h3>What this benchmark does not claim.</h3>
-            <ol>
-              {limitations.map((limitation, index) => (
-                <li key={limitation}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <p>{limitation}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function CitationSection() {
   const [copied, setCopied] = useState(false);
 
@@ -459,40 +365,13 @@ function CitationSection() {
     <section className="section section-citation" id="citation">
       <div className="page-shell">
         <SectionHeading
-          index="09"
-          eyebrow="Authors & citation"
-          title="Authors & citation"
+          index="08"
+          eyebrow="Citation"
+          title="Citation"
         >
-          Cite the paper, use the released evaluation protocol, and keep model configuration and
-          snapshot provenance attached to every reported number.
+          Cite SceneActBench when using the benchmark, data, or evaluation protocol.
         </SectionHeading>
         <div className="citation-grid">
-          <div className="authors-card" id="authors">
-            <span className="micro-label">Authors</span>
-            <div className="author-list">
-              {authors.map((author, index) => (
-                <div key={author.name}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <strong>
-                    {author.name}
-                    {'equal' in author && author.equal ? <sup>*</sup> : null}
-                    {'corresponding' in author && author.corresponding ? <sup>†</sup> : null}
-                  </strong>
-                  <small>
-                    {author.affiliations
-                      .map((affiliationId) =>
-                        affiliations.find((item) => item.id === affiliationId)?.name,
-                      )
-                      .filter(Boolean)
-                      .join(' · ')}
-                  </small>
-                </div>
-              ))}
-            </div>
-            <p className="author-source-note">
-              * Equal contribution · † Corresponding author
-            </p>
-          </div>
           <div className="bibtex-card">
             <div className="bibtex-head">
               <div>
@@ -552,7 +431,6 @@ export default function App() {
         <TasksSection />
         <MetricsSection />
         <AnalysisSection />
-        <ResourcesSection />
         <CitationSection />
       </main>
       <Footer />

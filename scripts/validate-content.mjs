@@ -19,7 +19,6 @@ const requiredSections = [
   'metrics',
   'explorer',
   'analysis',
-  'resources',
   'citation',
 ];
 
@@ -146,6 +145,18 @@ for (const example of examplesManifest.examples ?? []) {
         );
         if (invalidAnimations.length > 0) {
           violations.push(`${example.id} contains an invalid empty animation in ${source}.`);
+        }
+        const dynamicGlbSources = [
+          example.referenceGlb?.src,
+          example.animatedGlb?.src,
+          example.pairedAnimatedGlb?.src,
+        ];
+        if (
+          example.task === 'dynamic' &&
+          dynamicGlbSources.includes(source) &&
+          (document.animations?.length ?? 0) > 1
+        ) {
+          violations.push(`${example.id} has unmerged Dynamic animation clips in ${source}.`);
         }
         const animationFlag =
           source === example.animatedGlb?.src

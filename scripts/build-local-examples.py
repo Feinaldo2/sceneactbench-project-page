@@ -122,8 +122,13 @@ def copy_asset(source: Path, destination: Path) -> str:
     return f"/{destination.relative_to(SITE_ROOT / 'public').as_posix()}"
 
 
-def copy_web_glb(source: Path, destination: Path) -> str:
-    """Copy a GLB while dropping invalid empty animation records."""
+def copy_web_glb(
+    source: Path,
+    destination: Path,
+    *,
+    merge_animations: bool = False,
+) -> str:
+    """Copy a GLB while normalizing animations for browser playback."""
     data = source.read_bytes()
     if len(data) < 20 or data[:4] != b"glTF":
         raise ValueError(f"Invalid GLB: {source}")
@@ -146,6 +151,25 @@ def copy_web_glb(source: Path, destination: Path) -> str:
             ]
             if len(valid_animations) != len(animations):
                 changed = True
+            if merge_animations and len(valid_animations) > 1:
+                merged_channels = []
+                merged_samplers = []
+                for animation in valid_animations:
+                    sampler_offset = len(merged_samplers)
+                    merged_samplers.extend(animation["samplers"])
+                    for channel in animation["channels"]:
+                        merged_channel = dict(channel)
+                        merged_channel["sampler"] += sampler_offset
+                        merged_channels.append(merged_channel)
+                valid_animations = [
+                    {
+                        "name": "SceneActBench_All_Trajectories",
+                        "channels": merged_channels,
+                        "samplers": merged_samplers,
+                    }
+                ]
+                changed = True
+            if changed:
                 if valid_animations:
                     document["animations"] = valid_animations
                 else:
@@ -269,9 +293,10 @@ def copy_shared_references(
         ],
     }
 
-    dynamic_glb = copy_asset(
+    dynamic_glb = copy_web_glb(
         dynamic_case / "gt" / "gt_scene.glb",
         root / "dynamic" / "gt-scene.glb",
+        merge_animations=True,
     )
     low_video = copy_asset(
         dynamic_case / "reference.mp4",
@@ -383,7 +408,11 @@ def build_articulated(
     keyframes: list[dict[str, str]] = []
     source_glb = case_dir / "agent_animation.glb"
     has_animation = glb_has_animation(source_glb)
-    glb = copy_web_glb(source_glb, output_dir / "animation.glb")
+    glb = copy_web_glb(
+        source_glb,
+        output_dir / "animation.glb",
+        merge_animations=True,
+    )
     notes = (
         "The interactive viewer uses the submitted 32-state agent GLB."
         if has_animation
@@ -467,7 +496,11 @@ def build_dynamic(
     photorealistic: list[dict[str, str]] = []
     source_glb = case_dir / "agent_scene.glb"
     has_animation = glb_has_animation(source_glb)
-    glb = copy_web_glb(source_glb, output_dir / "animation.glb")
+    glb = copy_web_glb(
+        source_glb,
+        output_dir / "animation.glb",
+        merge_animations=True,
+    )
     paired_case_dir = (
         case_dir.parents[1]
         / "task7_anim"
@@ -478,6 +511,7 @@ def build_dynamic(
     paired_glb = copy_web_glb(
         paired_source_glb,
         output_dir / "paired-animation.glb",
+        merge_animations=True,
     )
     size = source_glb.stat().st_size
     notes = (
