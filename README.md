@@ -84,9 +84,10 @@ python3 scripts/build-local-examples.py \
   --static-benchmark-root /absolute/path/to/benchmark_final \
   --articulated-benchmark-root /absolute/path/to/benchmark_s2o_final \
   --dynamic-benchmark-root /absolute/path/to/benchmark_t6_final
+npm run optimize:glbs
 ```
 
-The generic `npm run curate:examples` workflow and schema remain available for alternate hand-authored manifests. Camera examples use JSON pose plus scoring renders. Articulated examples expose the submitted state sequence as an interactive GLB. Dynamic examples pair the T6 low-poly-input submission with the corresponding T7 photo-realistic-input submission and record animation metadata for both; displayed native metrics remain bound to T6.
+The optimization step converts embedded textures to WebP and applies Draco geometry compression to published GLBs above 4 MiB. The generic `npm run curate:examples` workflow and schema remain available for alternate hand-authored manifests. Camera examples use JSON pose plus scoring renders. Articulated examples expose the submitted state sequence as an interactive GLB. Dynamic examples pair the T6 low-poly-input submission with the corresponding T7 photo-realistic-input submission and record animation metadata for both; displayed native metrics remain bound to T6.
 
 `@google/model-viewer` is dynamically imported only when a manifest supplies a GLB and its panel approaches the viewport. Missing models, posters, and failed loads all have explicit accessible fallbacks.
 

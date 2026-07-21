@@ -53,6 +53,16 @@ for (const section of requiredSections) {
   }
 }
 
+for (const decoder of [
+  'public/assets/draco/draco_wasm_wrapper.js',
+  'public/assets/draco/draco_decoder.wasm',
+]) {
+  const decoderStat = await stat(path.join(root, decoder)).catch(() => null);
+  if (!decoderStat?.isFile()) {
+    violations.push(`${decoder} is required for self-hosted Draco decoding.`);
+  }
+}
+
 const vite = await readFile(path.join(root, 'vite.config.ts'), 'utf8');
 if (!/base:\s*['"]\/sceneactbench-project-page\/['"]/.test(vite)) {
   violations.push('vite.config.ts must use the GitHub Pages project base "/sceneactbench-project-page/".');
@@ -122,6 +132,8 @@ for (const example of examplesManifest.examples ?? []) {
         violations.push(`${example.id} references missing asset ${source}.`);
       } else if (assetStat.size >= 95 * 1024 * 1024) {
         violations.push(`${example.id} references an asset at or above the 95 MiB safety limit.`);
+      } else if (source.endsWith('.glb') && assetStat.size >= 4 * 1024 * 1024) {
+        violations.push(`${example.id} references an unoptimized GLB at or above 4 MiB.`);
       } else if (source.endsWith('.glb')) {
         const glb = await readFile(assetPath);
         const isGlb =

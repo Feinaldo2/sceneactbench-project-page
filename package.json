@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check:content": "node scripts/validate-content.mjs",
-    "curate:examples": "node scripts/curate-examples.mjs"
+    "curate:examples": "node scripts/curate-examples.mjs",
+    "optimize:glbs": "node scripts/optimize-glbs.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "4.1.0",
@@ -19,6 +20,7 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.4.1",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.17",

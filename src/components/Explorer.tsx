@@ -5,6 +5,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { withBase } from '../data/assetPath';
 import { emptyExamplesManifest, loadExamplesManifest } from '../data/examples';
 import { leaderboard } from '../data/leaderboard';
 import { metrics } from '../data/metrics';
@@ -127,8 +128,21 @@ function ModelViewer({
     if (!asset || !inView) return;
     let active = true;
     setStatus('loading');
+    const modelViewerGlobal = globalThis as typeof globalThis & {
+      ModelViewerElement?: { dracoDecoderLocation?: string };
+    };
+    modelViewerGlobal.ModelViewerElement = {
+      ...modelViewerGlobal.ModelViewerElement,
+      dracoDecoderLocation: withBase('assets/draco/'),
+    };
     void import('@google/model-viewer')
       .then(() => {
+        const viewerElement = customElements.get('model-viewer') as
+          | (CustomElementConstructor & { dracoDecoderLocation: string })
+          | undefined;
+        if (viewerElement) {
+          viewerElement.dracoDecoderLocation = withBase('assets/draco/');
+        }
         if (active) setRegistered(true);
       })
       .catch(() => {
