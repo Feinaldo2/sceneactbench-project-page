@@ -204,7 +204,7 @@ function Tldr() {
         <SectionHeading
           index="01"
           eyebrow="TL;DR"
-          title="The missing test is action."
+          title="Why action?"
         >
           Acting on a scene tests spatial understanding more strongly than describing it because
           the result must remain geometrically correct.
@@ -246,7 +246,7 @@ function LeaderboardSection() {
         <SectionHeading
           index="02"
           eyebrow="Interactive leaderboard"
-          title="One total. Five different competencies."
+          title="Leaderboard"
         >
           Sort by any task, select up to three configurations, and inspect how their task
           profiles differ behind the fixed Overall summary.
@@ -264,7 +264,7 @@ function BenchmarkSection() {
         <SectionHeading
           index="03"
           eyebrow="Benchmark loop"
-          title="Observe, intervene, render, measure."
+          title="Benchmark loop"
         >
           Every case closes the loop between visual evidence and an executable artifact. The
           evaluator measures what the agent made, not what it claimed to make.
@@ -305,7 +305,7 @@ function TasksSection() {
         <SectionHeading
           index="04"
           eyebrow="Five tasks"
-          title="A capability ladder for scene action."
+          title="Five tasks"
         >
           The suite moves from spatial placement and camera control to part motion, surface
           reconstruction, and time-varying scenes.
@@ -323,7 +323,7 @@ function MetricsSection() {
         <SectionHeading
           index="05"
           eyebrow="Metrics glossary"
-          title="Names that look alike measure different failures."
+          title="Metrics"
         >
           SceneActBench keeps each task in its natural metric space, then normalizes only the
           frozen components used by Overall.
@@ -341,7 +341,7 @@ function ExplorerSection() {
         <SectionHeading
           index="06"
           eyebrow="Model × task explorer"
-          title="Inspect the artifact, not only the score."
+          title="Model × task explorer"
         >
           Each curated example pairs reference evidence with task-native metrics, verification
           renders, structured poses, and interactive geometry.
@@ -359,7 +359,7 @@ function AnalysisSection() {
         <SectionHeading
           index="07"
           eyebrow="Analysis"
-          title="Where performance separates—and where it breaks."
+          title="Analysis"
         >
           Decompositions, sensitivity slices, budget traces, and stage-tagged failures make the
           benchmark useful beyond a single ordering.
@@ -382,7 +382,7 @@ function ResourcesSection() {
         <SectionHeading
           index="08"
           eyebrow="Resources & scope"
-          title="Reproduce the protocol. Read the limits."
+          title="Resources & limitations"
         >
           Source, evaluation code, snapshots, and curated assets are separated so every claim
           can be traced back to the artifact that supports it.
@@ -461,7 +461,7 @@ function CitationSection() {
         <SectionHeading
           index="09"
           eyebrow="Authors & citation"
-          title="Build on SceneActBench."
+          title="Authors & citation"
         >
           Cite the paper, use the released evaluation protocol, and keep model configuration and
           snapshot provenance attached to every reported number.
