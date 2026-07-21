@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://feinaldo2.github.io/schemas/examples-manifest.schema.json",
+  "title": "SceneActBench curated examples manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatedAt", "assetBase", "examples"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatedAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "assetBase": {
+      "type": "string",
+      "pattern": "^/assets/examples/$"
+    },
+    "examples": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/example" }
+    }
+  },
+  "$defs": {
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["src", "alt"],
+      "properties": {
+        "src": { "type": "string", "minLength": 1 },
+        "alt": { "type": "string", "minLength": 1 },
+        "poster": { "type": "string", "minLength": 1 }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "value"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "value": { "type": ["number", "string"] },
+        "unit": { "type": "string" },
+        "direction": {
+          "enum": ["higher", "lower", "diagnostic"]
+        }
+      }
+    },
+    "baseExampleProperties": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "task": {
+          "enum": ["layout", "camera", "articulated", "reconstruction", "dynamic"]
+        },
+        "modelId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "title": { "type": "string", "minLength": 1 },
+        "sourceInstance": { "type": "string", "minLength": 1 },
+        "prompt": { "type": "string" },
+        "metrics": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/metric" }
+        },
+        "referenceImages": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/media" }
+        },
+        "outputImages": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/media" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "example": {
+      "allOf": [
+        { "$ref": "#/$defs/baseExampleProperties" },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "task",
+            "modelId",
+            "title",
+            "sourceInstance",
+            "metrics",
+            "referenceImages",
+            "outputImages"
+          ],
+          "properties": {
+            "outputGlb": { "$ref": "#/$defs/media" },
+            "poseJson": { "type": "string" },
+            "keyframes": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/media" }
+            },
+            "animatedGlb": { "$ref": "#/$defs/media" },
+            "hasAnimation": { "type": "boolean" },
+            "lowPolyPreviews": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/media" }
+            },
+            "photorealisticPreviews": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/media" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "task": { "const": "camera" } },
+            "required": ["task"]
+          },
+          "then": {
+            "properties": {
+              "outputGlb": false,
+              "animatedGlb": false
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "task": { "const": "articulated" } },
+            "required": ["task"]
+          },
+          "then": { "required": ["hasAnimation", "keyframes"] }
+        },
+        {
+          "if": {
+            "properties": { "task": { "const": "dynamic" } },
+            "required": ["task"]
+          },
+          "then": {
+            "required": ["hasAnimation", "lowPolyPreviews", "photorealisticPreviews"]
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

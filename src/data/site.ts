@@ -1,0 +1,140 @@
+export const links = {
+  paper: '/sceneactbench.pdf',
+  code: 'https://github.com/harnessRL/3D_Bench',
+  dataset: 'https://huggingface.co/datasets/harnessRL/3D_Bench_Datasets',
+};
+
+export const authors = [
+  { name: 'Yifei Zhao', affiliations: [1, 2], equal: true },
+  { name: 'Xiangxin Zhou', affiliations: [1], equal: true, corresponding: true },
+  { name: 'Wenhao Yang', affiliations: [1, 3], equal: true },
+  { name: 'Jiaqi Tang', affiliations: [1, 4], equal: true },
+  { name: 'Pu Jian', affiliations: [1], equal: true },
+  { name: 'Huanjin Yao', affiliations: [1, 4], equal: true },
+  { name: 'Jiarui Yao', affiliations: [1, 5], equal: true },
+  { name: 'Haowei Lin', affiliations: [1, 6] },
+  { name: 'Zhuo Chen', affiliations: [1] },
+  { name: 'Wenkai Lyu', affiliations: [1] },
+  { name: 'Jianzhu Ma', affiliations: [2] },
+  { name: 'Xueqian Wang', affiliations: [2] },
+  { name: 'Wenxi Zhu', affiliations: [1] },
+  { name: 'Tianyu Pang', affiliations: [1], corresponding: true },
+] as const;
+
+export const affiliations = [
+  { id: 1, name: 'Tencent Hunyuan' },
+  { id: 2, name: 'Tsinghua University (THU)' },
+  { id: 3, name: 'Nanjing University (NJU)' },
+  { id: 4, name: 'Hong Kong University of Science and Technology (HKUST)' },
+  { id: 5, name: 'University of Illinois Urbana-Champaign (UIUC)' },
+  { id: 6, name: 'Peking University (PKU)' },
+] as const;
+
+export const contributions = [
+  {
+    number: '01',
+    title: 'From seeing to doing',
+    text: 'Five executable 3D tasks test whether multimodal agents can convert visual evidence into layouts, cameras, articulated states, geometry, and motion.',
+  },
+  {
+    number: '02',
+    title: 'Measured in native space',
+    text: 'Every task keeps its physically meaningful metrics and artifacts. Rendered similarity alone cannot conceal unusable geometry or broken motion.',
+  },
+  {
+    number: '03',
+    title: 'Traces, not just totals',
+    text: 'The protocol records intermediate actions, effective budget, failure stage, and final assets so aggregate rankings remain diagnosable.',
+  },
+] as const;
+
+export const stats = [
+  { value: '210', label: 'source instances' },
+  { value: '520', label: 'task cases' },
+  { value: '11', label: 'configurations' },
+  { value: '5', label: 'tasks' },
+] as const;
+
+export const analysisItems = [
+  {
+    id: 'ranking',
+    kicker: '01 · Result structure',
+    title: 'Ranking decomposition',
+    description: 'Overall separates into five fixed, task-normalized components.',
+    kind: 'stacked' as const,
+    image: '/assets/paper/top3_analysis.webp',
+    width: 841,
+    height: 341,
+    alt: 'Task contributions to the Overall score gaps among the top configurations.',
+  },
+  {
+    id: 'sensitivity',
+    kicker: '02 · Observation',
+    title: 'Input sensitivity',
+    description: 'Additional views or visual realism help some configurations and hurt others.',
+    kind: 'sensitivity' as const,
+    image: '/assets/paper/input_conditions.webp',
+    width: 748,
+    height: 418,
+    alt: 'Input-condition sensitivity across model configurations.',
+  },
+  {
+    id: 'failures',
+    kicker: '03 · Diagnosis',
+    title: 'Failure stages',
+    description: 'Conditional diagnostics separate target, geometry, coverage, and motion failures.',
+    kind: 'stages' as const,
+    image: '/assets/paper/failure_stages.webp',
+    width: 866,
+    height: 502,
+    alt: 'Denominator-aware failure stages for leading configurations.',
+  },
+  {
+    id: 'budget',
+    kicker: '04 · Efficiency',
+    title: 'Effective budget',
+    description: 'Allocated interactions and interactions actually used tell different stories.',
+    kind: 'budget' as const,
+    image: '/assets/paper/effective_budget.webp',
+    width: 830,
+    height: 405,
+    alt: 'Effective interaction budget and realized tool calls.',
+  },
+  {
+    id: 'steps',
+    kicker: '05 · Scaling',
+    title: 'Step curves',
+    description: 'Task quality is read against agent steps rather than endpoint alone.',
+    kind: 'curves' as const,
+    image: '/assets/paper/step_curve.webp',
+    width: 839,
+    height: 714,
+    alt: 'Step-budget sensitivity curves across Overall and five tasks.',
+  },
+  {
+    id: 'traces',
+    kicker: '06 · Behavior',
+    title: 'Representative traces',
+    description: 'Compact action traces reveal recovery, repetition, and premature stopping.',
+    kind: 'trace' as const,
+    image: '/assets/paper/agent_traces.webp',
+    width: 880,
+    height: 911,
+    alt: 'Representative agent-completion traces for three episodes.',
+  },
+] as const;
+
+export const limitations = [
+  'SceneActBench measures performance under fixed task protocols and tool budgets; it does not establish unrestricted real-world autonomy.',
+  'Closed model APIs and reasoning configurations can change after evaluation. Configuration names and snapshot provenance are therefore part of each result.',
+  'Overall is a compact normalized summary, not a significance test. Native metrics and per-case artifacts should drive technical conclusions.',
+  'Curated examples illustrate behavior and are not a substitute for the complete evaluation set or distributional analysis.',
+] as const;
+
+export const bibtex = `@misc{sceneactbench2026,
+  title  = {SceneActBench: Can Agents Act on the 3D Scenes They See?},
+  author = {Zhao, Yifei and Zhou, Xiangxin and Yang, Wenhao and Tang, Jiaqi and Jian, Pu and Yao, Huanjin and Yao, Jiarui and Lin, Haowei and Chen, Zhuo and Lyu, Wenkai and Ma, Jianzhu and Wang, Xueqian and Zhu, Wenxi and Pang, Tianyu},
+  year   = {2026},
+  note   = {Preprint},
+  url    = {https://feinaldo2.github.io/}
+}`;

@@ -1,0 +1,560 @@
+import { useEffect, useState, type ReactNode } from 'react';
+import { AnalysisGallery } from './components/AnalysisGallery';
+import { HeroScene, PipelineVisual } from './components/BenchmarkVisuals';
+import { Explorer } from './components/Explorer';
+import { ArrowUpRight, CheckIcon, CloseIcon, CopyIcon, MenuIcon } from './components/Icons';
+import { Leaderboard } from './components/Leaderboard';
+import { MetricsGlossary } from './components/MetricsGlossary';
+import { TaskTabs } from './components/TaskTabs';
+import {
+  affiliations,
+  authors,
+  bibtex,
+  contributions,
+  limitations,
+  links,
+  stats,
+} from './data/site';
+import { tasks } from './data/tasks';
+
+const navItems = [
+  ['tldr', 'TL;DR'],
+  ['leaderboard', 'Leaderboard'],
+  ['benchmark', 'Benchmark'],
+  ['tasks', 'Tasks'],
+  ['metrics', 'Metrics'],
+  ['explorer', 'Explorer'],
+  ['analysis', 'Analysis'],
+  ['resources', 'Resources'],
+  ['citation', 'Citation'],
+] as const;
+
+function SectionHeading({
+  index,
+  eyebrow,
+  title,
+  children,
+}: {
+  index: string;
+  eyebrow: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="section-heading">
+      <div className="section-index">{index}</div>
+      <div>
+        <span className="micro-label">{eyebrow}</span>
+        <h2>{title}</h2>
+      </div>
+      <p>{children}</p>
+    </div>
+  );
+}
+
+function Header() {
+  const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('tldr');
+
+  useEffect(() => {
+    const sections = navItems
+      .map(([id]) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+    if (typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: '-16% 0px -70% 0px', threshold: [0, 0.15, 0.4] },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 980) setOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <header className="site-header">
+      <div className="nav-shell">
+        <a className="brand" href="#top" aria-label="SceneActBench home">
+          <svg viewBox="0 0 42 42" aria-hidden="true">
+            <path d="m7 11 14-8 14 8v20l-14 8-14-8V11Z" />
+            <path d="m7 11 14 8 14-8M21 19v20" />
+            <circle cx="31" cy="28" r="4" />
+          </svg>
+          <span>SceneAct<span>Bench</span></span>
+        </a>
+        <nav
+          id="mobile-navigation"
+          className={open ? 'primary-nav open' : 'primary-nav'}
+          aria-label="Page sections"
+        >
+          {navItems.map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={activeSection === id ? 'active' : undefined}
+              aria-current={activeSection === id ? 'location' : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+        <a className="nav-code-link" href={links.code}>
+          Code <ArrowUpRight />
+        </a>
+        <button
+          className="menu-button"
+          type="button"
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          aria-label={open ? 'Close navigation' : 'Open navigation'}
+          onClick={() => setOpen((value) => !value)}
+        >
+          {open ? <CloseIcon /> : <MenuIcon />}
+        </button>
+      </div>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="hero" id="top">
+      <div className="hero-grid page-shell">
+        <div className="hero-copy">
+          <div className="hero-kicker">
+            <span>Scene intelligence, made executable</span>
+            <i />
+            <span>2026</span>
+          </div>
+          <h1 aria-label="SceneActBench: Can Agents Act on the 3D Scenes They See?">
+            <span className="title-name">SceneActBench:</span>
+            Can Agents Act on the <em>3D Scenes</em> They See?
+          </h1>
+          <p className="hero-tagline">
+            A unified benchmark that asks multimodal agents to do more than describe a scene:
+            arrange it, frame it, articulate it, reconstruct it, and set it in motion.
+          </p>
+          <div className="author-line" aria-label="Authors">
+            {authors.map((author, index) => (
+              <span key={author.name}>
+                <a href="#authors">{author.name}</a>
+                <sup>
+                  {author.affiliations.join(',')}
+                  {'equal' in author && author.equal ? ',*' : ''}
+                  {'corresponding' in author && author.corresponding ? ',†' : ''}
+                </sup>
+                {index < authors.length - 1 && <i>·</i>}
+              </span>
+            ))}
+          </div>
+          <p className="affiliation-line">
+            {affiliations.map((affiliation) => (
+              <span key={affiliation.id}><sup>{affiliation.id}</sup>{affiliation.name}</span>
+            ))}
+            <span>* Equal contribution</span>
+            <span>† Corresponding author</span>
+          </p>
+          <div className="hero-actions">
+            <a className="button primary" href={links.paper}>
+              Paper <ArrowUpRight />
+            </a>
+            <a className="button secondary" href={links.code}>
+              Code <ArrowUpRight />
+            </a>
+            <a className="button secondary" href={links.dataset}>
+              Dataset <ArrowUpRight />
+            </a>
+          </div>
+        </div>
+        <HeroScene />
+      </div>
+      <div className="stat-strip page-shell" aria-label="Benchmark statistics">
+        {stats.map((stat) => (
+          <div key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+        <p>
+          one benchmark
+          <span>from static perception to temporal action</span>
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Tldr() {
+  return (
+    <section className="section section-tldr" id="tldr">
+      <div className="page-shell">
+        <SectionHeading
+          index="01"
+          eyebrow="TL;DR"
+          title="The missing test is action."
+        >
+          Acting on a scene tests spatial understanding more strongly than describing it because
+          the result must remain geometrically correct.
+        </SectionHeading>
+        <div className="contribution-grid">
+          {contributions.map((item) => (
+            <article key={item.number}>
+              <div className="contribution-top">
+                <span>{item.number}</span>
+                <div className="contribution-mark" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </div>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+        <blockquote className="thesis-line">
+          <span>See</span>
+          <i />
+          <span>reason</span>
+          <i />
+          <span>act</span>
+          <i />
+          <strong>verify in 3D.</strong>
+        </blockquote>
+      </div>
+    </section>
+  );
+}
+
+function LeaderboardSection() {
+  return (
+    <section className="section section-leaderboard" id="leaderboard">
+      <div className="page-shell">
+        <SectionHeading
+          index="02"
+          eyebrow="Interactive leaderboard"
+          title="One total. Five different competencies."
+        >
+          Sort by any task, select up to three configurations, and inspect how their task
+          profiles differ behind the fixed Overall summary.
+        </SectionHeading>
+        <Leaderboard />
+      </div>
+    </section>
+  );
+}
+
+function BenchmarkSection() {
+  return (
+    <section className="section section-benchmark" id="benchmark">
+      <div className="page-shell">
+        <SectionHeading
+          index="03"
+          eyebrow="Benchmark loop"
+          title="Observe, intervene, render, measure."
+        >
+          Every case closes the loop between visual evidence and an executable artifact. The
+          evaluator measures what the agent made, not what it claimed to make.
+        </SectionHeading>
+        <PipelineVisual />
+        <div className="benchmark-contract">
+          <div>
+            <span className="micro-label">The evaluation contract</span>
+            <h3>Same scene. Same task budget. Native output.</h3>
+          </div>
+          <div className="contract-items">
+            <article>
+              <span>01</span>
+              <strong>Controlled evidence</strong>
+              <p>Task-specific inputs expose only the views and metadata defined by the protocol.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>Executable actions</strong>
+              <p>Tool calls modify scene state and produce machine-readable artifacts.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Fresh verification</strong>
+              <p>Renders, geometry, poses, and trajectories are evaluated after execution.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TasksSection() {
+  return (
+    <section className="section section-tasks" id="tasks">
+      <div className="page-shell">
+        <SectionHeading
+          index="04"
+          eyebrow="Five tasks"
+          title="A capability ladder for scene action."
+        >
+          The suite moves from spatial placement and camera control to part motion, surface
+          reconstruction, and time-varying scenes.
+        </SectionHeading>
+        <TaskTabs />
+      </div>
+    </section>
+  );
+}
+
+function MetricsSection() {
+  return (
+    <section className="section section-metrics" id="metrics">
+      <div className="page-shell">
+        <SectionHeading
+          index="05"
+          eyebrow="Metrics glossary"
+          title="Names that look alike measure different failures."
+        >
+          SceneActBench keeps each task in its natural metric space, then normalizes only the
+          frozen components used by Overall.
+        </SectionHeading>
+        <MetricsGlossary />
+      </div>
+    </section>
+  );
+}
+
+function ExplorerSection() {
+  return (
+    <section className="section section-explorer" id="explorer">
+      <div className="page-shell">
+        <SectionHeading
+          index="06"
+          eyebrow="Model × task explorer"
+          title="Inspect the artifact, not only the score."
+        >
+          Each curated example pairs reference evidence with task-native metrics, verification
+          renders, structured poses, and interactive geometry.
+        </SectionHeading>
+        <Explorer />
+      </div>
+    </section>
+  );
+}
+
+function AnalysisSection() {
+  return (
+    <section className="section section-analysis" id="analysis">
+      <div className="page-shell">
+        <SectionHeading
+          index="07"
+          eyebrow="Analysis"
+          title="Where performance separates—and where it breaks."
+        >
+          Decompositions, sensitivity slices, budget traces, and stage-tagged failures make the
+          benchmark useful beyond a single ordering.
+        </SectionHeading>
+        <div className="figure-sync-note">
+          <span>Figure provenance</span>
+          Web-optimized previews are generated from the current manuscript exports; open any
+          panel to inspect the canonical figure at a larger scale.
+        </div>
+        <AnalysisGallery />
+      </div>
+    </section>
+  );
+}
+
+function ResourcesSection() {
+  return (
+    <section className="section section-resources" id="resources">
+      <div className="page-shell">
+        <SectionHeading
+          index="08"
+          eyebrow="Resources & scope"
+          title="Reproduce the protocol. Read the limits."
+        >
+          Source, evaluation code, snapshots, and curated assets are separated so every claim
+          can be traced back to the artifact that supports it.
+        </SectionHeading>
+        <div className="resources-grid">
+          <div className="resource-links">
+            <a href={links.code}>
+              <span>01</span>
+              <div>
+                <small>Code & evaluation</small>
+                <strong>SceneActBench repository</strong>
+                <p>Benchmark tasks, shared agent loop, evaluators, and release materials.</p>
+              </div>
+              <ArrowUpRight />
+            </a>
+            <a href={links.dataset}>
+              <span>02</span>
+              <div>
+                <small>Dataset</small>
+                <strong>Hugging Face</strong>
+                <p>Source instances, task inputs, supplied assets, and release metadata.</p>
+              </div>
+              <ArrowUpRight />
+            </a>
+            <a href="/data/examples.json">
+              <span>03</span>
+              <div>
+                <small>Website data</small>
+                <strong>Examples manifest</strong>
+                <p>Stable schema for curated images, poses, metrics, and GLB assets.</p>
+              </div>
+              <ArrowUpRight />
+            </a>
+          </div>
+          <div className="limitations-card">
+            <span className="micro-label">Limitations</span>
+            <h3>What this benchmark does not claim.</h3>
+            <ol>
+              {limitations.map((limitation, index) => (
+                <li key={limitation}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <p>{limitation}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CitationSection() {
+  const [copied, setCopied] = useState(false);
+
+  const copyCitation = async () => {
+    try {
+      await navigator.clipboard.writeText(bibtex);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = bibtex;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  };
+
+  return (
+    <section className="section section-citation" id="citation">
+      <div className="page-shell">
+        <SectionHeading
+          index="09"
+          eyebrow="Authors & citation"
+          title="Build on SceneActBench."
+        >
+          Cite the paper, use the released evaluation protocol, and keep model configuration and
+          snapshot provenance attached to every reported number.
+        </SectionHeading>
+        <div className="citation-grid">
+          <div className="authors-card" id="authors">
+            <span className="micro-label">Authors</span>
+            <div className="author-list">
+              {authors.map((author, index) => (
+                <div key={author.name}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>
+                    {author.name}
+                    {'equal' in author && author.equal ? <sup>*</sup> : null}
+                    {'corresponding' in author && author.corresponding ? <sup>†</sup> : null}
+                  </strong>
+                  <small>
+                    {author.affiliations
+                      .map((affiliationId) =>
+                        affiliations.find((item) => item.id === affiliationId)?.name,
+                      )
+                      .filter(Boolean)
+                      .join(' · ')}
+                  </small>
+                </div>
+              ))}
+            </div>
+            <p className="author-source-note">
+              * Equal contribution · † Corresponding author
+            </p>
+          </div>
+          <div className="bibtex-card">
+            <div className="bibtex-head">
+              <div>
+                <span className="micro-label">BibTeX</span>
+                <strong>Provisional preprint citation</strong>
+              </div>
+              <button type="button" onClick={copyCitation}>
+                {copied ? <CheckIcon /> : <CopyIcon />}
+                {copied ? 'Copied' : 'Copy'}
+              </button>
+            </div>
+            <pre><code>{bibtex}</code></pre>
+            <span className="sr-only" aria-live="polite">{copied ? 'Citation copied' : ''}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer>
+      <div className="footer-main page-shell">
+        <a className="footer-brand" href="#top">
+          SceneAct<span>Bench</span>
+        </a>
+        <p>
+          Can agents act on the 3D scenes they see?
+          <span>Five tasks. Native metrics. Executable evidence.</span>
+        </p>
+        <div>
+          <a href={links.paper}>Paper</a>
+          <a href={links.code}>Code</a>
+          <a href={links.dataset}>Dataset</a>
+          <a href="#top">Back to top ↑</a>
+        </div>
+      </div>
+      <div className="footer-bottom page-shell">
+        <span>© 2026 SceneActBench</span>
+        <span>Designed for research clarity · Built with accessible web standards</span>
+      </div>
+    </footer>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <Header />
+      <main id="main-content">
+        <Hero />
+        <Tldr />
+        <LeaderboardSection />
+        <BenchmarkSection />
+        <TasksSection />
+        <MetricsSection />
+        <ExplorerSection />
+        <AnalysisSection />
+        <ResourcesSection />
+        <CitationSection />
+      </main>
+      <Footer />
+    </>
+  );
+}

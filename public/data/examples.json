@@ -1,0 +1,2624 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-21T09:43:42.482978Z",
+  "assetBase": "/assets/examples/",
+  "examples": [
+    {
+      "id": "layout-doubao-seed-2-pro-high",
+      "task": "layout",
+      "modelId": "doubao-seed-2-pro-high",
+      "title": "Doubao Seed 2.0 Pro High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.1672,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.2831,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/layout-doubao-seed-2-pro-high/output.png",
+          "alt": "Doubao Seed 2.0 Pro High reconstruction of DiningRoom-13034."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/layout-doubao-seed-2-pro-high/scene.glb",
+        "alt": "Interactive Doubao Seed 2.0 Pro High Layout GLB.",
+        "poster": "/assets/examples/layout-doubao-seed-2-pro-high/output.png"
+      }
+    },
+    {
+      "id": "camera-doubao-seed-2-pro-high",
+      "task": "camera",
+      "modelId": "doubao-seed-2-pro-high",
+      "title": "Doubao Seed 2.0 Pro High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 2.9791,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 155.4185,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-doubao-seed-2-pro-high/agent-view.png",
+          "alt": "Rendered view from Doubao Seed 2.0 Pro High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    -4.0,\n    -1.5,\n    1.2000000476837158\n  ],\n  \"agent_look_dir\": [\n    -0.9353047013282776,\n    -0.35073935985565186,\n    0.04676547273993492\n  ],\n  \"agent_matrix_world\": [\n    [\n      -0.35112354159355164,\n      0.04378790035843849,\n      0.9353047013282776,\n      -4.0\n    ],\n    [\n      0.9363291263580322,\n      0.0164203979074955,\n      0.35073935985565186,\n      -1.5\n    ],\n    [\n      6.539171693020762e-08,\n      0.9989058971405029,\n      -0.04676547273993492,\n      1.2000000476837158\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-doubao-seed-2-pro-high",
+      "task": "articulated",
+      "modelId": "doubao-seed-2-pro-high",
+      "title": "Doubao Seed 2.0 Pro High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.5609,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.5596,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-doubao-seed-2-pro-high/animation.glb",
+        "alt": "Interactive static Doubao Seed 2.0 Pro High articulated submission.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": false,
+      "keyframes": [],
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+    },
+    {
+      "id": "reconstruction-doubao-seed-2-pro-high",
+      "task": "reconstruction",
+      "modelId": "doubao-seed-2-pro-high",
+      "title": "Doubao Seed 2.0 Pro High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.3598,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.25,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.1717,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-doubao-seed-2-pro-high/agent-view-0.png",
+          "alt": "Doubao Seed 2.0 Pro High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-doubao-seed-2-pro-high/agent-view-2.png",
+          "alt": "Doubao Seed 2.0 Pro High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-doubao-seed-2-pro-high/scene.glb",
+        "alt": "Interactive Doubao Seed 2.0 Pro High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-doubao-seed-2-pro-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-doubao-seed-2-pro-high",
+      "task": "dynamic",
+      "modelId": "doubao-seed-2-pro-high",
+      "title": "Doubao Seed 2.0 Pro High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 0.461,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 0.3556,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.337,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-doubao-seed-2-pro-high/animation.glb",
+        "alt": "Interactive animated Doubao Seed 2.0 Pro High Dynamic GLB.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": true,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+    },
+    {
+      "id": "layout-claude-opus-4-6-high",
+      "task": "layout",
+      "modelId": "claude-opus-4-6-high",
+      "title": "Claude Opus 4.6 High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.2882,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.309,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.3333,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/layout-claude-opus-4-6-high/output.png",
+          "alt": "Claude Opus 4.6 High reconstruction of DiningRoom-13034."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/layout-claude-opus-4-6-high/scene.glb",
+        "alt": "Interactive Claude Opus 4.6 High Layout GLB.",
+        "poster": "/assets/examples/layout-claude-opus-4-6-high/output.png"
+      }
+    },
+    {
+      "id": "camera-claude-opus-4-6-high",
+      "task": "camera",
+      "modelId": "claude-opus-4-6-high",
+      "title": "Claude Opus 4.6 High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 1.1335,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 13.9696,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-claude-opus-4-6-high/agent-view.png",
+          "alt": "Rendered view from Claude Opus 4.6 High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    -4.5,\n    -3.5,\n    2.0999999046325684\n  ],\n  \"agent_look_dir\": [\n    0.7565723657608032,\n    0.6158145070075989,\n    -0.21993348002433777\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.631271243095398,\n      0.17057213187217712,\n      -0.7565723657608032,\n      -4.5\n    ],\n    [\n      -0.7755621075630188,\n      0.13883762061595917,\n      -0.6158145070075989,\n      -3.5\n    ],\n    [\n      -7.826641734709483e-08,\n      0.9755148887634277,\n      0.21993348002433777,\n      2.0999999046325684\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-claude-opus-4-6-high",
+      "task": "articulated",
+      "modelId": "claude-opus-4-6-high",
+      "title": "Claude Opus 4.6 High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.021,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.0208,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 1.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-0.png",
+          "alt": "Claude Opus articulated output state 1."
+        }
+      ],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-claude-opus-4-6-high/animation.glb",
+        "alt": "Interactive animated Claude Opus 4.6 High articulated GLB.",
+        "poster": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-2.png"
+      },
+      "hasAnimation": true,
+      "keyframes": [
+        {
+          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-0.png",
+          "alt": "Claude Opus articulated output state 1."
+        },
+        {
+          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-1.png",
+          "alt": "Claude Opus articulated output state 2."
+        },
+        {
+          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-2.png",
+          "alt": "Claude Opus articulated output state 3."
+        },
+        {
+          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-3.png",
+          "alt": "Claude Opus articulated output state 4."
+        }
+      ],
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+    },
+    {
+      "id": "reconstruction-claude-opus-4-6-high",
+      "task": "reconstruction",
+      "modelId": "claude-opus-4-6-high",
+      "title": "Claude Opus 4.6 High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.08,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.25,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.4584,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-claude-opus-4-6-high/agent-view-0.png",
+          "alt": "Claude Opus 4.6 High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-claude-opus-4-6-high/agent-view-2.png",
+          "alt": "Claude Opus 4.6 High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-claude-opus-4-6-high/scene.glb",
+        "alt": "Interactive Claude Opus 4.6 High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-claude-opus-4-6-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-claude-opus-4-6-high",
+      "task": "dynamic",
+      "modelId": "claude-opus-4-6-high",
+      "title": "Claude Opus 4.6 High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 0.4731,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 0.3513,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.2966,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-0.png",
+          "alt": "Claude Opus low-poly output frame 1."
+        }
+      ],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-claude-opus-4-6-high/animation.glb",
+        "alt": "Interactive animated Claude Opus 4.6 High Dynamic GLB.",
+        "poster": "/assets/examples/dynamic-claude-opus-4-6-high/low-0.png"
+      },
+      "hasAnimation": true,
+      "lowPolyPreviews": [
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-0.png",
+          "alt": "Claude Opus low-poly output frame 1."
+        },
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-1.png",
+          "alt": "Claude Opus low-poly output frame 2."
+        },
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-2.png",
+          "alt": "Claude Opus low-poly output frame 3."
+        },
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-3.png",
+          "alt": "Claude Opus low-poly output frame 4."
+        }
+      ],
+      "photorealisticPreviews": [
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-0.png",
+          "alt": "Claude Opus photo-realistic output frame 1."
+        },
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-1.png",
+          "alt": "Claude Opus photo-realistic output frame 2."
+        },
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-2.png",
+          "alt": "Claude Opus photo-realistic output frame 3."
+        },
+        {
+          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-3.png",
+          "alt": "Claude Opus photo-realistic output frame 4."
+        }
+      ],
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+    },
+    {
+      "id": "layout-gpt-5-4-medium",
+      "task": "layout",
+      "modelId": "gpt-5-4-medium",
+      "title": "GPT 5.4 Medium \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.4992,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.6685,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/layout-gpt-5-4-medium/output.png",
+          "alt": "GPT 5.4 Medium reconstruction of DiningRoom-13034."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/layout-gpt-5-4-medium/scene.glb",
+        "alt": "Interactive GPT 5.4 Medium Layout GLB.",
+        "poster": "/assets/examples/layout-gpt-5-4-medium/output.png"
+      }
+    },
+    {
+      "id": "camera-gpt-5-4-medium",
+      "task": "camera",
+      "modelId": "gpt-5-4-medium",
+      "title": "GPT 5.4 Medium \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 5.7552,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 45.0095,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-gpt-5-4-medium/agent-view.png",
+          "alt": "Rendered view from GPT 5.4 Medium's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    0.3499999940395355,\n    -1.5499999523162842,\n    1.1799999475479126\n  ],\n  \"agent_look_dir\": [\n    -0.0,\n    0.999684751033783,\n    -0.01817612163722515\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9974968433380127,\n      0.0,\n      0.0,\n      0.3499999940395355\n    ],\n    [\n      0.0,\n      0.018136078491806984,\n      -0.999684751033783,\n      -1.5499999523162842\n    ],\n    [\n      0.0,\n      0.9974824786186218,\n      0.01817612163722515,\n      1.1799999475479126\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-gpt-5-4-medium",
+      "task": "articulated",
+      "modelId": "gpt-5-4-medium",
+      "title": "GPT 5.4 Medium \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.1355,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.1352,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 1.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-gpt-5-4-medium/animation.glb",
+        "alt": "Interactive animated GPT 5.4 Medium articulated GLB.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": true,
+      "keyframes": [],
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+    },
+    {
+      "id": "reconstruction-gpt-5-4-medium",
+      "task": "reconstruction",
+      "modelId": "gpt-5-4-medium",
+      "title": "GPT 5.4 Medium \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.1112,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.25,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.5451,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-gpt-5-4-medium/agent-view-0.png",
+          "alt": "GPT 5.4 Medium reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-gpt-5-4-medium/agent-view-2.png",
+          "alt": "GPT 5.4 Medium reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-gpt-5-4-medium/scene.glb",
+        "alt": "Interactive GPT 5.4 Medium Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-gpt-5-4-medium/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-gpt-5-4-medium",
+      "task": "dynamic",
+      "modelId": "gpt-5-4-medium",
+      "title": "GPT 5.4 Medium \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 0.4797,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.2381,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-gpt-5-4-medium/animation.glb",
+        "alt": "Interactive animated GPT 5.4 Medium Dynamic GLB.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": true,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+    },
+    {
+      "id": "layout-gpt-5-4-high",
+      "task": "layout",
+      "modelId": "gpt-5-4-high",
+      "title": "GPT 5.4 High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.16,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.2707,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.3333,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/layout-gpt-5-4-high/output.png",
+          "alt": "GPT 5.4 High reconstruction of DiningRoom-13034."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/layout-gpt-5-4-high/scene.glb",
+        "alt": "Interactive GPT 5.4 High Layout GLB.",
+        "poster": "/assets/examples/layout-gpt-5-4-high/output.png"
+      }
+    },
+    {
+      "id": "camera-gpt-5-4-high",
+      "task": "camera",
+      "modelId": "gpt-5-4-high",
+      "title": "GPT 5.4 High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 4.9458,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 45.0,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-gpt-5-4-high/agent-view.png",
+          "alt": "Rendered view from GPT 5.4 High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    -3.721789925401932e-15,\n    -3.472222328186035,\n    0.0\n  ],\n  \"agent_look_dir\": [\n    1.0718756196414678e-15,\n    1.0,\n    -7.549790126404332e-08\n  ],\n  \"agent_matrix_world\": [\n    [\n      1.0,\n      1.5579220328097004e-22,\n      -1.0718756196414678e-15,\n      -3.721789925401932e-15\n    ],\n    [\n      -1.0718756196414678e-15,\n      7.549790126404332e-08,\n      -1.0,\n      -3.472222328186035\n    ],\n    [\n      -7.486784133018432e-23,\n      1.0,\n      7.549790126404332e-08,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-gpt-5-4-high",
+      "task": "articulated",
+      "modelId": "gpt-5-4-high",
+      "title": "GPT 5.4 High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.0,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.0,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 1.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-gpt-5-4-high/animation.glb",
+        "alt": "Interactive static GPT 5.4 High articulated submission.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": false,
+      "keyframes": [],
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+    },
+    {
+      "id": "reconstruction-gpt-5-4-high",
+      "task": "reconstruction",
+      "modelId": "gpt-5-4-high",
+      "title": "GPT 5.4 High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.3208,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.25,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.3686,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-gpt-5-4-high/agent-view-0.png",
+          "alt": "GPT 5.4 High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-gpt-5-4-high/agent-view-2.png",
+          "alt": "GPT 5.4 High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-gpt-5-4-high/scene.glb",
+        "alt": "Interactive GPT 5.4 High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-gpt-5-4-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-gpt-5-4-high",
+      "task": "dynamic",
+      "modelId": "gpt-5-4-high",
+      "title": "GPT 5.4 High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 1.0,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.5725,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-gpt-5-4-high/animation.glb",
+        "alt": "Interactive static GPT 5.4 High Dynamic submission.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": false,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+    },
+    {
+      "id": "layout-qwen-3-7-plus-high",
+      "task": "layout",
+      "modelId": "qwen-3-7-plus-high",
+      "title": "Qwen 3.7 Plus High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.2274,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.3645,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/layout-qwen-3-7-plus-high/output.png",
+          "alt": "Qwen 3.7 Plus High reconstruction of DiningRoom-13034."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/layout-qwen-3-7-plus-high/scene.glb",
+        "alt": "Interactive Qwen 3.7 Plus High Layout GLB.",
+        "poster": "/assets/examples/layout-qwen-3-7-plus-high/output.png"
+      }
+    },
+    {
+      "id": "camera-qwen-3-7-plus-high",
+      "task": "camera",
+      "modelId": "qwen-3-7-plus-high",
+      "title": "Qwen 3.7 Plus High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 6.1595,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 68.2425,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-qwen-3-7-plus-high/agent-view.png",
+          "alt": "Rendered view from Qwen 3.7 Plus High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    1.5,\n    -4.0,\n    1.600000023841858\n  ],\n  \"agent_look_dir\": [\n    -0.3874659836292267,\n    0.9116846323013306,\n    -0.13675269484519958\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9203308820724487,\n      -0.05348953604698181,\n      0.3874659836292267,\n      1.5\n    ],\n    [\n      0.3911406397819519,\n      0.12585772573947906,\n      -0.9116846323013306,\n      -4.0\n    ],\n    [\n      -0.0,\n      0.9906052350997925,\n      0.13675269484519958,\n      1.600000023841858\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-qwen-3-7-plus-high",
+      "task": "articulated",
+      "modelId": "qwen-3-7-plus-high",
+      "title": "Qwen 3.7 Plus High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.5253,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.4847,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 0.333,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-qwen-3-7-plus-high/animation.glb",
+        "alt": "Interactive animated Qwen 3.7 Plus High articulated GLB.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": true,
+      "keyframes": [],
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+    },
+    {
+      "id": "reconstruction-qwen-3-7-plus-high",
+      "task": "reconstruction",
+      "modelId": "qwen-3-7-plus-high",
+      "title": "Qwen 3.7 Plus High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.2337,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.25,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.7031,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-qwen-3-7-plus-high/agent-view-0.png",
+          "alt": "Qwen 3.7 Plus High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-qwen-3-7-plus-high/agent-view-2.png",
+          "alt": "Qwen 3.7 Plus High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-qwen-3-7-plus-high/scene.glb",
+        "alt": "Interactive Qwen 3.7 Plus High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-qwen-3-7-plus-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-qwen-3-7-plus-high",
+      "task": "dynamic",
+      "modelId": "qwen-3-7-plus-high",
+      "title": "Qwen 3.7 Plus High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 0.4465,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.1291,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-qwen-3-7-plus-high/animation.glb",
+        "alt": "Interactive animated Qwen 3.7 Plus High Dynamic GLB.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": true,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+    },
+    {
+      "id": "layout-gemini-3-1-pro-high",
+      "task": "layout",
+      "modelId": "gemini-3-1-pro-high",
+      "title": "Gemini 3.1 Pro High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.1755,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.2847,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/layout-gemini-3-1-pro-high/output.png",
+          "alt": "Gemini 3.1 Pro High reconstruction of DiningRoom-13034."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/layout-gemini-3-1-pro-high/scene.glb",
+        "alt": "Interactive Gemini 3.1 Pro High Layout GLB.",
+        "poster": "/assets/examples/layout-gemini-3-1-pro-high/output.png"
+      }
+    },
+    {
+      "id": "camera-gemini-3-1-pro-high",
+      "task": "camera",
+      "modelId": "gemini-3-1-pro-high",
+      "title": "Gemini 3.1 Pro High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 4.0642,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 46.5468,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-gemini-3-1-pro-high/agent-view.png",
+          "alt": "Rendered view from Gemini 3.1 Pro High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    -0.699999988079071,\n    -4.5,\n    0.44999998807907104\n  ],\n  \"agent_look_dir\": [\n    -0.026647720485925674,\n    0.9992896318435669,\n    0.026647556573152542\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9996446371078491,\n      0.0007103494135662913,\n      0.026647720485925674,\n      -0.699999988079071\n    ],\n    [\n      0.026657186448574066,\n      -0.026638086885213852,\n      -0.9992896318435669,\n      -4.5\n    ],\n    [\n      -5.227418498066072e-10,\n      0.9996448755264282,\n      -0.026647556573152542,\n      0.44999998807907104\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-gemini-3-1-pro-high",
+      "task": "articulated",
+      "modelId": "gemini-3-1-pro-high",
+      "title": "Gemini 3.1 Pro High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.5609,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.3913,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 0.333,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-gemini-3-1-pro-high/animation.glb",
+        "alt": "Interactive animated Gemini 3.1 Pro High articulated GLB.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": true,
+      "keyframes": [],
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+    },
+    {
+      "id": "reconstruction-gemini-3-1-pro-high",
+      "task": "reconstruction",
+      "modelId": "gemini-3-1-pro-high",
+      "title": "Gemini 3.1 Pro High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.2854,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.0,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.292,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-gemini-3-1-pro-high/agent-view-0.png",
+          "alt": "Gemini 3.1 Pro High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-gemini-3-1-pro-high/agent-view-2.png",
+          "alt": "Gemini 3.1 Pro High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-gemini-3-1-pro-high/scene.glb",
+        "alt": "Interactive Gemini 3.1 Pro High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-gemini-3-1-pro-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-gemini-3-1-pro-high",
+      "task": "dynamic",
+      "modelId": "gemini-3-1-pro-high",
+      "title": "Gemini 3.1 Pro High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.016,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 0.7898,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 1.823,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-gemini-3-1-pro-high/animation.glb",
+        "alt": "Interactive animated Gemini 3.1 Pro High Dynamic GLB.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": true,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+    },
+    {
+      "id": "layout-mimo-2-5-high",
+      "task": "layout",
+      "modelId": "mimo-2-5-high",
+      "title": "MiMo 2.5 High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.2568,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.4992,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [],
+      "outputGlb": {
+        "src": "/assets/examples/layout-mimo-2-5-high/scene.glb",
+        "alt": "Interactive MiMo 2.5 High Layout GLB.",
+        "poster": "/assets/references/layout/reference.png"
+      },
+      "notes": "The submitted GLB is valid but nearly empty; this failure is preserved."
+    },
+    {
+      "id": "camera-mimo-2-5-high",
+      "task": "camera",
+      "modelId": "mimo-2-5-high",
+      "title": "MiMo 2.5 High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 5.0273,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 53.6056,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-mimo-2-5-high/agent-view.png",
+          "alt": "Rendered view from MiMo 2.5 High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    0.20000000298023224,\n    -5.5,\n    2.200000047683716\n  ],\n  \"agent_look_dir\": [\n    -0.11987286061048508,\n    0.9589828848838806,\n    -0.25687041878700256\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9922779202461243,\n      -0.031860850751399994,\n      0.11987286061048508,\n      0.20000000298023224\n    ],\n    [\n      0.12403474003076553,\n      0.25488680601119995,\n      -0.9589828848838806,\n      -5.5\n    ],\n    [\n      0.0,\n      0.9664458632469177,\n      0.25687041878700256,\n      2.200000047683716\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-mimo-2-5-high",
+      "task": "articulated",
+      "modelId": "mimo-2-5-high",
+      "title": "MiMo 2.5 High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.5591,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.559,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-mimo-2-5-high/animation.glb",
+        "alt": "Interactive static MiMo 2.5 High articulated submission.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": false,
+      "keyframes": [],
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+    },
+    {
+      "id": "reconstruction-mimo-2-5-high",
+      "task": "reconstruction",
+      "modelId": "mimo-2-5-high",
+      "title": "MiMo 2.5 High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.2775,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.25,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.1496,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-mimo-2-5-high/agent-view-0.png",
+          "alt": "MiMo 2.5 High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-mimo-2-5-high/agent-view-2.png",
+          "alt": "MiMo 2.5 High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-mimo-2-5-high/scene.glb",
+        "alt": "Interactive MiMo 2.5 High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-mimo-2-5-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-mimo-2-5-high",
+      "task": "dynamic",
+      "modelId": "mimo-2-5-high",
+      "title": "MiMo 2.5 High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 0.5837,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.2155,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-mimo-2-5-high/animation.glb",
+        "alt": "Interactive animated MiMo 2.5 High Dynamic GLB.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": true,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+    },
+    {
+      "id": "layout-kimi-k2-6-reason",
+      "task": "layout",
+      "modelId": "kimi-k2-6-reason",
+      "title": "Kimi K2.6 Reason \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.0104,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.0195,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 1.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [],
+      "outputGlb": {
+        "src": "/assets/examples/layout-kimi-k2-6-reason/scene.glb",
+        "alt": "Interactive Kimi K2.6 Reason Layout GLB.",
+        "poster": "/assets/references/layout/reference.png"
+      }
+    },
+    {
+      "id": "camera-kimi-k2-6-reason",
+      "task": "camera",
+      "modelId": "kimi-k2-6-reason",
+      "title": "Kimi K2.6 Reason \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 12.7643,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 91.5149,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-kimi-k2-6-reason/agent-view.png",
+          "alt": "Rendered view from Kimi K2.6 Reason's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    7.358891487121582,\n    -6.925790786743164,\n    4.958309173583984\n  ],\n  \"agent_look_dir\": [\n    -0.6515582203865051,\n    0.6141703724861145,\n    -0.44527140259742737\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.6859206557273865,\n      -0.32401347160339355,\n      0.6515582203865051,\n      7.358891487121582\n    ],\n    [\n      0.7276763319969177,\n      0.305420845746994,\n      -0.6141703724861145,\n      -6.925790786743164\n    ],\n    [\n      0.0,\n      0.8953956365585327,\n      0.44527140259742737,\n      4.958309173583984\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-kimi-k2-6-reason",
+      "task": "articulated",
+      "modelId": "kimi-k2-6-reason",
+      "title": "Kimi K2.6 Reason \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.4394,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.4202,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 1.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-kimi-k2-6-reason/animation.glb",
+        "alt": "Interactive static Kimi K2.6 Reason articulated submission.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": false,
+      "keyframes": [],
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+    },
+    {
+      "id": "reconstruction-kimi-k2-6-reason",
+      "task": "reconstruction",
+      "modelId": "kimi-k2-6-reason",
+      "title": "Kimi K2.6 Reason \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.2167,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.25,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.5201,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-kimi-k2-6-reason/agent-view-0.png",
+          "alt": "Kimi K2.6 Reason reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-kimi-k2-6-reason/agent-view-2.png",
+          "alt": "Kimi K2.6 Reason reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-kimi-k2-6-reason/scene.glb",
+        "alt": "Interactive Kimi K2.6 Reason Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-kimi-k2-6-reason/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-kimi-k2-6-reason",
+      "task": "dynamic",
+      "modelId": "kimi-k2-6-reason",
+      "title": "Kimi K2.6 Reason \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 1.0,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.3452,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-kimi-k2-6-reason/animation.glb",
+        "alt": "Interactive static Kimi K2.6 Reason Dynamic submission.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": false,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+    },
+    {
+      "id": "layout-step-3-7-flash-high",
+      "task": "layout",
+      "modelId": "step-3-7-flash-high",
+      "title": "Step 3.7 Flash High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.5714,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 1.8179,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [],
+      "outputGlb": {
+        "src": "/assets/examples/layout-step-3-7-flash-high/scene.glb",
+        "alt": "Interactive Step 3.7 Flash High Layout GLB.",
+        "poster": "/assets/references/layout/reference.png"
+      },
+      "notes": "The submitted GLB is substantially smaller than the full asset set and may be partial."
+    },
+    {
+      "id": "camera-step-3-7-flash-high",
+      "task": "camera",
+      "modelId": "step-3-7-flash-high",
+      "title": "Step 3.7 Flash High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 4.9458,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 45.0,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-step-3-7-flash-high/agent-view.png",
+          "alt": "Rendered view from Step 3.7 Flash High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    -3.721789925401932e-15,\n    -3.472222328186035,\n    0.0\n  ],\n  \"agent_look_dir\": [\n    1.0718756196414678e-15,\n    1.0,\n    -7.549790126404332e-08\n  ],\n  \"agent_matrix_world\": [\n    [\n      1.0,\n      1.5579220328097004e-22,\n      -1.0718756196414678e-15,\n      -3.721789925401932e-15\n    ],\n    [\n      -1.0718756196414678e-15,\n      7.549790126404332e-08,\n      -1.0,\n      -3.472222328186035\n    ],\n    [\n      -7.486784133018432e-23,\n      1.0,\n      7.549790126404332e-08,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-step-3-7-flash-high",
+      "task": "articulated",
+      "modelId": "step-3-7-flash-high",
+      "title": "Step 3.7 Flash High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.5609,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.5596,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-step-3-7-flash-high/animation.glb",
+        "alt": "Interactive static Step 3.7 Flash High articulated submission.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": false,
+      "keyframes": [],
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+    },
+    {
+      "id": "reconstruction-step-3-7-flash-high",
+      "task": "reconstruction",
+      "modelId": "step-3-7-flash-high",
+      "title": "Step 3.7 Flash High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.2171,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.0,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.3963,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-step-3-7-flash-high/agent-view-0.png",
+          "alt": "Step 3.7 Flash High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-step-3-7-flash-high/agent-view-2.png",
+          "alt": "Step 3.7 Flash High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-step-3-7-flash-high/scene.glb",
+        "alt": "Interactive Step 3.7 Flash High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-step-3-7-flash-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-step-3-7-flash-high",
+      "task": "dynamic",
+      "modelId": "step-3-7-flash-high",
+      "title": "Step 3.7 Flash High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 1.0,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.2205,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-step-3-7-flash-high/animation.glb",
+        "alt": "Interactive static Step 3.7 Flash High Dynamic submission.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": false,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+    },
+    {
+      "id": "layout-claude-sonnet-5-high",
+      "task": "layout",
+      "modelId": "claude-sonnet-5-high",
+      "title": "Claude Sonnet 5 High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 0.2527,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 0.3992,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [],
+      "outputGlb": {
+        "src": "/assets/examples/layout-claude-sonnet-5-high/scene.glb",
+        "alt": "Interactive Claude Sonnet 5 High Layout GLB.",
+        "poster": "/assets/references/layout/reference.png"
+      }
+    },
+    {
+      "id": "camera-claude-sonnet-5-high",
+      "task": "camera",
+      "modelId": "claude-sonnet-5-high",
+      "title": "Claude Sonnet 5 High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 1.6645,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 6.1589,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-claude-sonnet-5-high/agent-view.png",
+          "alt": "Rendered view from Claude Sonnet 5 High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    -4.0,\n    -2.9000000953674316,\n    1.100000023841858\n  ],\n  \"agent_look_dir\": [\n    0.7498939037322998,\n    0.6561570167541504,\n    -0.0843629240989685\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.6585045456886292,\n      0.06348961591720581,\n      -0.7498939037322998,\n      -4.0\n    ],\n    [\n      -0.7525767683982849,\n      0.055553317070007324,\n      -0.6561570167541504,\n      -2.9000000953674316\n    ],\n    [\n      -6.340222569178877e-08,\n      0.9964351058006287,\n      0.0843629240989685,\n      1.100000023841858\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-claude-sonnet-5-high",
+      "task": "articulated",
+      "modelId": "claude-sonnet-5-high",
+      "title": "Claude Sonnet 5 High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.4288,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.4155,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 1.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-claude-sonnet-5-high/animation.glb",
+        "alt": "Interactive static Claude Sonnet 5 High articulated submission.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": false,
+      "keyframes": [],
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+    },
+    {
+      "id": "reconstruction-claude-sonnet-5-high",
+      "task": "reconstruction",
+      "modelId": "claude-sonnet-5-high",
+      "title": "Claude Sonnet 5 High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.1897,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.0,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.4581,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-claude-sonnet-5-high/agent-view-0.png",
+          "alt": "Claude Sonnet 5 High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-claude-sonnet-5-high/agent-view-2.png",
+          "alt": "Claude Sonnet 5 High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-claude-sonnet-5-high/scene.glb",
+        "alt": "Interactive Claude Sonnet 5 High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-claude-sonnet-5-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-claude-sonnet-5-high",
+      "task": "dynamic",
+      "modelId": "claude-sonnet-5-high",
+      "title": "Claude Sonnet 5 High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 1.0,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 0.7417,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-claude-sonnet-5-high/animation.glb",
+        "alt": "Interactive static Claude Sonnet 5 High Dynamic submission.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": false,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+    },
+    {
+      "id": "layout-minimax-m3-high",
+      "task": "layout",
+      "modelId": "minimax-m3-high",
+      "title": "MiniMax M3 High \u00b7 DiningRoom-13034",
+      "sourceInstance": "DiningRoom-13034 \u00b7 single-view Layout",
+      "metrics": [
+        {
+          "id": "ADD-S",
+          "label": "ADD-S",
+          "value": 58.5371,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Chamfer",
+          "label": "Chamfer",
+          "value": 58.9251,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Placement",
+          "label": "Placement accuracy",
+          "value": 0.0,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/layout/reference.png",
+          "alt": "Reference view for DiningRoom-13034."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/layout-minimax-m3-high/output.png",
+          "alt": "MiniMax M3 High reconstruction of DiningRoom-13034."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/layout-minimax-m3-high/scene.glb",
+        "alt": "Interactive MiniMax M3 High Layout GLB.",
+        "poster": "/assets/examples/layout-minimax-m3-high/output.png"
+      }
+    },
+    {
+      "id": "camera-minimax-m3-high",
+      "task": "camera",
+      "modelId": "minimax-m3-high",
+      "title": "MiniMax M3 High \u00b7 Bedroom-5088",
+      "sourceInstance": "Bedroom-5088 \u00b7 hidden camera extrinsics",
+      "metrics": [
+        {
+          "id": "PE",
+          "label": "Position Error",
+          "value": 7.328,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "AE",
+          "label": "Angular Error",
+          "value": 90.0,
+          "direction": "lower",
+          "unit": "\u00b0"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/camera/reference.png",
+          "alt": "Ground-truth camera view for Bedroom-5088."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/camera-minimax-m3-high/agent-view.png",
+          "alt": "Rendered view from MiniMax M3 High's predicted camera."
+        }
+      ],
+      "poseJson": "{\n  \"agent_position\": [\n    0.0,\n    0.0,\n    5.0\n  ],\n  \"agent_look_dir\": [\n    -0.0,\n    -0.0,\n    1.0\n  ],\n  \"agent_matrix_world\": [\n    [\n      -1.0,\n      0.0,\n      0.0,\n      0.0\n    ],\n    [\n      0.0,\n      1.0,\n      0.0,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      -1.0,\n      5.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+    },
+    {
+      "id": "articulated-minimax-m3-high",
+      "task": "articulated",
+      "modelId": "minimax-m3-high",
+      "title": "MiniMax M3 High \u00b7 Kitchen cabinet",
+      "sourceInstance": "S2O ACD kitchen cabinet \u00b7 32 ordered states",
+      "metrics": [
+        {
+          "id": "MPE",
+          "label": "Maximum Part Error",
+          "value": 0.5037,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Mean Part",
+          "label": "Mean Part Error",
+          "value": 0.4195,
+          "direction": "lower",
+          "unit": " m"
+        },
+        {
+          "id": "Recall",
+          "label": "Movable recall",
+          "value": 0.333,
+          "direction": "higher"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/articulated/reference-0.png",
+          "alt": "Articulated reference state 1."
+        },
+        {
+          "src": "/assets/references/articulated/reference-2.png",
+          "alt": "Articulated reference state 3."
+        },
+        {
+          "src": "/assets/references/articulated/reference-4.png",
+          "alt": "Articulated reference state 5."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/articulated-minimax-m3-high/animation.glb",
+        "alt": "Interactive animated MiniMax M3 High articulated GLB.",
+        "poster": "/assets/references/articulated/reference-0.png"
+      },
+      "hasAnimation": true,
+      "keyframes": [],
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+    },
+    {
+      "id": "reconstruction-minimax-m3-high",
+      "task": "reconstruction",
+      "modelId": "minimax-m3-high",
+      "title": "MiniMax M3 High \u00b7 SecondBedroom-5427",
+      "sourceInstance": "SecondBedroom-5427 \u00b7 calibrated multi-view Reconstruction",
+      "metrics": [
+        {
+          "id": "F@5%",
+          "label": "Object F@5%",
+          "value": 0.4597,
+          "direction": "higher"
+        },
+        {
+          "id": "Coverage",
+          "label": "Object coverage",
+          "value": 0.5,
+          "direction": "higher"
+        },
+        {
+          "id": "Centroid",
+          "label": "Mean centroid error",
+          "value": 0.1732,
+          "direction": "lower",
+          "unit": " m"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/reconstruction/reference-0.png",
+          "alt": "Calibrated reconstruction reference view 1."
+        },
+        {
+          "src": "/assets/references/reconstruction/reference-2.png",
+          "alt": "Calibrated reconstruction reference view 3."
+        }
+      ],
+      "outputImages": [
+        {
+          "src": "/assets/examples/reconstruction-minimax-m3-high/agent-view-0.png",
+          "alt": "MiniMax M3 High reconstruction from calibrated view 1."
+        },
+        {
+          "src": "/assets/examples/reconstruction-minimax-m3-high/agent-view-2.png",
+          "alt": "MiniMax M3 High reconstruction from calibrated view 3."
+        }
+      ],
+      "outputGlb": {
+        "src": "/assets/examples/reconstruction-minimax-m3-high/scene.glb",
+        "alt": "Interactive MiniMax M3 High Reconstruction GLB.",
+        "poster": "/assets/examples/reconstruction-minimax-m3-high/agent-view-0.png"
+      }
+    },
+    {
+      "id": "dynamic-minimax-m3-high",
+      "task": "dynamic",
+      "modelId": "minimax-m3-high",
+      "title": "MiniMax M3 High \u00b7 Castle siege",
+      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "metrics": [
+        {
+          "id": "MME",
+          "label": "Maximum Mover Error",
+          "value": 1.0,
+          "direction": "lower"
+        },
+        {
+          "id": "AME",
+          "label": "Average Mover Error",
+          "value": 1.0,
+          "direction": "diagnostic"
+        },
+        {
+          "id": "LE",
+          "label": "Layout Error",
+          "value": 1.0833,
+          "direction": "lower"
+        }
+      ],
+      "referenceImages": [
+        {
+          "src": "/assets/references/dynamic/t6_gt_0.png",
+          "alt": "Low-poly Dynamic reference frame."
+        },
+        {
+          "src": "/assets/references/dynamic/t7_gt_0.png",
+          "alt": "Photo-realistic Dynamic reference frame."
+        }
+      ],
+      "outputImages": [],
+      "animatedGlb": {
+        "src": "/assets/examples/dynamic-minimax-m3-high/animation.glb",
+        "alt": "Interactive static MiniMax M3 High Dynamic submission.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "hasAnimation": false,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+    }
+  ]
+}
