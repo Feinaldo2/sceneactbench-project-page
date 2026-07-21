@@ -1,3 +1,5 @@
+import { withBase } from '../data/assetPath';
+
 export function HeroScene() {
   return (
     <div className="hero-visual" aria-label="SceneActBench five-task scene illustration" role="img">
@@ -82,7 +84,7 @@ export function PipelineVisual() {
     <div className="pipeline-visual">
       <figure className="pipeline-paper-figure">
         <img
-          src="/assets/paper/pipeline.webp"
+          src={withBase('assets/paper/pipeline.webp')}
           alt="SceneActBench shared agent-environment loop from task input through Blender actions to hidden evaluation."
           width="1743"
           height="558"

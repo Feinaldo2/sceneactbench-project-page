@@ -2,7 +2,7 @@
 
 Production GitHub Pages site for **SceneActBench: Can Agents Act on the 3D Scenes They See?**
 
-Deployed root: <https://feinaldo2.github.io/>
+Deployed project page: <https://feinaldo2.github.io/sceneactbench-project-page/>
 
 The site is a React + Vite + TypeScript application at the repository root. It includes an interactive leaderboard, five-task benchmark guide, metric glossary, typed model × task explorer, analysis lightbox, resources, limitations, and citation UI.
 
@@ -25,7 +25,7 @@ npm run build
 npm run preview
 ```
 
-Vite is intentionally configured with `base: '/'` because this is a GitHub user Pages repository, not a project subpath.
+Vite is configured with `base: '/sceneactbench-project-page/'` because this repository is deployed as a GitHub project page beneath the Feinaldo2 user site.
 
 ## Repository structure
 
@@ -46,7 +46,7 @@ scripts/
 .github/workflows/pages.yml
 ```
 
-All public asset and data URLs are root-relative so development and the user Pages root resolve them consistently.
+Runtime asset URLs are rebased through `import.meta.env.BASE_URL` so local development and the GitHub project subpath resolve consistently.
 
 ## Canonical data refresh
 
@@ -95,7 +95,7 @@ One-time repository setting:
 1. Open **Settings → Pages**.
 2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
 
-No custom domain or subpath base is required.
+No custom domain is required; GitHub serves this repository beneath `/sceneactbench-project-page/`.
 
 ## Accessibility and responsive behavior
 

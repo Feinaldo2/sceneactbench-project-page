@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://feinaldo2.github.io/schemas/examples-manifest.schema.json",
+  "$id": "https://feinaldo2.github.io/sceneactbench-project-page/schemas/examples-manifest.schema.json",
   "title": "SceneActBench curated examples manifest",
   "type": "object",
   "additionalProperties": false,

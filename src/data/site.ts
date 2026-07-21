@@ -1,5 +1,7 @@
+import { withBase } from './assetPath';
+
 export const links = {
-  paper: '/sceneactbench.pdf',
+  paper: withBase('sceneactbench.pdf'),
   code: 'https://github.com/harnessRL/3D_Bench',
   dataset: 'https://huggingface.co/datasets/harnessRL/3D_Bench_Datasets',
 };
@@ -62,7 +64,7 @@ export const analysisItems = [
     title: 'Ranking decomposition',
     description: 'Overall separates into five fixed, task-normalized components.',
     kind: 'stacked' as const,
-    image: '/assets/paper/top3_analysis.webp',
+    image: withBase('assets/paper/top3_analysis.webp'),
     width: 841,
     height: 341,
     alt: 'Task contributions to the Overall score gaps among the top configurations.',
@@ -73,7 +75,7 @@ export const analysisItems = [
     title: 'Input sensitivity',
     description: 'Additional views or visual realism help some configurations and hurt others.',
     kind: 'sensitivity' as const,
-    image: '/assets/paper/input_conditions.webp',
+    image: withBase('assets/paper/input_conditions.webp'),
     width: 748,
     height: 418,
     alt: 'Input-condition sensitivity across model configurations.',
@@ -84,7 +86,7 @@ export const analysisItems = [
     title: 'Failure stages',
     description: 'Conditional diagnostics separate target, geometry, coverage, and motion failures.',
     kind: 'stages' as const,
-    image: '/assets/paper/failure_stages.webp',
+    image: withBase('assets/paper/failure_stages.webp'),
     width: 866,
     height: 502,
     alt: 'Denominator-aware failure stages for leading configurations.',
@@ -95,7 +97,7 @@ export const analysisItems = [
     title: 'Effective budget',
     description: 'Allocated interactions and interactions actually used tell different stories.',
     kind: 'budget' as const,
-    image: '/assets/paper/effective_budget.webp',
+    image: withBase('assets/paper/effective_budget.webp'),
     width: 830,
     height: 405,
     alt: 'Effective interaction budget and realized tool calls.',
@@ -106,7 +108,7 @@ export const analysisItems = [
     title: 'Step curves',
     description: 'Task quality is read against agent steps rather than endpoint alone.',
     kind: 'curves' as const,
-    image: '/assets/paper/step_curve.webp',
+    image: withBase('assets/paper/step_curve.webp'),
     width: 839,
     height: 714,
     alt: 'Step-budget sensitivity curves across Overall and five tasks.',
@@ -117,7 +119,7 @@ export const analysisItems = [
     title: 'Representative traces',
     description: 'Compact action traces reveal recovery, repetition, and premature stopping.',
     kind: 'trace' as const,
-    image: '/assets/paper/agent_traces.webp',
+    image: withBase('assets/paper/agent_traces.webp'),
     width: 880,
     height: 911,
     alt: 'Representative agent-completion traces for three episodes.',
@@ -136,5 +138,5 @@ export const bibtex = `@misc{sceneactbench2026,
   author = {Zhao, Yifei and Zhou, Xiangxin and Yang, Wenhao and Tang, Jiaqi and Jian, Pu and Yao, Huanjin and Yao, Jiarui and Lin, Haowei and Chen, Zhuo and Lyu, Wenkai and Ma, Jianzhu and Wang, Xueqian and Zhu, Wenxi and Pang, Tianyu},
   year   = {2026},
   note   = {Preprint},
-  url    = {https://feinaldo2.github.io/}
+  url    = {https://feinaldo2.github.io/sceneactbench-project-page/}
 }`;

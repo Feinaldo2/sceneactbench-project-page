@@ -16,6 +16,7 @@ import {
   stats,
 } from './data/site';
 import { tasks } from './data/tasks';
+import { withBase } from './data/assetPath';
 
 const navItems = [
   ['tldr', 'TL;DR'],
@@ -406,7 +407,7 @@ function ResourcesSection() {
               </div>
               <ArrowUpRight />
             </a>
-            <a href="/data/examples.json">
+            <a href={withBase('data/examples.json')}>
               <span>03</span>
               <div>
                 <small>Website data</small>

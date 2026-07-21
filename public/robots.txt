@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://feinaldo2.github.io/sitemap.xml
+Sitemap: https://feinaldo2.github.io/sceneactbench-project-page/sitemap.xml

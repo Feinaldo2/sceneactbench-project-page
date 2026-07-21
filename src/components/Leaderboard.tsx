@@ -8,6 +8,7 @@ import {
 } from '../data/leaderboard';
 import { tasks } from '../data/tasks';
 import type { LeaderboardEntry, ScoreKey } from '../data/types';
+import { withBase } from '../data/assetPath';
 import { CheckIcon, ChevronDown } from './Icons';
 
 const scoreKeys: ScoreKey[] = [
@@ -285,7 +286,7 @@ export function Leaderboard() {
       <details className="paper-ranking-preview">
         <summary>View the published static leaderboard figure</summary>
         <img
-          src="/assets/paper/ranking.webp"
+          src={withBase('assets/paper/ranking.webp')}
           alt="Published SceneActBench leaderboard with task contributions stacked into Overall score."
           width="844"
           height="404"

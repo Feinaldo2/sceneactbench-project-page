@@ -55,8 +55,8 @@ for (const section of requiredSections) {
 }
 
 const vite = await readFile(path.join(root, 'vite.config.ts'), 'utf8');
-if (!/base:\s*['"]\/['"]/.test(vite)) {
-  violations.push('vite.config.ts must use the GitHub Pages user-root base "/".');
+if (!/base:\s*['"]\/sceneactbench-project-page\/['"]/.test(vite)) {
+  violations.push('vite.config.ts must use the GitHub Pages project base "/sceneactbench-project-page/".');
 }
 
 const examplesManifest = JSON.parse(

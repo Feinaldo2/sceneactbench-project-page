@@ -4,8 +4,10 @@ import {
   type BenchmarkExample,
   type DynamicExample,
   type ExamplesManifest,
+  type MediaAsset,
   type TaskId,
 } from './types';
+import { withBase } from './assetPath';
 
 export const emptyExamplesManifest: ExamplesManifest = {
   schemaVersion: 1,
@@ -48,6 +50,46 @@ const isExample = (value: unknown): value is BenchmarkExample => {
   return true;
 };
 
+const rebaseMedia = (asset: MediaAsset): MediaAsset => ({
+  ...asset,
+  src: withBase(asset.src),
+  ...(asset.poster ? { poster: withBase(asset.poster) } : {}),
+});
+
+const rebaseExample = (example: BenchmarkExample): BenchmarkExample => {
+  const referenceImages = example.referenceImages.map(rebaseMedia);
+  const outputImages = example.outputImages.map(rebaseMedia);
+  if (example.task === 'layout' || example.task === 'reconstruction') {
+    return {
+      ...example,
+      referenceImages,
+      outputImages,
+      ...(example.outputGlb ? { outputGlb: rebaseMedia(example.outputGlb) } : {}),
+    };
+  }
+  if (example.task === 'camera') return { ...example, referenceImages, outputImages };
+  if (example.task === 'articulated') {
+    return {
+      ...example,
+      referenceImages,
+      outputImages,
+      keyframes: example.keyframes.map(rebaseMedia),
+      ...(example.animatedGlb ? { animatedGlb: rebaseMedia(example.animatedGlb) } : {}),
+    };
+  }
+  if (example.task === 'dynamic') {
+    return {
+      ...example,
+      referenceImages,
+      outputImages,
+      lowPolyPreviews: example.lowPolyPreviews.map(rebaseMedia),
+      photorealisticPreviews: example.photorealisticPreviews.map(rebaseMedia),
+      ...(example.animatedGlb ? { animatedGlb: rebaseMedia(example.animatedGlb) } : {}),
+    };
+  }
+  throw new Error(`Unsupported example task: ${example.task}`);
+};
+
 export function parseExamplesManifest(value: unknown): ExamplesManifest {
   if (!value || typeof value !== 'object') {
     throw new Error('Examples manifest must be an object.');
@@ -66,8 +108,8 @@ export function parseExamplesManifest(value: unknown): ExamplesManifest {
   return {
     schemaVersion: 1,
     generatedAt: typeof candidate.generatedAt === 'string' ? candidate.generatedAt : null,
-    assetBase: candidate.assetBase,
-    examples: candidate.examples,
+    assetBase: withBase(candidate.assetBase),
+    examples: candidate.examples.map(rebaseExample),
   };
 }
 

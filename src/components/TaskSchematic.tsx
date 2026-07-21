@@ -1,4 +1,5 @@
 import { useState, type CSSProperties, type ReactNode } from 'react';
+import { withBase } from '../data/assetPath';
 import type { TaskDefinition, TaskId } from '../data/types';
 
 function Frame({ children }: { children: ReactNode }) {
@@ -115,11 +116,11 @@ const schematics: Record<TaskId, () => ReactNode> = {
 };
 
 const taskImages: Record<TaskId, string> = {
-  layout: '/assets/paper/task_t1.webp',
-  camera: '/assets/paper/task_t3.webp',
-  articulated: '/assets/paper/task_t4.webp',
-  reconstruction: '/assets/paper/task_t5.webp',
-  dynamic: '/assets/paper/task_t6.webp',
+  layout: withBase('assets/paper/task_t1.webp'),
+  camera: withBase('assets/paper/task_t3.webp'),
+  articulated: withBase('assets/paper/task_t4.webp'),
+  reconstruction: withBase('assets/paper/task_t5.webp'),
+  dynamic: withBase('assets/paper/task_t6.webp'),
 };
 
 export function TaskSchematic({ task }: { task: TaskDefinition }) {
