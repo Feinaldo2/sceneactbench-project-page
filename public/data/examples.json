@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-21T12:23:42.853676Z",
+  "generatedAt": "2026-07-21T13:45:40.807197Z",
   "assetBase": "/assets/examples/",
   "examples": [
     {
@@ -33,20 +33,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/layout-doubao-seed-2-pro-high/output.png",
-          "alt": "Doubao Seed 2.0 Pro High reconstruction of DiningRoom-13034."
-        }
-      ],
+      "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-doubao-seed-2-pro-high/scene.glb",
-        "alt": "Interactive Doubao Seed 2.0 Pro High Layout GLB.",
-        "poster": "/assets/examples/layout-doubao-seed-2-pro-high/output.png"
+        "alt": "Interactive Doubao Seed 2.0 Pro High Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -79,8 +73,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -127,23 +121,22 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-doubao-seed-2-pro-high/animation.glb",
-        "alt": "Interactive static Doubao Seed 2.0 Pro High articulated submission.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive static Doubao Seed 2.0 Pro High articulated submission."
       },
       "hasAnimation": false,
       "keyframes": [],
@@ -151,14 +144,14 @@
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -191,11 +184,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -226,7 +219,7 @@
       "task": "dynamic",
       "modelId": "doubao-seed-2-pro-high",
       "title": "Doubao Seed 2.0 Pro High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -249,40 +242,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-doubao-seed-2-pro-high/animation.glb",
-        "alt": "Interactive animated Doubao Seed 2.0 Pro High Dynamic GLB.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive animated Doubao Seed 2.0 Pro High Dynamic GLB."
       },
       "hasAnimation": true,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-doubao-seed-2-pro-high/paired-animation.glb",
+        "alt": "Interactive static Doubao Seed 2.0 Pro High photo-realistic-input Dynamic submission."
+      },
+      "pairedHasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "notes": "The two interactive GLBs compare submissions from the low-poly base condition and the paired photo-realistic-input condition. The paired T7 submission also contains no animation. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -316,20 +313,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/layout-claude-opus-4-6-high/output.png",
-          "alt": "Claude Opus 4.6 High reconstruction of DiningRoom-13034."
-        }
-      ],
+      "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-claude-opus-4-6-high/scene.glb",
-        "alt": "Interactive Claude Opus 4.6 High Layout GLB.",
-        "poster": "/assets/examples/layout-claude-opus-4-6-high/output.png"
+        "alt": "Interactive Claude Opus 4.6 High Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -362,8 +353,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -410,60 +401,37 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-0.png",
-          "alt": "Claude Opus articulated output state 1."
-        }
-      ],
+      "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-claude-opus-4-6-high/animation.glb",
-        "alt": "Interactive animated Claude Opus 4.6 High articulated GLB.",
-        "poster": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-2.png"
+        "alt": "Interactive animated Claude Opus 4.6 High articulated GLB."
       },
       "hasAnimation": true,
-      "keyframes": [
-        {
-          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-0.png",
-          "alt": "Claude Opus articulated output state 1."
-        },
-        {
-          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-1.png",
-          "alt": "Claude Opus articulated output state 2."
-        },
-        {
-          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-2.png",
-          "alt": "Claude Opus articulated output state 3."
-        },
-        {
-          "src": "/assets/examples/articulated-claude-opus-4-6-high/keyframe-3.png",
-          "alt": "Claude Opus articulated output state 4."
-        }
-      ],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "keyframes": [],
+      "notes": "The interactive viewer uses the submitted 32-state agent GLB.",
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -496,11 +464,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -531,7 +499,7 @@
       "task": "dynamic",
       "modelId": "claude-opus-4-6-high",
       "title": "Claude Opus 4.6 High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -554,79 +522,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-0.png",
-          "alt": "Claude Opus low-poly output frame 1."
-        }
-      ],
+      "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-claude-opus-4-6-high/animation.glb",
-        "alt": "Interactive animated Claude Opus 4.6 High Dynamic GLB.",
-        "poster": "/assets/examples/dynamic-claude-opus-4-6-high/low-0.png"
+        "alt": "Interactive animated Claude Opus 4.6 High Dynamic GLB."
       },
       "hasAnimation": true,
-      "lowPolyPreviews": [
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-0.png",
-          "alt": "Claude Opus low-poly output frame 1."
-        },
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-1.png",
-          "alt": "Claude Opus low-poly output frame 2."
-        },
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-2.png",
-          "alt": "Claude Opus low-poly output frame 3."
-        },
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/low-3.png",
-          "alt": "Claude Opus low-poly output frame 4."
-        }
-      ],
-      "photorealisticPreviews": [
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-0.png",
-          "alt": "Claude Opus photo-realistic output frame 1."
-        },
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-1.png",
-          "alt": "Claude Opus photo-realistic output frame 2."
-        },
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-2.png",
-          "alt": "Claude Opus photo-realistic output frame 3."
-        },
-        {
-          "src": "/assets/examples/dynamic-claude-opus-4-6-high/photo-3.png",
-          "alt": "Claude Opus photo-realistic output frame 4."
-        }
-      ],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-claude-opus-4-6-high/paired-animation.glb",
+        "alt": "Interactive animated Claude Opus 4.6 High photo-realistic-input Dynamic GLB."
+      },
+      "pairedHasAnimation": true,
+      "lowPolyPreviews": [],
+      "photorealisticPreviews": [],
+      "notes": "The two interactive GLBs compare submissions from the low-poly base condition and the paired photo-realistic-input condition. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -660,20 +593,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/layout-gpt-5-4-medium/output.png",
-          "alt": "GPT 5.4 Medium reconstruction of DiningRoom-13034."
-        }
-      ],
+      "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-gpt-5-4-medium/scene.glb",
-        "alt": "Interactive GPT 5.4 Medium Layout GLB.",
-        "poster": "/assets/examples/layout-gpt-5-4-medium/output.png"
+        "alt": "Interactive GPT 5.4 Medium Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -706,8 +633,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -754,38 +681,37 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-gpt-5-4-medium/animation.glb",
-        "alt": "Interactive animated GPT 5.4 Medium articulated GLB.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive animated GPT 5.4 Medium articulated GLB."
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "notes": "The interactive viewer uses the submitted 32-state agent GLB.",
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -818,11 +744,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -853,7 +779,7 @@
       "task": "dynamic",
       "modelId": "gpt-5-4-medium",
       "title": "GPT 5.4 Medium \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -876,40 +802,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-gpt-5-4-medium/animation.glb",
-        "alt": "Interactive animated GPT 5.4 Medium Dynamic GLB.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive animated GPT 5.4 Medium Dynamic GLB."
       },
       "hasAnimation": true,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-gpt-5-4-medium/paired-animation.glb",
+        "alt": "Interactive animated GPT 5.4 Medium photo-realistic-input Dynamic GLB."
+      },
+      "pairedHasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "notes": "The two interactive GLBs compare submissions from the low-poly base condition and the paired photo-realistic-input condition. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -943,20 +873,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/layout-gpt-5-4-high/output.png",
-          "alt": "GPT 5.4 High reconstruction of DiningRoom-13034."
-        }
-      ],
+      "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-gpt-5-4-high/scene.glb",
-        "alt": "Interactive GPT 5.4 High Layout GLB.",
-        "poster": "/assets/examples/layout-gpt-5-4-high/output.png"
+        "alt": "Interactive GPT 5.4 High Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -989,8 +913,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -1037,23 +961,22 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-gpt-5-4-high/animation.glb",
-        "alt": "Interactive static GPT 5.4 High articulated submission.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive static GPT 5.4 High articulated submission."
       },
       "hasAnimation": false,
       "keyframes": [],
@@ -1061,14 +984,14 @@
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -1101,11 +1024,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -1136,7 +1059,7 @@
       "task": "dynamic",
       "modelId": "gpt-5-4-high",
       "title": "GPT 5.4 High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -1159,40 +1082,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-gpt-5-4-high/animation.glb",
-        "alt": "Interactive static GPT 5.4 High Dynamic submission.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive static GPT 5.4 High Dynamic submission."
       },
       "hasAnimation": false,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-gpt-5-4-high/paired-animation.glb",
+        "alt": "Interactive static GPT 5.4 High photo-realistic-input Dynamic submission."
+      },
+      "pairedHasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the first viewer preserves this static-scene failure alongside the paired photo-realistic-input submission. The paired T7 submission also contains no animation. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -1226,20 +1153,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/layout-qwen-3-7-plus-high/output.png",
-          "alt": "Qwen 3.7 Plus High reconstruction of DiningRoom-13034."
-        }
-      ],
+      "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-qwen-3-7-plus-high/scene.glb",
-        "alt": "Interactive Qwen 3.7 Plus High Layout GLB.",
-        "poster": "/assets/examples/layout-qwen-3-7-plus-high/output.png"
+        "alt": "Interactive Qwen 3.7 Plus High Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -1272,8 +1193,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -1320,38 +1241,37 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-qwen-3-7-plus-high/animation.glb",
-        "alt": "Interactive animated Qwen 3.7 Plus High articulated GLB.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive animated Qwen 3.7 Plus High articulated GLB."
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "notes": "The interactive viewer uses the submitted 32-state agent GLB.",
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -1384,11 +1304,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -1419,7 +1339,7 @@
       "task": "dynamic",
       "modelId": "qwen-3-7-plus-high",
       "title": "Qwen 3.7 Plus High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -1442,40 +1362,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-qwen-3-7-plus-high/animation.glb",
-        "alt": "Interactive animated Qwen 3.7 Plus High Dynamic GLB.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive animated Qwen 3.7 Plus High Dynamic GLB."
       },
       "hasAnimation": true,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-qwen-3-7-plus-high/paired-animation.glb",
+        "alt": "Interactive animated Qwen 3.7 Plus High photo-realistic-input Dynamic GLB."
+      },
+      "pairedHasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "notes": "The two interactive GLBs compare submissions from the low-poly base condition and the paired photo-realistic-input condition. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -1509,20 +1433,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/layout-gemini-3-1-pro-high/output.png",
-          "alt": "Gemini 3.1 Pro High reconstruction of DiningRoom-13034."
-        }
-      ],
+      "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-gemini-3-1-pro-high/scene.glb",
-        "alt": "Interactive Gemini 3.1 Pro High Layout GLB.",
-        "poster": "/assets/examples/layout-gemini-3-1-pro-high/output.png"
+        "alt": "Interactive Gemini 3.1 Pro High Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -1555,8 +1473,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -1603,38 +1521,37 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-gemini-3-1-pro-high/animation.glb",
-        "alt": "Interactive animated Gemini 3.1 Pro High articulated GLB.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive animated Gemini 3.1 Pro High articulated GLB."
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "notes": "The interactive viewer uses the submitted 32-state agent GLB.",
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -1667,11 +1584,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -1702,7 +1619,7 @@
       "task": "dynamic",
       "modelId": "gemini-3-1-pro-high",
       "title": "Gemini 3.1 Pro High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -1725,40 +1642,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-gemini-3-1-pro-high/animation.glb",
-        "alt": "Interactive animated Gemini 3.1 Pro High Dynamic GLB.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive animated Gemini 3.1 Pro High Dynamic GLB."
       },
       "hasAnimation": true,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-gemini-3-1-pro-high/paired-animation.glb",
+        "alt": "Interactive animated Gemini 3.1 Pro High photo-realistic-input Dynamic GLB."
+      },
+      "pairedHasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "notes": "The two interactive GLBs compare submissions from the low-poly base condition and the paired photo-realistic-input condition. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -1792,15 +1713,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
       "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-mimo-2-5-high/scene.glb",
-        "alt": "Interactive MiMo 2.5 High Layout GLB.",
-        "poster": "/assets/references/layout/reference.png"
+        "alt": "Interactive MiMo 2.5 High Layout GLB."
       },
       "notes": "The submitted GLB is valid but nearly empty; this failure is preserved.",
       "referenceGlb": {
@@ -1834,8 +1754,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -1882,23 +1802,22 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-mimo-2-5-high/animation.glb",
-        "alt": "Interactive static MiMo 2.5 High articulated submission.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive static MiMo 2.5 High articulated submission."
       },
       "hasAnimation": false,
       "keyframes": [],
@@ -1906,14 +1825,14 @@
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -1946,11 +1865,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -1981,7 +1900,7 @@
       "task": "dynamic",
       "modelId": "mimo-2-5-high",
       "title": "MiMo 2.5 High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -2004,40 +1923,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-mimo-2-5-high/animation.glb",
-        "alt": "Interactive animated MiMo 2.5 High Dynamic GLB.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive animated MiMo 2.5 High Dynamic GLB."
       },
       "hasAnimation": true,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-mimo-2-5-high/paired-animation.glb",
+        "alt": "Interactive animated MiMo 2.5 High photo-realistic-input Dynamic GLB."
+      },
+      "pairedHasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "notes": "The two interactive GLBs compare submissions from the low-poly base condition and the paired photo-realistic-input condition. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -2071,15 +1994,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
       "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-kimi-k2-6-reason/scene.glb",
-        "alt": "Interactive Kimi K2.6 Reason Layout GLB.",
-        "poster": "/assets/references/layout/reference.png"
+        "alt": "Interactive Kimi K2.6 Reason Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -2112,8 +2034,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -2160,23 +2082,22 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-kimi-k2-6-reason/animation.glb",
-        "alt": "Interactive static Kimi K2.6 Reason articulated submission.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive static Kimi K2.6 Reason articulated submission."
       },
       "hasAnimation": false,
       "keyframes": [],
@@ -2184,14 +2105,14 @@
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -2224,11 +2145,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -2259,7 +2180,7 @@
       "task": "dynamic",
       "modelId": "kimi-k2-6-reason",
       "title": "Kimi K2.6 Reason \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -2282,40 +2203,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-kimi-k2-6-reason/animation.glb",
-        "alt": "Interactive static Kimi K2.6 Reason Dynamic submission.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive static Kimi K2.6 Reason Dynamic submission."
       },
       "hasAnimation": false,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-kimi-k2-6-reason/paired-animation.glb",
+        "alt": "Interactive static Kimi K2.6 Reason photo-realistic-input Dynamic submission."
+      },
+      "pairedHasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the first viewer preserves this static-scene failure alongside the paired photo-realistic-input submission. The paired T7 submission also contains no animation. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -2349,15 +2274,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
       "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-step-3-7-flash-high/scene.glb",
-        "alt": "Interactive Step 3.7 Flash High Layout GLB.",
-        "poster": "/assets/references/layout/reference.png"
+        "alt": "Interactive Step 3.7 Flash High Layout GLB."
       },
       "notes": "The submitted GLB is substantially smaller than the full asset set and may be partial.",
       "referenceGlb": {
@@ -2391,8 +2315,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -2439,23 +2363,22 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-step-3-7-flash-high/animation.glb",
-        "alt": "Interactive static Step 3.7 Flash High articulated submission.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive static Step 3.7 Flash High articulated submission."
       },
       "hasAnimation": false,
       "keyframes": [],
@@ -2463,14 +2386,14 @@
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -2503,11 +2426,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -2538,7 +2461,7 @@
       "task": "dynamic",
       "modelId": "step-3-7-flash-high",
       "title": "Step 3.7 Flash High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -2561,40 +2484,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-step-3-7-flash-high/animation.glb",
-        "alt": "Interactive static Step 3.7 Flash High Dynamic submission.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive static Step 3.7 Flash High Dynamic submission."
       },
       "hasAnimation": false,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-step-3-7-flash-high/paired-animation.glb",
+        "alt": "Interactive static Step 3.7 Flash High photo-realistic-input Dynamic submission."
+      },
+      "pairedHasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the first viewer preserves this static-scene failure alongside the paired photo-realistic-input submission. The paired T7 submission also contains no animation. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -2628,15 +2555,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
       "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-claude-sonnet-5-high/scene.glb",
-        "alt": "Interactive Claude Sonnet 5 High Layout GLB.",
-        "poster": "/assets/references/layout/reference.png"
+        "alt": "Interactive Claude Sonnet 5 High Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -2669,8 +2595,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -2717,23 +2643,22 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-claude-sonnet-5-high/animation.glb",
-        "alt": "Interactive static Claude Sonnet 5 High articulated submission.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive static Claude Sonnet 5 High articulated submission."
       },
       "hasAnimation": false,
       "keyframes": [],
@@ -2741,14 +2666,14 @@
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -2781,11 +2706,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -2816,7 +2741,7 @@
       "task": "dynamic",
       "modelId": "claude-sonnet-5-high",
       "title": "Claude Sonnet 5 High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -2839,40 +2764,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-claude-sonnet-5-high/animation.glb",
-        "alt": "Interactive static Claude Sonnet 5 High Dynamic submission.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive static Claude Sonnet 5 High Dynamic submission."
       },
       "hasAnimation": false,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-claude-sonnet-5-high/paired-animation.glb",
+        "alt": "Interactive static Claude Sonnet 5 High photo-realistic-input Dynamic submission."
+      },
+      "pairedHasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the first viewer preserves this static-scene failure alongside the paired photo-realistic-input submission. The paired T7 submission also contains no animation. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     },
@@ -2906,20 +2835,14 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/layout/reference.png",
+          "src": "/assets/references/layout/reference.webp",
           "alt": "Reference view for DiningRoom-13034."
         }
       ],
-      "outputImages": [
-        {
-          "src": "/assets/examples/layout-minimax-m3-high/output.png",
-          "alt": "MiniMax M3 High reconstruction of DiningRoom-13034."
-        }
-      ],
+      "outputImages": [],
       "outputGlb": {
         "src": "/assets/examples/layout-minimax-m3-high/scene.glb",
-        "alt": "Interactive MiniMax M3 High Layout GLB.",
-        "poster": "/assets/examples/layout-minimax-m3-high/output.png"
+        "alt": "Interactive MiniMax M3 High Layout GLB."
       },
       "referenceGlb": {
         "src": "/assets/references/layout/gt-scene.glb",
@@ -2952,8 +2875,8 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/camera/reference.png",
-          "alt": "Ground-truth camera view for Bedroom-5088."
+          "src": "/assets/references/camera/reference.webp",
+          "alt": "Agent-visible reference image for Bedroom-5088."
         }
       ],
       "outputImages": [
@@ -3000,38 +2923,37 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/articulated/reference-0.png",
-          "alt": "Articulated reference state 1."
+          "src": "/assets/references/articulated/reference-0001.jpg",
+          "alt": "Articulated input frame 1: closed state."
         },
         {
-          "src": "/assets/references/articulated/reference-2.png",
-          "alt": "Articulated reference state 3."
+          "src": "/assets/references/articulated/reference-0016.jpg",
+          "alt": "Articulated input frame 16: open state."
         },
         {
-          "src": "/assets/references/articulated/reference-4.png",
-          "alt": "Articulated reference state 5."
+          "src": "/assets/references/articulated/reference-0032.jpg",
+          "alt": "Articulated input frame 32: closed state."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/articulated-minimax-m3-high/animation.glb",
-        "alt": "Interactive animated MiniMax M3 High articulated GLB.",
-        "poster": "/assets/references/articulated/reference-0.png"
+        "alt": "Interactive animated MiniMax M3 High articulated GLB."
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "notes": "The interactive viewer uses the submitted 32-state agent GLB.",
       "referenceGlb": {
         "src": "/assets/references/articulated/gt-open.glb",
         "alt": "Interactive ground-truth fully open articulated state.",
-        "poster": "/assets/references/articulated/reference-2.png"
+        "poster": "/assets/references/articulated/reference-0016.jpg"
       },
       "referenceGlbAnimated": false,
       "referenceVideos": [
         {
           "src": "/assets/references/articulated/reference.mp4",
-          "alt": "Ground-truth open-close articulated reference video.",
-          "poster": "/assets/references/articulated/reference-0.png"
+          "alt": "Agent-visible open-close articulated input video.",
+          "poster": "/assets/references/articulated/reference-0001.jpg"
         }
       ]
     },
@@ -3064,11 +2986,11 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/reconstruction/reference-0.png",
+          "src": "/assets/references/reconstruction/reference-0000.webp",
           "alt": "Calibrated reconstruction reference view 1."
         },
         {
-          "src": "/assets/references/reconstruction/reference-2.png",
+          "src": "/assets/references/reconstruction/reference-0002.webp",
           "alt": "Calibrated reconstruction reference view 3."
         }
       ],
@@ -3099,7 +3021,7 @@
       "task": "dynamic",
       "modelId": "minimax-m3-high",
       "title": "MiniMax M3 High \u00b7 Castle siege",
-      "sourceInstance": "Castle siege \u00b7 144-frame low-poly Dynamic",
+      "sourceInstance": "Castle siege \u00b7 paired 144-frame low-poly / photo-realistic Dynamic",
       "metrics": [
         {
           "id": "MME",
@@ -3122,40 +3044,44 @@
       ],
       "referenceImages": [
         {
-          "src": "/assets/references/dynamic/t6_gt_0.png",
-          "alt": "Low-poly Dynamic reference frame."
+          "src": "/assets/references/dynamic/low-poly.png",
+          "alt": "Low-poly Dynamic input frame."
         },
         {
-          "src": "/assets/references/dynamic/t7_gt_0.png",
-          "alt": "Photo-realistic Dynamic reference frame."
+          "src": "/assets/references/dynamic/photo-realistic.png",
+          "alt": "Photo-realistic Dynamic input frame."
         }
       ],
       "outputImages": [],
       "animatedGlb": {
         "src": "/assets/examples/dynamic-minimax-m3-high/animation.glb",
-        "alt": "Interactive static MiniMax M3 High Dynamic submission.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "alt": "Interactive static MiniMax M3 High Dynamic submission."
       },
       "hasAnimation": false,
+      "pairedAnimatedGlb": {
+        "src": "/assets/examples/dynamic-minimax-m3-high/paired-animation.glb",
+        "alt": "Interactive static MiniMax M3 High photo-realistic-input Dynamic submission."
+      },
+      "pairedHasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the first viewer preserves this static-scene failure alongside the paired photo-realistic-input submission. The paired T7 submission also contains no animation. Native metrics below are from the T6 low-poly base condition.",
       "referenceGlb": {
         "src": "/assets/references/dynamic/gt-scene.glb",
         "alt": "Interactive animated ground-truth Dynamic scene.",
-        "poster": "/assets/references/dynamic/t6_gt_0.png"
+        "poster": "/assets/references/dynamic/low-poly.png"
       },
       "referenceGlbAnimated": true,
       "referenceVideos": [
         {
           "src": "/assets/references/dynamic/reference-lowpoly.mp4",
-          "alt": "Ground-truth low-poly Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t6_gt_0.png"
+          "alt": "Agent-visible low-poly Dynamic input video.",
+          "poster": "/assets/references/dynamic/low-poly.png"
         },
         {
           "src": "/assets/references/dynamic/reference-photoreal.mp4",
-          "alt": "Photo-realistic Dynamic reference video.",
-          "poster": "/assets/references/dynamic/t7_gt_0.png"
+          "alt": "Agent-visible photo-realistic Dynamic input video.",
+          "poster": "/assets/references/dynamic/photo-realistic.png"
         }
       ]
     }

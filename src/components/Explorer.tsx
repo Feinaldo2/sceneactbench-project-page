@@ -42,7 +42,7 @@ function ImageSlot({
   asset,
   label,
   detail,
-  emptyTitle = 'No published preview',
+  emptyTitle = 'Preview unavailable',
 }: {
   asset?: MediaAsset;
   label: string;
@@ -140,15 +140,17 @@ function ModelViewer({
   useEffect(() => {
     const viewer = viewerRef.current;
     if (!viewer || !registered) return;
+    const modelViewer = viewer as HTMLElement & { loaded?: boolean };
     const handleLoad = () => setStatus('ready');
     const handleError = () => setStatus('error');
     viewer.addEventListener('load', handleLoad);
     viewer.addEventListener('error', handleError);
+    if (modelViewer.loaded) handleLoad();
     return () => {
       viewer.removeEventListener('load', handleLoad);
       viewer.removeEventListener('error', handleError);
     };
-  }, [registered]);
+  }, [asset?.src, registered]);
 
   return (
     <div className="model-viewer-frame" ref={containerRef}>
@@ -156,7 +158,7 @@ function ModelViewer({
         <Placeholder
           icon={animated ? <PlayIcon /> : <CubeIcon />}
           eyebrow={label}
-          title={animated ? 'No published animated GLB' : 'No published GLB'}
+          title="3D artifact unavailable"
           detail="No interactive 3D artifact is available for this selected example."
         />
       )}
@@ -190,7 +192,7 @@ function ModelViewer({
           shadow-intensity="0.8"
           exposure="1"
           loading="lazy"
-          reveal="interaction"
+          reveal="auto"
         />
       )}
       {asset && status === 'loading' && <span className="viewer-status">Loading geometry…</span>}
@@ -212,18 +214,7 @@ function PreviewStrip({
   label: string;
   emptyDetail: string;
 }) {
-  if (assets.length === 0) {
-    return (
-      <div className="preview-strip-empty">
-        <Placeholder
-          icon={<ImageIcon />}
-          eyebrow={label}
-          title="No published frame strip"
-          detail={emptyDetail}
-        />
-      </div>
-    );
-  }
+  if (assets.length === 0) return null;
   return (
     <div className="preview-strip" aria-label={label}>
       {assets.slice(0, 4).map((asset, index) => (
@@ -274,8 +265,9 @@ function TaskOutput({ taskId, example }: { taskId: TaskId; example?: BenchmarkEx
 
   if (taskId === 'articulated') {
     const articulated = example?.task === 'articulated' ? example : undefined;
+    const hasKeyframes = (articulated?.keyframes.length ?? 0) > 0;
     return (
-      <div className="specialized-output">
+      <div className={`specialized-output articulated-output ${hasKeyframes ? 'has-keyframes' : 'viewer-only'}`}>
         <ModelViewer
           asset={articulated?.animatedGlb}
           animated={articulated?.hasAnimation ?? false}
@@ -285,14 +277,16 @@ function TaskOutput({ taskId, example }: { taskId: TaskId; example?: BenchmarkEx
               : 'Animated articulated geometry'
           }
         />
-        <div>
-          <span className="micro-label">Keyframe evidence</span>
-          <PreviewStrip
-            assets={articulated?.keyframes ?? []}
-            label="Keyframe"
-            emptyDetail="No rendered keyframe strip is published for this configuration."
-          />
-        </div>
+        {hasKeyframes && (
+          <div>
+            <span className="micro-label">Keyframe evidence</span>
+            <PreviewStrip
+              assets={articulated?.keyframes ?? []}
+              label="Keyframe"
+              emptyDetail="Rendered keyframe unavailable."
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -300,29 +294,36 @@ function TaskOutput({ taskId, example }: { taskId: TaskId; example?: BenchmarkEx
   if (taskId === 'dynamic') {
     const dynamic = example?.task === 'dynamic' ? example : undefined;
     return (
-      <div className="specialized-output">
-        <ModelViewer
-          asset={dynamic?.animatedGlb}
-          animated={dynamic?.hasAnimation ?? false}
-          label={dynamic?.hasAnimation === false ? 'Submitted static geometry' : 'Animated geometry'}
-        />
-        <div className="dynamic-previews">
-          <div>
-            <span className="micro-label">Base condition · low-poly input</span>
-            <PreviewStrip
-              assets={dynamic?.lowPolyPreviews ?? []}
-              label="Low-poly-input output"
-              emptyDetail="No output strip is published for the base-condition run."
-            />
+      <div className="dynamic-output-stack">
+        <div className="dynamic-condition">
+          <div className="condition-heading">
+            <span className="micro-label">Base condition</span>
+            <strong>Low-poly input</strong>
           </div>
-          <div>
-            <span className="micro-label">Paired condition · photo-realistic input</span>
-            <PreviewStrip
-              assets={dynamic?.photorealisticPreviews ?? []}
-              label="Photo-realistic-input output"
-              emptyDetail="No output strip is published for the paired-condition run."
-            />
+          <ModelViewer
+            asset={dynamic?.animatedGlb}
+            animated={dynamic?.hasAnimation ?? false}
+            label={
+              dynamic?.hasAnimation === false
+                ? 'Submitted static base geometry'
+                : 'Animated base geometry'
+            }
+          />
+        </div>
+        <div className="dynamic-condition">
+          <div className="condition-heading">
+            <span className="micro-label">Paired condition</span>
+            <strong>Photo-realistic input</strong>
           </div>
+          <ModelViewer
+            asset={dynamic?.pairedAnimatedGlb}
+            animated={dynamic?.pairedHasAnimation ?? false}
+            label={
+              dynamic?.pairedHasAnimation === false
+                ? 'Submitted static paired geometry'
+                : 'Animated paired geometry'
+            }
+          />
         </div>
       </div>
     );
@@ -330,17 +331,35 @@ function TaskOutput({ taskId, example }: { taskId: TaskId; example?: BenchmarkEx
 
   const sceneExample =
     example?.task === 'layout' || example?.task === 'reconstruction' ? example : undefined;
+  const outputImage = sceneExample?.outputImages[0];
   return (
-    <div className="scene-output-grid">
+    <div className={`scene-output-grid ${outputImage ? 'has-render' : 'viewer-only'}`}>
       <ModelViewer asset={sceneExample?.outputGlb} label="Interactive result" />
-      <ImageSlot
-        asset={sceneExample?.outputImages[0]}
-        label="Output render"
-        emptyTitle="No published output render"
-        detail="Inspect the submitted GLB directly in the interactive viewer."
-      />
+      {outputImage && (
+        <ImageSlot
+          asset={outputImage}
+          label="Output render"
+          detail="Rendered verification of the submitted scene."
+        />
+      )}
     </div>
   );
+}
+
+function referenceImageLabel(taskId: TaskId, index: number) {
+  if (taskId === 'dynamic') {
+    return index === 0 ? 'Low-poly input' : 'Photo-realistic input';
+  }
+  if (taskId === 'articulated') return index === 0 ? 'Closed input frame' : 'Open input frame';
+  if (taskId === 'reconstruction') return `Input view ${index + 1}`;
+  return 'Input reference';
+}
+
+function referenceVideoLabel(taskId: TaskId, index: number) {
+  if (taskId === 'dynamic') {
+    return index === 0 ? 'Low-poly input video' : 'Photo-realistic input video';
+  }
+  return 'Input motion sequence';
 }
 
 export function Explorer() {
@@ -449,7 +468,7 @@ export function Explorer() {
                 <ImageSlot
                   key={asset.src}
                   asset={asset}
-                  label={index === 0 ? 'Reference view' : 'Context view'}
+                  label={referenceImageLabel(taskId, index)}
                   detail="Reference evidence for this benchmark case."
                 />
               ))
@@ -463,7 +482,7 @@ export function Explorer() {
           </div>
           {example?.referenceGlb && (
             <div className="reference-geometry">
-              <span className="micro-label">Ground-truth 3D</span>
+              <span className="micro-label">Hidden ground-truth 3D</span>
               <ModelViewer
                 asset={example.referenceGlb}
                 animated={example.referenceGlbAnimated ?? false}
@@ -479,11 +498,7 @@ export function Explorer() {
                   <VideoSlot
                     key={video.src}
                     asset={video}
-                    label={
-                      example.referenceVideos && example.referenceVideos.length > 1
-                        ? `Reference style ${index + 1}`
-                        : 'Ground-truth motion'
-                    }
+                    label={referenceVideoLabel(taskId, index)}
                   />
                 ))}
               </div>

@@ -70,16 +70,6 @@ STATIC_SCENES = {
 ARTICULATED_SAMPLE = "acd_1a570da5ae0c4d1d51c94be81d7248f155a0dcef"
 DYNAMIC_SAMPLE = "t6l1_castle_001"
 
-LAYOUT_POSTERS = {
-    "claude-opus-4-6": "t1_claude-opus-4-6.png",
-    "doubao-seed-2.0-pro": "t1_doubao-seed-2.0-pro.png",
-    "gemini-3.1-pro": "t1_gemini-3.1-pro.png",
-    "gpt-5.4-high": "t1_gpt-5.4-high.png",
-    "gpt-5.4": "t1_gpt-5.4.png",
-    "minimax-m3": "t1_minimax-m3.png",
-    "qwen3.7-plus": "t1_qwen3.7-plus.png",
-}
-
 
 def media(src: str, alt: str, poster: str | None = None) -> dict[str, str]:
     result = {"src": src, "alt": alt}
@@ -136,8 +126,6 @@ def example_dir(example_id: str) -> Path:
 
 
 def copy_shared_references(
-    qualitative: Path,
-    runs: Path,
     static_root: Path,
     articulated_root: Path,
     dynamic_root: Path,
@@ -147,39 +135,50 @@ def copy_shared_references(
         shutil.rmtree(root)
 
     references: dict[str, list[dict[str, str]]] = {}
-    layout = copy_asset(qualitative / "t1_gt_0.png", root / "layout" / "reference.png")
+    layout_scene = static_root / "scenes" / STATIC_SCENES["layout"][0]
+    layout = copy_asset(
+        layout_scene / "render" / "render_0003.webp",
+        root / "layout" / "reference.webp",
+    )
     references["layout"] = [media(layout, "Reference view for DiningRoom-13034.")]
 
-    first_camera = runs / MODELS[0][1] / CASES["camera"][0] / CASES["camera"][1]
-    camera_name = f"{CASES['camera'][1]}__gt_view.png"
-    camera = copy_asset(first_camera / camera_name, root / "camera" / "reference.png")
-    references["camera"] = [media(camera, "Ground-truth camera view for Bedroom-5088.")]
+    camera_scene = static_root / "scenes" / STATIC_SCENES["camera"][0]
+    camera = copy_asset(
+        camera_scene / "render" / "render_0003.webp",
+        root / "camera" / "reference.webp",
+    )
+    references["camera"] = [media(camera, "Agent-visible reference image for Bedroom-5088.")]
 
+    articulated_case = articulated_root / ARTICULATED_SAMPLE
     articulated = []
-    for index in (0, 2, 4):
+    for index, state in ((1, "closed"), (16, "open"), (32, "closed")):
         src = copy_asset(
-            qualitative / f"t4_gt_{index}.png",
-            root / "articulated" / f"reference-{index}.png",
+            articulated_case / "reference_small" / f"r_{index:04d}.jpg",
+            root / "articulated" / f"reference-{index:04d}.jpg",
         )
-        articulated.append(media(src, f"Articulated reference state {index + 1}."))
+        articulated.append(media(src, f"Articulated input frame {index}: {state} state."))
     references["articulated"] = articulated
 
-    first_recon = runs / MODELS[0][1] / CASES["reconstruction"][0] / CASES["reconstruction"][1]
+    reconstruction_scene = static_root / "scenes" / STATIC_SCENES["reconstruction"][0]
     reconstruction = []
     for index in (0, 2):
         src = copy_asset(
-            first_recon / "views" / f"gt_v{index}.png",
-            root / "reconstruction" / f"reference-{index}.png",
+            reconstruction_scene / "render" / f"render_{index:04d}.webp",
+            root / "reconstruction" / f"reference-{index:04d}.webp",
         )
         reconstruction.append(media(src, f"Calibrated reconstruction reference view {index + 1}."))
     references["reconstruction"] = reconstruction
 
+    dynamic_case = dynamic_root / DYNAMIC_SAMPLE
     dynamic = []
-    for filename, alt in (
-        ("t6_gt_0.png", "Low-poly Dynamic reference frame."),
-        ("t7_gt_0.png", "Photo-realistic Dynamic reference frame."),
+    for subdir, filename, alt in (
+        ("reference", "low-poly.png", "Low-poly Dynamic input frame."),
+        ("reference_real", "photo-realistic.png", "Photo-realistic Dynamic input frame."),
     ):
-        src = copy_asset(qualitative / filename, root / "dynamic" / filename)
+        src = copy_asset(
+            dynamic_case / subdir / "r_0001.png",
+            root / "dynamic" / filename,
+        )
         dynamic.append(media(src, alt))
     references["dynamic"] = dynamic
 
@@ -196,7 +195,6 @@ def copy_shared_references(
             "referenceVideos": [],
         }
 
-    articulated_case = articulated_root / ARTICULATED_SAMPLE
     articulated_glb = copy_asset(
         articulated_case / "gt" / "gt_0016.glb",
         root / "articulated" / "gt-open.glb",
@@ -215,13 +213,12 @@ def copy_shared_references(
         "referenceVideos": [
             media(
                 articulated_video,
-                "Ground-truth open-close articulated reference video.",
+                "Agent-visible open-close articulated input video.",
                 references["articulated"][0]["src"],
             )
         ],
     }
 
-    dynamic_case = dynamic_root / DYNAMIC_SAMPLE
     dynamic_glb = copy_asset(
         dynamic_case / "gt" / "gt_scene.glb",
         root / "dynamic" / "gt-scene.glb",
@@ -244,12 +241,12 @@ def copy_shared_references(
         "referenceVideos": [
             media(
                 low_video,
-                "Ground-truth low-poly Dynamic reference video.",
+                "Agent-visible low-poly Dynamic input video.",
                 references["dynamic"][0]["src"],
             ),
             media(
                 photo_video,
-                "Photo-realistic Dynamic reference video.",
+                "Agent-visible photo-realistic Dynamic input video.",
                 references["dynamic"][1]["src"],
             ),
         ],
@@ -264,16 +261,9 @@ def build_layout(
     case_dir: Path,
     score: dict[str, Any],
     references: list[dict[str, str]],
-    qualitative: Path,
 ) -> dict[str, Any]:
     identifier = f"layout-{model_id}"
     output_dir = example_dir(identifier)
-    poster_url = None
-    output_images: list[dict[str, str]] = []
-    poster_name = LAYOUT_POSTERS.get(run_slug)
-    if poster_name:
-        poster_url = copy_asset(qualitative / poster_name, output_dir / "output.png")
-        output_images.append(media(poster_url, f"{model_name} reconstruction of DiningRoom-13034."))
     glb = copy_asset(case_dir / "agent_scene.glb", output_dir / "scene.glb")
     size = (case_dir / "agent_scene.glb").stat().st_size
     notes = None
@@ -293,11 +283,10 @@ def build_layout(
             metric("Placement", "Placement accuracy", score["score"]["placement_acc"], direction="higher"),
         ],
         "referenceImages": references,
-        "outputImages": output_images,
+        "outputImages": [],
         "outputGlb": media(
             glb,
             f"Interactive {model_name} Layout GLB.",
-            poster_url or references[0]["src"],
         ),
         **({"notes": notes} if notes else {}),
     }
@@ -338,26 +327,15 @@ def build_articulated(
     case_dir: Path,
     score: dict[str, Any],
     references: list[dict[str, str]],
-    qualitative: Path,
 ) -> dict[str, Any]:
     identifier = f"articulated-{model_id}"
     output_dir = example_dir(identifier)
     keyframes: list[dict[str, str]] = []
-    poster_url = None
-    if run_slug == "claude-opus-4-6":
-        for index in range(4):
-            src = copy_asset(
-                qualitative / f"t4_agent_{index}.png",
-                output_dir / f"keyframe-{index}.png",
-            )
-            keyframes.append(media(src, f"Claude Opus articulated output state {index + 1}."))
-        poster_url = keyframes[2]["src"]
     source_glb = case_dir / "agent_animation.glb"
     has_animation = glb_has_animation(source_glb)
     glb = copy_asset(source_glb, output_dir / "animation.glb")
     notes = (
-        "The viewer uses the submitted 32-state animated GLB. "
-        "Rendered output keyframes are available only for the paper's qualitative example."
+        "The interactive viewer uses the submitted 32-state agent GLB."
         if has_animation
         else (
             "The submitted GLB contains no animated channels; "
@@ -384,7 +362,6 @@ def build_articulated(
                 if has_animation
                 else f"Interactive static {model_name} articulated submission."
             ),
-            poster_url or references[0]["src"],
         ),
         "hasAnimation": has_animation,
         "keyframes": keyframes,
@@ -433,45 +410,50 @@ def build_dynamic(
     case_dir: Path,
     score: dict[str, Any],
     references: list[dict[str, str]],
-    qualitative: Path,
 ) -> dict[str, Any]:
     identifier = f"dynamic-{model_id}"
     output_dir = example_dir(identifier)
     low_poly: list[dict[str, str]] = []
     photorealistic: list[dict[str, str]] = []
-    poster_url = None
-    if run_slug == "claude-opus-4-6":
-        for index in range(4):
-            low = copy_asset(qualitative / f"t6_agent_{index}.png", output_dir / f"low-{index}.png")
-            photo = copy_asset(qualitative / f"t7_agent_{index}.png", output_dir / f"photo-{index}.png")
-            low_poly.append(media(low, f"Claude Opus low-poly output frame {index + 1}."))
-            photorealistic.append(media(photo, f"Claude Opus photo-realistic output frame {index + 1}."))
-        poster_url = low_poly[0]["src"]
     source_glb = case_dir / "agent_scene.glb"
     has_animation = glb_has_animation(source_glb)
     glb = copy_asset(source_glb, output_dir / "animation.glb")
+    paired_case_dir = (
+        case_dir.parents[1]
+        / "task7_anim"
+        / "t7anim-t6l1_castle_001"
+    )
+    paired_source_glb = paired_case_dir / "agent_scene.glb"
+    paired_has_animation = glb_has_animation(paired_source_glb)
+    paired_glb = copy_asset(
+        paired_source_glb,
+        output_dir / "paired-animation.glb",
+    )
     size = source_glb.stat().st_size
     notes = (
-        "The interactive GLB and metrics use the low-poly base condition. "
-        "Paired low-poly- and photo-realistic-input output strips are published only "
-        "for the paper's qualitative example."
+        "The two interactive GLBs compare submissions from the low-poly base condition "
+        "and the paired photo-realistic-input condition."
     )
     if not has_animation:
         notes = (
             "The submitted low-poly base-condition GLB contains no animation; "
-            "the interactive viewer preserves this static-scene failure."
+            "the first viewer preserves this static-scene failure alongside the paired "
+            "photo-realistic-input submission."
         )
     elif size < 100_000:
         notes = (
             "The submitted low-poly base-condition GLB is nearly empty; "
             "the interactive viewer preserves this failure."
         )
+    if not paired_has_animation:
+        notes += " The paired T7 submission also contains no animation."
+    notes += " Native metrics below are from the T6 low-poly base condition."
     return {
         "id": identifier,
         "task": "dynamic",
         "modelId": model_id,
         "title": f"{model_name} · Castle siege",
-        "sourceInstance": "Castle siege · 144-frame low-poly Dynamic",
+        "sourceInstance": "Castle siege · paired 144-frame low-poly / photo-realistic Dynamic",
         "metrics": [
             metric("MME", "Maximum Mover Error", score["score"]["worst_vehicle_err"]),
             metric("AME", "Average Mover Error", score["score"]["mean_vehicle_err"], direction="diagnostic"),
@@ -486,9 +468,17 @@ def build_dynamic(
                 if has_animation
                 else f"Interactive static {model_name} Dynamic submission."
             ),
-            poster_url or references[0]["src"],
         ),
         "hasAnimation": has_animation,
+        "pairedAnimatedGlb": media(
+            paired_glb,
+            (
+                f"Interactive animated {model_name} photo-realistic-input Dynamic GLB."
+                if paired_has_animation
+                else f"Interactive static {model_name} photo-realistic-input Dynamic submission."
+            ),
+        ),
+        "pairedHasAnimation": paired_has_animation,
         "lowPolyPreviews": low_poly,
         "photorealisticPreviews": photorealistic,
         "notes": notes,
@@ -497,18 +487,14 @@ def build_dynamic(
 
 def build_examples(
     runs: Path,
-    legacy: Path,
     static_root: Path,
     articulated_root: Path,
     dynamic_root: Path,
 ) -> list[dict[str, Any]]:
-    qualitative = legacy / "_figure_assets" / "qualitative_frames"
     output_root = SITE_ROOT / "public" / "assets" / "examples"
     if output_root.exists():
         shutil.rmtree(output_root)
     references, reference_artifacts = copy_shared_references(
-        qualitative,
-        runs,
         static_root,
         articulated_root,
         dynamic_root,
@@ -532,7 +518,6 @@ def build_examples(
                 case_dir,
                 score,
                 references[task],
-                qualitative,
             ]
             if task in {"camera", "reconstruction"}:
                 arguments = [model_id, model_name, case_dir, score, references[task]]
@@ -545,7 +530,6 @@ def build_examples(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--runs-root", type=Path, required=True)
-    parser.add_argument("--legacy-root", type=Path, required=True)
     parser.add_argument("--static-benchmark-root", type=Path, required=True)
     parser.add_argument("--articulated-benchmark-root", type=Path, required=True)
     parser.add_argument("--dynamic-benchmark-root", type=Path, required=True)
@@ -555,7 +539,6 @@ def main() -> None:
     SITE_ROOT = args.site_root.resolve()
     examples = build_examples(
         args.runs_root.resolve(),
-        args.legacy_root.resolve(),
         args.static_benchmark_root.resolve(),
         args.articulated_benchmark_root.resolve(),
         args.dynamic_benchmark_root.resolve(),

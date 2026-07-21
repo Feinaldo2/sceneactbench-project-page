@@ -16,7 +16,7 @@ Every example includes:
   - Layout/Reconstruction: optional `outputGlb`
   - Camera: `poseJson` and output images; an optional GT scene GLB is reference-only
   - Articulated: optional `animatedGlb`, required `hasAnimation`, plus `keyframes`
-  - Dynamic: optional `animatedGlb`, required `hasAnimation`, `lowPolyPreviews`, and `photorealisticPreviews`
+  - Dynamic: required T6 `animatedGlb`/`hasAnimation`, paired T7 `pairedAnimatedGlb`/`pairedHasAnimation`, plus both optional preview arrays
 
 Media records have `src`, meaningful `alt`, and an optional image `poster`. Do not insert remote URLs, unpublished scores, or paths that point back into the private raw run tree.
 
@@ -44,7 +44,7 @@ Images are limited to 12 MB each, GLBs to 40 MB each, and the curated set to 180
 - Camera examples contain no GLB.
 - Articulated `hasAnimation` matches non-empty animation channels in the submitted GLB; static failures are labelled explicitly.
 - Published Articulated keyframes show the requested state and align with the submitted example.
-- Dynamic `hasAnimation` matches the submitted GLB; static-scene failures remain published and are labelled explicitly.
+- Dynamic `hasAnimation` and `pairedHasAnimation` match the T6 and T7 submitted GLBs; static-scene failures remain published and are labelled explicitly.
 - When both Dynamic preview strips are present, they represent the paired low-poly- and photo-realistic-input runs of the same scene.
 - Every visual has useful alt text and every GLB has a poster when practical.
 - `npm run check:content`, `npm test`, and `npm run build` pass.

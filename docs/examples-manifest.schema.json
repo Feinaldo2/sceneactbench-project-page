@@ -101,6 +101,8 @@
             },
             "animatedGlb": { "$ref": "#/$defs/media" },
             "hasAnimation": { "type": "boolean" },
+            "pairedAnimatedGlb": { "$ref": "#/$defs/media" },
+            "pairedHasAnimation": { "type": "boolean" },
             "lowPolyPreviews": {
               "type": "array",
               "items": { "$ref": "#/$defs/media" }
@@ -119,7 +121,8 @@
           "then": {
             "properties": {
               "outputGlb": false,
-              "animatedGlb": false
+              "animatedGlb": false,
+              "pairedAnimatedGlb": false
             }
           }
         },
@@ -136,7 +139,14 @@
             "required": ["task"]
           },
           "then": {
-            "required": ["hasAnimation", "lowPolyPreviews", "photorealisticPreviews"]
+            "required": [
+              "animatedGlb",
+              "hasAnimation",
+              "pairedAnimatedGlb",
+              "pairedHasAnimation",
+              "lowPolyPreviews",
+              "photorealisticPreviews"
+            ]
           }
         }
       ],

@@ -95,8 +95,22 @@ const mediaFields = [
   'photorealisticPreviews',
   'referenceVideos',
 ];
-const singleMediaFields = ['outputGlb', 'animatedGlb', 'referenceGlb'];
+const singleMediaFields = [
+  'outputGlb',
+  'animatedGlb',
+  'pairedAnimatedGlb',
+  'referenceGlb',
+];
 for (const example of examplesManifest.examples ?? []) {
+  if (
+    example.task === 'dynamic' &&
+    (!example.animatedGlb ||
+      typeof example.hasAnimation !== 'boolean' ||
+      !example.pairedAnimatedGlb ||
+      typeof example.pairedHasAnimation !== 'boolean')
+  ) {
+    violations.push(`${example.id} is missing a Dynamic GLB or animation flag.`);
+  }
   const media = [
     ...mediaFields.flatMap((field) => example[field] ?? []),
     ...singleMediaFields.flatMap((field) => (example[field] ? [example[field]] : [])),
@@ -121,10 +135,13 @@ for (const example of examplesManifest.examples ?? []) {
           violations.push(`${example.id} references an invalid GLB container ${source}.`);
           continue;
         }
-        if (
-          (example.task === 'articulated' || example.task === 'dynamic') &&
+        const animationFlag =
           source === example.animatedGlb?.src
-        ) {
+            ? example.hasAnimation
+            : source === example.pairedAnimatedGlb?.src
+              ? example.pairedHasAnimation
+              : null;
+        if (animationFlag !== null) {
           const jsonLength = glb.readUInt32LE(12);
           const document = JSON.parse(glb.toString('utf8', 20, 20 + jsonLength).trim());
           const hasAnimation =
@@ -136,8 +153,8 @@ for (const example of examplesManifest.examples ?? []) {
                 Array.isArray(animation.samplers) &&
                 animation.samplers.length > 0,
             );
-          if (example.hasAnimation !== hasAnimation) {
-            violations.push(`${example.id} has an incorrect hasAnimation flag.`);
+          if (animationFlag !== hasAnimation) {
+            violations.push(`${example.id} has an incorrect animation flag for ${source}.`);
           }
         }
       }

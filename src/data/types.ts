@@ -101,8 +101,10 @@ export type ArticulatedExample = BaseExample & {
 
 export type DynamicExample = BaseExample & {
   task: 'dynamic';
-  animatedGlb?: MediaAsset;
+  animatedGlb: MediaAsset;
   hasAnimation: boolean;
+  pairedAnimatedGlb: MediaAsset;
+  pairedHasAnimation: boolean;
   lowPolyPreviews: MediaAsset[];
   photorealisticPreviews: MediaAsset[];
 };

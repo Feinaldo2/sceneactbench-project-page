@@ -42,7 +42,12 @@ const isExample = (value: unknown): value is BenchmarkExample => {
   if (candidate.task === 'dynamic') {
     const dynamic = candidate as Partial<DynamicExample>;
     return (
+      typeof dynamic.animatedGlb === 'object' &&
+      dynamic.animatedGlb !== null &&
       typeof dynamic.hasAnimation === 'boolean' &&
+      typeof dynamic.pairedAnimatedGlb === 'object' &&
+      dynamic.pairedAnimatedGlb !== null &&
+      typeof dynamic.pairedHasAnimation === 'boolean' &&
       Array.isArray(dynamic.lowPolyPreviews) &&
       Array.isArray(dynamic.photorealisticPreviews)
     );
@@ -95,7 +100,8 @@ const rebaseExample = (example: BenchmarkExample): BenchmarkExample => {
       ...referenceArtifacts,
       lowPolyPreviews: example.lowPolyPreviews.map(rebaseMedia),
       photorealisticPreviews: example.photorealisticPreviews.map(rebaseMedia),
-      ...(example.animatedGlb ? { animatedGlb: rebaseMedia(example.animatedGlb) } : {}),
+      animatedGlb: rebaseMedia(example.animatedGlb),
+      pairedAnimatedGlb: rebaseMedia(example.pairedAnimatedGlb),
     };
   }
   throw new Error(`Unsupported example task: ${example.task}`);

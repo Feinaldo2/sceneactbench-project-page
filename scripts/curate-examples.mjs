@@ -13,8 +13,13 @@ const MEDIA_ARRAY_FIELDS = [
   'photorealisticPreviews',
   'referenceVideos',
 ];
-const MEDIA_SINGLE_FIELDS = ['outputGlb', 'animatedGlb', 'referenceGlb'];
-const AGENT_GLB_FIELDS = ['outputGlb', 'animatedGlb'];
+const MEDIA_SINGLE_FIELDS = [
+  'outputGlb',
+  'animatedGlb',
+  'pairedAnimatedGlb',
+  'referenceGlb',
+];
+const AGENT_GLB_FIELDS = ['outputGlb', 'animatedGlb', 'pairedAnimatedGlb'];
 const IMAGE_EXTENSIONS = new Set(['.avif', '.jpg', '.jpeg', '.png', '.webp']);
 const VIDEO_EXTENSIONS = new Set(['.mp4']);
 const ASSET_EXTENSIONS = new Set([...IMAGE_EXTENSIONS, ...VIDEO_EXTENSIONS, '.glb']);
@@ -182,12 +187,15 @@ for (const example of raw.examples) {
   }
   if (
     example.task === 'dynamic' &&
-    (typeof example.hasAnimation !== 'boolean' ||
+    (!example.animatedGlb ||
+      typeof example.hasAnimation !== 'boolean' ||
+      !example.pairedAnimatedGlb ||
+      typeof example.pairedHasAnimation !== 'boolean' ||
       !Array.isArray(example.lowPolyPreviews) ||
       !Array.isArray(example.photorealisticPreviews))
   ) {
     throw new Error(
-      `${example.id}: Dynamic examples require hasAnimation and both preview arrays.`,
+      `${example.id}: Dynamic examples require both GLBs, both animation flags, and both preview arrays.`,
     );
   }
 
