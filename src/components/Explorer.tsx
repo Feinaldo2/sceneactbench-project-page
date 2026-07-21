@@ -77,6 +77,17 @@ function ImageSlot({
   );
 }
 
+function VideoSlot({ asset, label }: { asset: MediaAsset; label: string }) {
+  return (
+    <figure className="explorer-video">
+      <video controls loop muted playsInline preload="metadata" poster={asset.poster}>
+        <source src={asset.src} type="video/mp4" />
+      </video>
+      <figcaption>{label}</figcaption>
+    </figure>
+  );
+}
+
 function ModelViewer({
   asset,
   animated = false,
@@ -450,6 +461,34 @@ export function Explorer() {
               />
             )}
           </div>
+          {example?.referenceGlb && (
+            <div className="reference-geometry">
+              <span className="micro-label">Ground-truth 3D</span>
+              <ModelViewer
+                asset={example.referenceGlb}
+                animated={example.referenceGlbAnimated ?? false}
+                label={example.referenceGlbAnimated ? 'Animated ground truth' : 'Ground-truth geometry'}
+              />
+            </div>
+          )}
+          {example?.referenceVideos && example.referenceVideos.length > 0 && (
+            <div className="reference-videos">
+              <span className="micro-label">Reference video</span>
+              <div className="reference-video-grid">
+                {example.referenceVideos.map((video, index) => (
+                  <VideoSlot
+                    key={video.src}
+                    asset={video}
+                    label={
+                      example.referenceVideos && example.referenceVideos.length > 1
+                        ? `Reference style ${index + 1}`
+                        : 'Ground-truth motion'
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         <section className="evidence-output" aria-labelledby="explorer-output-title">

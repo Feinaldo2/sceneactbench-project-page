@@ -11,11 +11,15 @@ const MEDIA_ARRAY_FIELDS = [
   'keyframes',
   'lowPolyPreviews',
   'photorealisticPreviews',
+  'referenceVideos',
 ];
-const MEDIA_SINGLE_FIELDS = ['outputGlb', 'animatedGlb'];
+const MEDIA_SINGLE_FIELDS = ['outputGlb', 'animatedGlb', 'referenceGlb'];
+const AGENT_GLB_FIELDS = ['outputGlb', 'animatedGlb'];
 const IMAGE_EXTENSIONS = new Set(['.avif', '.jpg', '.jpeg', '.png', '.webp']);
-const ASSET_EXTENSIONS = new Set([...IMAGE_EXTENSIONS, '.glb']);
+const VIDEO_EXTENSIONS = new Set(['.mp4']);
+const ASSET_EXTENSIONS = new Set([...IMAGE_EXTENSIONS, ...VIDEO_EXTENSIONS, '.glb']);
 const MAX_IMAGE_BYTES = 12 * 1024 * 1024;
+const MAX_VIDEO_BYTES = 24 * 1024 * 1024;
 const MAX_GLB_BYTES = 40 * 1024 * 1024;
 const MAX_TOTAL_BYTES = 180 * 1024 * 1024;
 
@@ -88,9 +92,17 @@ async function curatePath(source, exampleId, expectedKind, suffix = '') {
   if (expectedKind === 'glb' && extension !== '.glb') {
     throw new Error(`${exampleId}: expected a .glb asset.`);
   }
+  if (expectedKind === 'video' && !VIDEO_EXTENSIONS.has(extension)) {
+    throw new Error(`${exampleId}: expected an MP4 video asset.`);
+  }
 
   const sourceStat = await stat(absoluteSource);
-  const perFileLimit = extension === '.glb' ? MAX_GLB_BYTES : MAX_IMAGE_BYTES;
+  const perFileLimit =
+    extension === '.glb'
+      ? MAX_GLB_BYTES
+      : VIDEO_EXTENSIONS.has(extension)
+        ? MAX_VIDEO_BYTES
+        : MAX_IMAGE_BYTES;
   if (sourceStat.size > perFileLimit) {
     throw new Error(
       `${exampleId}: ${path.basename(source)} exceeds the ${Math.round(perFileLimit / 1024 / 1024)} MB limit.`,
@@ -148,7 +160,7 @@ for (const example of raw.examples) {
     if (!Array.isArray(curated[field])) throw new Error(`${example.id}: ${field} must be an array.`);
     curated[field] = await Promise.all(
       curated[field].map((media, index) =>
-        curateMedia(media, example.id, 'image', index + 1),
+        curateMedia(media, example.id, field === 'referenceVideos' ? 'video' : 'image', index + 1),
       ),
     );
   }
@@ -157,7 +169,7 @@ for (const example of raw.examples) {
     curated[field] = await curateMedia(curated[field], example.id, 'glb', 0);
   }
 
-  if (example.task === 'camera' && MEDIA_SINGLE_FIELDS.some((field) => example[field])) {
+  if (example.task === 'camera' && AGENT_GLB_FIELDS.some((field) => example[field])) {
     throw new Error(`${example.id}: Camera examples must use JSON pose and images, not GLB.`);
   }
   if (

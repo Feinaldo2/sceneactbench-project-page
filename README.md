@@ -74,14 +74,17 @@ Optimized WebP exports of the current paper figures live in `public/assets/paper
 
 ## Curated example assets
 
-The explorer loads `public/data/examples.json` at runtime. The committed curated set contains one common representative instance per task across all 11 configurations: 44 submitted GLBs for the four GLB-producing tasks, Camera pose JSON/renders, selected reconstruction views, and shared reference evidence. Static-scene Dynamic failures remain in the set and are labelled rather than removed.
+The explorer loads `public/data/examples.json` at runtime. The committed curated set contains one common representative instance per task across all 11 configurations: 44 submitted GLBs, Camera pose JSON/renders, complete shared GT scene GLBs for every task, Articulated/Dynamic reference videos, selected reconstruction views, and shared reference evidence. Static failures remain in the set and are labelled rather than removed.
 
 Use `scripts/build-local-examples.py` to regenerate the published set from the local read-only runs:
 
 ```bash
 python3 scripts/build-local-examples.py \
   --runs-root /absolute/path/to/glb-placement-benchmark/runs \
-  --legacy-root /absolute/path/to/llm3dbench
+  --legacy-root /absolute/path/to/llm3dbench \
+  --static-benchmark-root /absolute/path/to/benchmark_final \
+  --articulated-benchmark-root /absolute/path/to/benchmark_s2o_final \
+  --dynamic-benchmark-root /absolute/path/to/benchmark_t6_final
 ```
 
 The generic `npm run curate:examples` workflow and schema remain available for alternate hand-authored manifests. Camera examples use JSON pose plus images. Articulated and Dynamic examples record whether each submitted GLB contains non-empty animation channels, so static failures remain explicit. Rendered output strips are included only where the paper already publishes them.

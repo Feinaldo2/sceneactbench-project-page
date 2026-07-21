@@ -21,10 +21,10 @@ import { withBase } from './data/assetPath';
 const navItems = [
   ['tldr', 'TL;DR'],
   ['leaderboard', 'Leaderboard'],
+  ['explorer', 'Examples'],
   ['benchmark', 'Benchmark'],
   ['tasks', 'Tasks'],
   ['metrics', 'Metrics'],
-  ['explorer', 'Explorer'],
   ['analysis', 'Analysis'],
   ['resources', 'Resources'],
   ['citation', 'Citation'],
@@ -262,7 +262,7 @@ function BenchmarkSection() {
     <section className="section section-benchmark" id="benchmark">
       <div className="page-shell">
         <SectionHeading
-          index="03"
+          index="04"
           eyebrow="Benchmark loop"
           title="Benchmark loop"
         >
@@ -303,7 +303,7 @@ function TasksSection() {
     <section className="section section-tasks" id="tasks">
       <div className="page-shell">
         <SectionHeading
-          index="04"
+          index="05"
           eyebrow="Five tasks"
           title="Five tasks"
         >
@@ -321,7 +321,7 @@ function MetricsSection() {
     <section className="section section-metrics" id="metrics">
       <div className="page-shell">
         <SectionHeading
-          index="05"
+          index="06"
           eyebrow="Metrics glossary"
           title="Metrics"
         >
@@ -339,7 +339,7 @@ function ExplorerSection() {
     <section className="section section-explorer" id="explorer">
       <div className="page-shell">
         <SectionHeading
-          index="06"
+          index="03"
           eyebrow="Model × task explorer"
           title="Model × task explorer"
         >
@@ -547,10 +547,10 @@ export default function App() {
         <Hero />
         <Tldr />
         <LeaderboardSection />
+        <ExplorerSection />
         <BenchmarkSection />
         <TasksSection />
         <MetricsSection />
-        <ExplorerSection />
         <AnalysisSection />
         <ResourcesSection />
         <CitationSection />

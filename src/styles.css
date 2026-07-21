@@ -2169,6 +2169,46 @@ pre {
   grid-template-columns: 1fr;
 }
 
+.reference-geometry,
+.reference-videos {
+  margin-top: 18px;
+}
+
+.reference-geometry > .micro-label,
+.reference-videos > .micro-label {
+  margin-bottom: 9px;
+}
+
+.reference-video-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.explorer-video {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0d1f2c;
+}
+
+.explorer-video video {
+  display: block;
+  width: 100%;
+  min-height: 210px;
+  max-height: 360px;
+  background: #0d1f2c;
+  object-fit: contain;
+}
+
+.explorer-video figcaption {
+  padding: 7px 10px;
+  background: white;
+  color: var(--ink-soft);
+  font-size: 0.56rem;
+}
+
 .media-placeholder {
   display: flex;
   min-height: 230px;
@@ -4273,6 +4313,10 @@ body {
   .section-heading > p {
     margin-left: 0;
     grid-column: auto;
+  }
+
+  .reference-video-grid {
+    grid-template-columns: 1fr;
   }
 }
 

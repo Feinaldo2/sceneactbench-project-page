@@ -53,6 +53,23 @@ CASES = {
     ),
 }
 
+STATIC_SCENES = {
+    "layout": (
+        "f877d2a1-678f-49a0-a90e-e99ff27134c7_DiningRoom-13034",
+        "DiningRoom-13034_full.glb",
+    ),
+    "camera": (
+        "deaa4ac0-8d13-423f-930f-78fb25825e8d_Bedroom-5088",
+        "Bedroom-5088_full.glb",
+    ),
+    "reconstruction": (
+        "e6534ac2-3e67-4cb1-8776-f1b5ae914105_SecondBedroom-5427",
+        "SecondBedroom-5427_full.glb",
+    ),
+}
+ARTICULATED_SAMPLE = "acd_1a570da5ae0c4d1d51c94be81d7248f155a0dcef"
+DYNAMIC_SAMPLE = "t6l1_castle_001"
+
 LAYOUT_POSTERS = {
     "claude-opus-4-6": "t1_claude-opus-4-6.png",
     "doubao-seed-2.0-pro": "t1_doubao-seed-2.0-pro.png",
@@ -118,7 +135,13 @@ def example_dir(example_id: str) -> Path:
     return SITE_ROOT / "public" / "assets" / "examples" / example_id
 
 
-def copy_shared_references(qualitative: Path, runs: Path) -> dict[str, list[dict[str, str]]]:
+def copy_shared_references(
+    qualitative: Path,
+    runs: Path,
+    static_root: Path,
+    articulated_root: Path,
+    dynamic_root: Path,
+) -> tuple[dict[str, list[dict[str, str]]], dict[str, dict[str, Any]]]:
     root = SITE_ROOT / "public" / "assets" / "references"
     if root.exists():
         shutil.rmtree(root)
@@ -159,7 +182,79 @@ def copy_shared_references(qualitative: Path, runs: Path) -> dict[str, list[dict
         src = copy_asset(qualitative / filename, root / "dynamic" / filename)
         dynamic.append(media(src, alt))
     references["dynamic"] = dynamic
-    return references
+
+    artifacts: dict[str, dict[str, Any]] = {}
+    for task in ("layout", "camera", "reconstruction"):
+        scene_id, filename = STATIC_SCENES[task]
+        gt_glb = copy_asset(
+            static_root / "scenes" / scene_id / "scene" / filename,
+            root / task / "gt-scene.glb",
+        )
+        artifacts[task] = {
+            "referenceGlb": media(gt_glb, f"Interactive ground-truth {task} scene."),
+            "referenceGlbAnimated": False,
+            "referenceVideos": [],
+        }
+
+    articulated_case = articulated_root / ARTICULATED_SAMPLE
+    articulated_glb = copy_asset(
+        articulated_case / "gt" / "gt_0016.glb",
+        root / "articulated" / "gt-open.glb",
+    )
+    articulated_video = copy_asset(
+        articulated_case / "reference.mp4",
+        root / "articulated" / "reference.mp4",
+    )
+    artifacts["articulated"] = {
+        "referenceGlb": media(
+            articulated_glb,
+            "Interactive ground-truth fully open articulated state.",
+            references["articulated"][1]["src"],
+        ),
+        "referenceGlbAnimated": False,
+        "referenceVideos": [
+            media(
+                articulated_video,
+                "Ground-truth open-close articulated reference video.",
+                references["articulated"][0]["src"],
+            )
+        ],
+    }
+
+    dynamic_case = dynamic_root / DYNAMIC_SAMPLE
+    dynamic_glb = copy_asset(
+        dynamic_case / "gt" / "gt_scene.glb",
+        root / "dynamic" / "gt-scene.glb",
+    )
+    low_video = copy_asset(
+        dynamic_case / "reference.mp4",
+        root / "dynamic" / "reference-lowpoly.mp4",
+    )
+    photo_video = copy_asset(
+        dynamic_case / "vision.mp4",
+        root / "dynamic" / "reference-photoreal.mp4",
+    )
+    artifacts["dynamic"] = {
+        "referenceGlb": media(
+            dynamic_glb,
+            "Interactive animated ground-truth Dynamic scene.",
+            references["dynamic"][0]["src"],
+        ),
+        "referenceGlbAnimated": True,
+        "referenceVideos": [
+            media(
+                low_video,
+                "Ground-truth low-poly Dynamic reference video.",
+                references["dynamic"][0]["src"],
+            ),
+            media(
+                photo_video,
+                "Photo-realistic Dynamic reference video.",
+                references["dynamic"][1]["src"],
+            ),
+        ],
+    }
+    return references, artifacts
 
 
 def build_layout(
@@ -400,12 +495,24 @@ def build_dynamic(
     }
 
 
-def build_examples(runs: Path, legacy: Path) -> list[dict[str, Any]]:
+def build_examples(
+    runs: Path,
+    legacy: Path,
+    static_root: Path,
+    articulated_root: Path,
+    dynamic_root: Path,
+) -> list[dict[str, Any]]:
     qualitative = legacy / "_figure_assets" / "qualitative_frames"
     output_root = SITE_ROOT / "public" / "assets" / "examples"
     if output_root.exists():
         shutil.rmtree(output_root)
-    references = copy_shared_references(qualitative, runs)
+    references, reference_artifacts = copy_shared_references(
+        qualitative,
+        runs,
+        static_root,
+        articulated_root,
+        dynamic_root,
+    )
     builders = {
         "layout": build_layout,
         "camera": build_camera,
@@ -429,7 +536,9 @@ def build_examples(runs: Path, legacy: Path) -> list[dict[str, Any]]:
             ]
             if task in {"camera", "reconstruction"}:
                 arguments = [model_id, model_name, case_dir, score, references[task]]
-            examples.append(builders[task](*arguments))
+            example = builders[task](*arguments)
+            example.update(reference_artifacts[task])
+            examples.append(example)
     return examples
 
 
@@ -437,11 +546,20 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--runs-root", type=Path, required=True)
     parser.add_argument("--legacy-root", type=Path, required=True)
+    parser.add_argument("--static-benchmark-root", type=Path, required=True)
+    parser.add_argument("--articulated-benchmark-root", type=Path, required=True)
+    parser.add_argument("--dynamic-benchmark-root", type=Path, required=True)
     parser.add_argument("--site-root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
     global SITE_ROOT
     SITE_ROOT = args.site_root.resolve()
-    examples = build_examples(args.runs_root.resolve(), args.legacy_root.resolve())
+    examples = build_examples(
+        args.runs_root.resolve(),
+        args.legacy_root.resolve(),
+        args.static_benchmark_root.resolve(),
+        args.articulated_benchmark_root.resolve(),
+        args.dynamic_benchmark_root.resolve(),
+    )
     manifest = {
         "schemaVersion": 1,
         "generatedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),

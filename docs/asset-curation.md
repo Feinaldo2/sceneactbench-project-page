@@ -11,9 +11,10 @@ Every example includes:
 - `id`, `task`, `modelId`, `title`, and `sourceInstance`
 - task-native `metrics` copied from the evaluated case
 - `referenceImages` and `outputImages`
+- optional shared `referenceGlb`, `referenceGlbAnimated`, and `referenceVideos`
 - task-specific artifacts:
   - Layout/Reconstruction: optional `outputGlb`
-  - Camera: `poseJson` and images only
+  - Camera: `poseJson` and output images; an optional GT scene GLB is reference-only
   - Articulated: optional `animatedGlb`, required `hasAnimation`, plus `keyframes`
   - Dynamic: optional `animatedGlb`, required `hasAnimation`, `lowPolyPreviews`, and `photorealisticPreviews`
 

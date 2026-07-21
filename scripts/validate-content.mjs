@@ -93,8 +93,9 @@ const mediaFields = [
   'keyframes',
   'lowPolyPreviews',
   'photorealisticPreviews',
+  'referenceVideos',
 ];
-const singleMediaFields = ['outputGlb', 'animatedGlb'];
+const singleMediaFields = ['outputGlb', 'animatedGlb', 'referenceGlb'];
 for (const example of examplesManifest.examples ?? []) {
   const media = [
     ...mediaFields.flatMap((field) => example[field] ?? []),
@@ -120,7 +121,10 @@ for (const example of examplesManifest.examples ?? []) {
           violations.push(`${example.id} references an invalid GLB container ${source}.`);
           continue;
         }
-        if (example.task === 'articulated' || example.task === 'dynamic') {
+        if (
+          (example.task === 'articulated' || example.task === 'dynamic') &&
+          source === example.animatedGlb?.src
+        ) {
           const jsonLength = glb.readUInt32LE(12);
           const document = JSON.parse(glb.toString('utf8', 20, 20 + jsonLength).trim());
           const hasAnimation =

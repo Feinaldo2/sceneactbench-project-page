@@ -59,20 +59,30 @@ const rebaseMedia = (asset: MediaAsset): MediaAsset => ({
 const rebaseExample = (example: BenchmarkExample): BenchmarkExample => {
   const referenceImages = example.referenceImages.map(rebaseMedia);
   const outputImages = example.outputImages.map(rebaseMedia);
+  const referenceArtifacts = {
+    ...(example.referenceGlb ? { referenceGlb: rebaseMedia(example.referenceGlb) } : {}),
+    ...(example.referenceVideos
+      ? { referenceVideos: example.referenceVideos.map(rebaseMedia) }
+      : {}),
+  };
   if (example.task === 'layout' || example.task === 'reconstruction') {
     return {
       ...example,
       referenceImages,
       outputImages,
+      ...referenceArtifacts,
       ...(example.outputGlb ? { outputGlb: rebaseMedia(example.outputGlb) } : {}),
     };
   }
-  if (example.task === 'camera') return { ...example, referenceImages, outputImages };
+  if (example.task === 'camera') {
+    return { ...example, referenceImages, outputImages, ...referenceArtifacts };
+  }
   if (example.task === 'articulated') {
     return {
       ...example,
       referenceImages,
       outputImages,
+      ...referenceArtifacts,
       keyframes: example.keyframes.map(rebaseMedia),
       ...(example.animatedGlb ? { animatedGlb: rebaseMedia(example.animatedGlb) } : {}),
     };
@@ -82,6 +92,7 @@ const rebaseExample = (example: BenchmarkExample): BenchmarkExample => {
       ...example,
       referenceImages,
       outputImages,
+      ...referenceArtifacts,
       lowPolyPreviews: example.lowPolyPreviews.map(rebaseMedia),
       photorealisticPreviews: example.photorealisticPreviews.map(rebaseMedia),
       ...(example.animatedGlb ? { animatedGlb: rebaseMedia(example.animatedGlb) } : {}),

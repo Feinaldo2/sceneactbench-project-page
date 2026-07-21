@@ -76,6 +76,9 @@ export type BaseExample = {
   metrics: NativeMetricValue[];
   referenceImages: MediaAsset[];
   outputImages: MediaAsset[];
+  referenceGlb?: MediaAsset;
+  referenceGlbAnimated?: boolean;
+  referenceVideos?: MediaAsset[];
   notes?: string;
 };
 

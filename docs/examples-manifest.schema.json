@@ -68,6 +68,12 @@
           "type": "array",
           "items": { "$ref": "#/$defs/media" }
         },
+        "referenceGlb": { "$ref": "#/$defs/media" },
+        "referenceGlbAnimated": { "type": "boolean" },
+        "referenceVideos": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/media" }
+        },
         "notes": { "type": "string" }
       }
     },

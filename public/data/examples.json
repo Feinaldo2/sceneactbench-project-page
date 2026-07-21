@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-21T09:43:42.482978Z",
+  "generatedAt": "2026-07-21T12:23:42.853676Z",
   "assetBase": "/assets/examples/",
   "examples": [
     {
@@ -47,7 +47,13 @@
         "src": "/assets/examples/layout-doubao-seed-2-pro-high/scene.glb",
         "alt": "Interactive Doubao Seed 2.0 Pro High Layout GLB.",
         "poster": "/assets/examples/layout-doubao-seed-2-pro-high/output.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-doubao-seed-2-pro-high",
@@ -83,7 +89,13 @@
           "alt": "Rendered view from Doubao Seed 2.0 Pro High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    -4.0,\n    -1.5,\n    1.2000000476837158\n  ],\n  \"agent_look_dir\": [\n    -0.9353047013282776,\n    -0.35073935985565186,\n    0.04676547273993492\n  ],\n  \"agent_matrix_world\": [\n    [\n      -0.35112354159355164,\n      0.04378790035843849,\n      0.9353047013282776,\n      -4.0\n    ],\n    [\n      0.9363291263580322,\n      0.0164203979074955,\n      0.35073935985565186,\n      -1.5\n    ],\n    [\n      6.539171693020762e-08,\n      0.9989058971405029,\n      -0.04676547273993492,\n      1.2000000476837158\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    -4.0,\n    -1.5,\n    1.2000000476837158\n  ],\n  \"agent_look_dir\": [\n    -0.9353047013282776,\n    -0.35073935985565186,\n    0.04676547273993492\n  ],\n  \"agent_matrix_world\": [\n    [\n      -0.35112354159355164,\n      0.04378790035843849,\n      0.9353047013282776,\n      -4.0\n    ],\n    [\n      0.9363291263580322,\n      0.0164203979074955,\n      0.35073935985565186,\n      -1.5\n    ],\n    [\n      6.539171693020762e-08,\n      0.9989058971405029,\n      -0.04676547273993492,\n      1.2000000476837158\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-doubao-seed-2-pro-high",
@@ -135,7 +147,20 @@
       },
       "hasAnimation": false,
       "keyframes": [],
-      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-doubao-seed-2-pro-high",
@@ -188,7 +213,13 @@
         "src": "/assets/examples/reconstruction-doubao-seed-2-pro-high/scene.glb",
         "alt": "Interactive Doubao Seed 2.0 Pro High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-doubao-seed-2-pro-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-doubao-seed-2-pro-high",
@@ -235,7 +266,25 @@
       "hasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-claude-opus-4-6-high",
@@ -281,7 +330,13 @@
         "src": "/assets/examples/layout-claude-opus-4-6-high/scene.glb",
         "alt": "Interactive Claude Opus 4.6 High Layout GLB.",
         "poster": "/assets/examples/layout-claude-opus-4-6-high/output.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-claude-opus-4-6-high",
@@ -317,7 +372,13 @@
           "alt": "Rendered view from Claude Opus 4.6 High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    -4.5,\n    -3.5,\n    2.0999999046325684\n  ],\n  \"agent_look_dir\": [\n    0.7565723657608032,\n    0.6158145070075989,\n    -0.21993348002433777\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.631271243095398,\n      0.17057213187217712,\n      -0.7565723657608032,\n      -4.5\n    ],\n    [\n      -0.7755621075630188,\n      0.13883762061595917,\n      -0.6158145070075989,\n      -3.5\n    ],\n    [\n      -7.826641734709483e-08,\n      0.9755148887634277,\n      0.21993348002433777,\n      2.0999999046325684\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    -4.5,\n    -3.5,\n    2.0999999046325684\n  ],\n  \"agent_look_dir\": [\n    0.7565723657608032,\n    0.6158145070075989,\n    -0.21993348002433777\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.631271243095398,\n      0.17057213187217712,\n      -0.7565723657608032,\n      -4.5\n    ],\n    [\n      -0.7755621075630188,\n      0.13883762061595917,\n      -0.6158145070075989,\n      -3.5\n    ],\n    [\n      -7.826641734709483e-08,\n      0.9755148887634277,\n      0.21993348002433777,\n      2.0999999046325684\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-claude-opus-4-6-high",
@@ -391,7 +452,20 @@
           "alt": "Claude Opus articulated output state 4."
         }
       ],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-claude-opus-4-6-high",
@@ -444,7 +518,13 @@
         "src": "/assets/examples/reconstruction-claude-opus-4-6-high/scene.glb",
         "alt": "Interactive Claude Opus 4.6 High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-claude-opus-4-6-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-claude-opus-4-6-high",
@@ -530,7 +610,25 @@
           "alt": "Claude Opus photo-realistic output frame 4."
         }
       ],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-gpt-5-4-medium",
@@ -576,7 +674,13 @@
         "src": "/assets/examples/layout-gpt-5-4-medium/scene.glb",
         "alt": "Interactive GPT 5.4 Medium Layout GLB.",
         "poster": "/assets/examples/layout-gpt-5-4-medium/output.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-gpt-5-4-medium",
@@ -612,7 +716,13 @@
           "alt": "Rendered view from GPT 5.4 Medium's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    0.3499999940395355,\n    -1.5499999523162842,\n    1.1799999475479126\n  ],\n  \"agent_look_dir\": [\n    -0.0,\n    0.999684751033783,\n    -0.01817612163722515\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9974968433380127,\n      0.0,\n      0.0,\n      0.3499999940395355\n    ],\n    [\n      0.0,\n      0.018136078491806984,\n      -0.999684751033783,\n      -1.5499999523162842\n    ],\n    [\n      0.0,\n      0.9974824786186218,\n      0.01817612163722515,\n      1.1799999475479126\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    0.3499999940395355,\n    -1.5499999523162842,\n    1.1799999475479126\n  ],\n  \"agent_look_dir\": [\n    -0.0,\n    0.999684751033783,\n    -0.01817612163722515\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9974968433380127,\n      0.0,\n      0.0,\n      0.3499999940395355\n    ],\n    [\n      0.0,\n      0.018136078491806984,\n      -0.999684751033783,\n      -1.5499999523162842\n    ],\n    [\n      0.0,\n      0.9974824786186218,\n      0.01817612163722515,\n      1.1799999475479126\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-gpt-5-4-medium",
@@ -664,7 +774,20 @@
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-gpt-5-4-medium",
@@ -717,7 +840,13 @@
         "src": "/assets/examples/reconstruction-gpt-5-4-medium/scene.glb",
         "alt": "Interactive GPT 5.4 Medium Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-gpt-5-4-medium/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-gpt-5-4-medium",
@@ -764,7 +893,25 @@
       "hasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-gpt-5-4-high",
@@ -810,7 +957,13 @@
         "src": "/assets/examples/layout-gpt-5-4-high/scene.glb",
         "alt": "Interactive GPT 5.4 High Layout GLB.",
         "poster": "/assets/examples/layout-gpt-5-4-high/output.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-gpt-5-4-high",
@@ -846,7 +999,13 @@
           "alt": "Rendered view from GPT 5.4 High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    -3.721789925401932e-15,\n    -3.472222328186035,\n    0.0\n  ],\n  \"agent_look_dir\": [\n    1.0718756196414678e-15,\n    1.0,\n    -7.549790126404332e-08\n  ],\n  \"agent_matrix_world\": [\n    [\n      1.0,\n      1.5579220328097004e-22,\n      -1.0718756196414678e-15,\n      -3.721789925401932e-15\n    ],\n    [\n      -1.0718756196414678e-15,\n      7.549790126404332e-08,\n      -1.0,\n      -3.472222328186035\n    ],\n    [\n      -7.486784133018432e-23,\n      1.0,\n      7.549790126404332e-08,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    -3.721789925401932e-15,\n    -3.472222328186035,\n    0.0\n  ],\n  \"agent_look_dir\": [\n    1.0718756196414678e-15,\n    1.0,\n    -7.549790126404332e-08\n  ],\n  \"agent_matrix_world\": [\n    [\n      1.0,\n      1.5579220328097004e-22,\n      -1.0718756196414678e-15,\n      -3.721789925401932e-15\n    ],\n    [\n      -1.0718756196414678e-15,\n      7.549790126404332e-08,\n      -1.0,\n      -3.472222328186035\n    ],\n    [\n      -7.486784133018432e-23,\n      1.0,\n      7.549790126404332e-08,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-gpt-5-4-high",
@@ -898,7 +1057,20 @@
       },
       "hasAnimation": false,
       "keyframes": [],
-      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-gpt-5-4-high",
@@ -951,7 +1123,13 @@
         "src": "/assets/examples/reconstruction-gpt-5-4-high/scene.glb",
         "alt": "Interactive GPT 5.4 High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-gpt-5-4-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-gpt-5-4-high",
@@ -998,7 +1176,25 @@
       "hasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-qwen-3-7-plus-high",
@@ -1044,7 +1240,13 @@
         "src": "/assets/examples/layout-qwen-3-7-plus-high/scene.glb",
         "alt": "Interactive Qwen 3.7 Plus High Layout GLB.",
         "poster": "/assets/examples/layout-qwen-3-7-plus-high/output.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-qwen-3-7-plus-high",
@@ -1080,7 +1282,13 @@
           "alt": "Rendered view from Qwen 3.7 Plus High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    1.5,\n    -4.0,\n    1.600000023841858\n  ],\n  \"agent_look_dir\": [\n    -0.3874659836292267,\n    0.9116846323013306,\n    -0.13675269484519958\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9203308820724487,\n      -0.05348953604698181,\n      0.3874659836292267,\n      1.5\n    ],\n    [\n      0.3911406397819519,\n      0.12585772573947906,\n      -0.9116846323013306,\n      -4.0\n    ],\n    [\n      -0.0,\n      0.9906052350997925,\n      0.13675269484519958,\n      1.600000023841858\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    1.5,\n    -4.0,\n    1.600000023841858\n  ],\n  \"agent_look_dir\": [\n    -0.3874659836292267,\n    0.9116846323013306,\n    -0.13675269484519958\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9203308820724487,\n      -0.05348953604698181,\n      0.3874659836292267,\n      1.5\n    ],\n    [\n      0.3911406397819519,\n      0.12585772573947906,\n      -0.9116846323013306,\n      -4.0\n    ],\n    [\n      -0.0,\n      0.9906052350997925,\n      0.13675269484519958,\n      1.600000023841858\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-qwen-3-7-plus-high",
@@ -1132,7 +1340,20 @@
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-qwen-3-7-plus-high",
@@ -1185,7 +1406,13 @@
         "src": "/assets/examples/reconstruction-qwen-3-7-plus-high/scene.glb",
         "alt": "Interactive Qwen 3.7 Plus High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-qwen-3-7-plus-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-qwen-3-7-plus-high",
@@ -1232,7 +1459,25 @@
       "hasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-gemini-3-1-pro-high",
@@ -1278,7 +1523,13 @@
         "src": "/assets/examples/layout-gemini-3-1-pro-high/scene.glb",
         "alt": "Interactive Gemini 3.1 Pro High Layout GLB.",
         "poster": "/assets/examples/layout-gemini-3-1-pro-high/output.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-gemini-3-1-pro-high",
@@ -1314,7 +1565,13 @@
           "alt": "Rendered view from Gemini 3.1 Pro High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    -0.699999988079071,\n    -4.5,\n    0.44999998807907104\n  ],\n  \"agent_look_dir\": [\n    -0.026647720485925674,\n    0.9992896318435669,\n    0.026647556573152542\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9996446371078491,\n      0.0007103494135662913,\n      0.026647720485925674,\n      -0.699999988079071\n    ],\n    [\n      0.026657186448574066,\n      -0.026638086885213852,\n      -0.9992896318435669,\n      -4.5\n    ],\n    [\n      -5.227418498066072e-10,\n      0.9996448755264282,\n      -0.026647556573152542,\n      0.44999998807907104\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    -0.699999988079071,\n    -4.5,\n    0.44999998807907104\n  ],\n  \"agent_look_dir\": [\n    -0.026647720485925674,\n    0.9992896318435669,\n    0.026647556573152542\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9996446371078491,\n      0.0007103494135662913,\n      0.026647720485925674,\n      -0.699999988079071\n    ],\n    [\n      0.026657186448574066,\n      -0.026638086885213852,\n      -0.9992896318435669,\n      -4.5\n    ],\n    [\n      -5.227418498066072e-10,\n      0.9996448755264282,\n      -0.026647556573152542,\n      0.44999998807907104\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-gemini-3-1-pro-high",
@@ -1366,7 +1623,20 @@
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-gemini-3-1-pro-high",
@@ -1419,7 +1689,13 @@
         "src": "/assets/examples/reconstruction-gemini-3-1-pro-high/scene.glb",
         "alt": "Interactive Gemini 3.1 Pro High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-gemini-3-1-pro-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-gemini-3-1-pro-high",
@@ -1466,7 +1742,25 @@
       "hasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-mimo-2-5-high",
@@ -1508,7 +1802,13 @@
         "alt": "Interactive MiMo 2.5 High Layout GLB.",
         "poster": "/assets/references/layout/reference.png"
       },
-      "notes": "The submitted GLB is valid but nearly empty; this failure is preserved."
+      "notes": "The submitted GLB is valid but nearly empty; this failure is preserved.",
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-mimo-2-5-high",
@@ -1544,7 +1844,13 @@
           "alt": "Rendered view from MiMo 2.5 High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    0.20000000298023224,\n    -5.5,\n    2.200000047683716\n  ],\n  \"agent_look_dir\": [\n    -0.11987286061048508,\n    0.9589828848838806,\n    -0.25687041878700256\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9922779202461243,\n      -0.031860850751399994,\n      0.11987286061048508,\n      0.20000000298023224\n    ],\n    [\n      0.12403474003076553,\n      0.25488680601119995,\n      -0.9589828848838806,\n      -5.5\n    ],\n    [\n      0.0,\n      0.9664458632469177,\n      0.25687041878700256,\n      2.200000047683716\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    0.20000000298023224,\n    -5.5,\n    2.200000047683716\n  ],\n  \"agent_look_dir\": [\n    -0.11987286061048508,\n    0.9589828848838806,\n    -0.25687041878700256\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.9922779202461243,\n      -0.031860850751399994,\n      0.11987286061048508,\n      0.20000000298023224\n    ],\n    [\n      0.12403474003076553,\n      0.25488680601119995,\n      -0.9589828848838806,\n      -5.5\n    ],\n    [\n      0.0,\n      0.9664458632469177,\n      0.25687041878700256,\n      2.200000047683716\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-mimo-2-5-high",
@@ -1596,7 +1902,20 @@
       },
       "hasAnimation": false,
       "keyframes": [],
-      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-mimo-2-5-high",
@@ -1649,7 +1968,13 @@
         "src": "/assets/examples/reconstruction-mimo-2-5-high/scene.glb",
         "alt": "Interactive MiMo 2.5 High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-mimo-2-5-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-mimo-2-5-high",
@@ -1696,7 +2021,25 @@
       "hasAnimation": true,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example."
+      "notes": "The interactive GLB and metrics use the low-poly base condition. Paired low-poly- and photo-realistic-input output strips are published only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-kimi-k2-6-reason",
@@ -1737,7 +2080,13 @@
         "src": "/assets/examples/layout-kimi-k2-6-reason/scene.glb",
         "alt": "Interactive Kimi K2.6 Reason Layout GLB.",
         "poster": "/assets/references/layout/reference.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-kimi-k2-6-reason",
@@ -1773,7 +2122,13 @@
           "alt": "Rendered view from Kimi K2.6 Reason's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    7.358891487121582,\n    -6.925790786743164,\n    4.958309173583984\n  ],\n  \"agent_look_dir\": [\n    -0.6515582203865051,\n    0.6141703724861145,\n    -0.44527140259742737\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.6859206557273865,\n      -0.32401347160339355,\n      0.6515582203865051,\n      7.358891487121582\n    ],\n    [\n      0.7276763319969177,\n      0.305420845746994,\n      -0.6141703724861145,\n      -6.925790786743164\n    ],\n    [\n      0.0,\n      0.8953956365585327,\n      0.44527140259742737,\n      4.958309173583984\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    7.358891487121582,\n    -6.925790786743164,\n    4.958309173583984\n  ],\n  \"agent_look_dir\": [\n    -0.6515582203865051,\n    0.6141703724861145,\n    -0.44527140259742737\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.6859206557273865,\n      -0.32401347160339355,\n      0.6515582203865051,\n      7.358891487121582\n    ],\n    [\n      0.7276763319969177,\n      0.305420845746994,\n      -0.6141703724861145,\n      -6.925790786743164\n    ],\n    [\n      0.0,\n      0.8953956365585327,\n      0.44527140259742737,\n      4.958309173583984\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-kimi-k2-6-reason",
@@ -1825,7 +2180,20 @@
       },
       "hasAnimation": false,
       "keyframes": [],
-      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-kimi-k2-6-reason",
@@ -1878,7 +2246,13 @@
         "src": "/assets/examples/reconstruction-kimi-k2-6-reason/scene.glb",
         "alt": "Interactive Kimi K2.6 Reason Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-kimi-k2-6-reason/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-kimi-k2-6-reason",
@@ -1925,7 +2299,25 @@
       "hasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-step-3-7-flash-high",
@@ -1967,7 +2359,13 @@
         "alt": "Interactive Step 3.7 Flash High Layout GLB.",
         "poster": "/assets/references/layout/reference.png"
       },
-      "notes": "The submitted GLB is substantially smaller than the full asset set and may be partial."
+      "notes": "The submitted GLB is substantially smaller than the full asset set and may be partial.",
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-step-3-7-flash-high",
@@ -2003,7 +2401,13 @@
           "alt": "Rendered view from Step 3.7 Flash High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    -3.721789925401932e-15,\n    -3.472222328186035,\n    0.0\n  ],\n  \"agent_look_dir\": [\n    1.0718756196414678e-15,\n    1.0,\n    -7.549790126404332e-08\n  ],\n  \"agent_matrix_world\": [\n    [\n      1.0,\n      1.5579220328097004e-22,\n      -1.0718756196414678e-15,\n      -3.721789925401932e-15\n    ],\n    [\n      -1.0718756196414678e-15,\n      7.549790126404332e-08,\n      -1.0,\n      -3.472222328186035\n    ],\n    [\n      -7.486784133018432e-23,\n      1.0,\n      7.549790126404332e-08,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    -3.721789925401932e-15,\n    -3.472222328186035,\n    0.0\n  ],\n  \"agent_look_dir\": [\n    1.0718756196414678e-15,\n    1.0,\n    -7.549790126404332e-08\n  ],\n  \"agent_matrix_world\": [\n    [\n      1.0,\n      1.5579220328097004e-22,\n      -1.0718756196414678e-15,\n      -3.721789925401932e-15\n    ],\n    [\n      -1.0718756196414678e-15,\n      7.549790126404332e-08,\n      -1.0,\n      -3.472222328186035\n    ],\n    [\n      -7.486784133018432e-23,\n      1.0,\n      7.549790126404332e-08,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-step-3-7-flash-high",
@@ -2055,7 +2459,20 @@
       },
       "hasAnimation": false,
       "keyframes": [],
-      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-step-3-7-flash-high",
@@ -2108,7 +2525,13 @@
         "src": "/assets/examples/reconstruction-step-3-7-flash-high/scene.glb",
         "alt": "Interactive Step 3.7 Flash High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-step-3-7-flash-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-step-3-7-flash-high",
@@ -2155,7 +2578,25 @@
       "hasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-claude-sonnet-5-high",
@@ -2196,7 +2637,13 @@
         "src": "/assets/examples/layout-claude-sonnet-5-high/scene.glb",
         "alt": "Interactive Claude Sonnet 5 High Layout GLB.",
         "poster": "/assets/references/layout/reference.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-claude-sonnet-5-high",
@@ -2232,7 +2679,13 @@
           "alt": "Rendered view from Claude Sonnet 5 High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    -4.0,\n    -2.9000000953674316,\n    1.100000023841858\n  ],\n  \"agent_look_dir\": [\n    0.7498939037322998,\n    0.6561570167541504,\n    -0.0843629240989685\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.6585045456886292,\n      0.06348961591720581,\n      -0.7498939037322998,\n      -4.0\n    ],\n    [\n      -0.7525767683982849,\n      0.055553317070007324,\n      -0.6561570167541504,\n      -2.9000000953674316\n    ],\n    [\n      -6.340222569178877e-08,\n      0.9964351058006287,\n      0.0843629240989685,\n      1.100000023841858\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    -4.0,\n    -2.9000000953674316,\n    1.100000023841858\n  ],\n  \"agent_look_dir\": [\n    0.7498939037322998,\n    0.6561570167541504,\n    -0.0843629240989685\n  ],\n  \"agent_matrix_world\": [\n    [\n      0.6585045456886292,\n      0.06348961591720581,\n      -0.7498939037322998,\n      -4.0\n    ],\n    [\n      -0.7525767683982849,\n      0.055553317070007324,\n      -0.6561570167541504,\n      -2.9000000953674316\n    ],\n    [\n      -6.340222569178877e-08,\n      0.9964351058006287,\n      0.0843629240989685,\n      1.100000023841858\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-claude-sonnet-5-high",
@@ -2284,7 +2737,20 @@
       },
       "hasAnimation": false,
       "keyframes": [],
-      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure."
+      "notes": "The submitted GLB contains no animated channels; the viewer preserves this static articulated failure.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-claude-sonnet-5-high",
@@ -2337,7 +2803,13 @@
         "src": "/assets/examples/reconstruction-claude-sonnet-5-high/scene.glb",
         "alt": "Interactive Claude Sonnet 5 High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-claude-sonnet-5-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-claude-sonnet-5-high",
@@ -2384,7 +2856,25 @@
       "hasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     },
     {
       "id": "layout-minimax-m3-high",
@@ -2430,7 +2920,13 @@
         "src": "/assets/examples/layout-minimax-m3-high/scene.glb",
         "alt": "Interactive MiniMax M3 High Layout GLB.",
         "poster": "/assets/examples/layout-minimax-m3-high/output.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/layout/gt-scene.glb",
+        "alt": "Interactive ground-truth layout scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "camera-minimax-m3-high",
@@ -2466,7 +2962,13 @@
           "alt": "Rendered view from MiniMax M3 High's predicted camera."
         }
       ],
-      "poseJson": "{\n  \"agent_position\": [\n    0.0,\n    0.0,\n    5.0\n  ],\n  \"agent_look_dir\": [\n    -0.0,\n    -0.0,\n    1.0\n  ],\n  \"agent_matrix_world\": [\n    [\n      -1.0,\n      0.0,\n      0.0,\n      0.0\n    ],\n    [\n      0.0,\n      1.0,\n      0.0,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      -1.0,\n      5.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}"
+      "poseJson": "{\n  \"agent_position\": [\n    0.0,\n    0.0,\n    5.0\n  ],\n  \"agent_look_dir\": [\n    -0.0,\n    -0.0,\n    1.0\n  ],\n  \"agent_matrix_world\": [\n    [\n      -1.0,\n      0.0,\n      0.0,\n      0.0\n    ],\n    [\n      0.0,\n      1.0,\n      0.0,\n      0.0\n    ],\n    [\n      0.0,\n      0.0,\n      -1.0,\n      5.0\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "referenceGlb": {
+        "src": "/assets/references/camera/gt-scene.glb",
+        "alt": "Interactive ground-truth camera scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "articulated-minimax-m3-high",
@@ -2518,7 +3020,20 @@
       },
       "hasAnimation": true,
       "keyframes": [],
-      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example."
+      "notes": "The viewer uses the submitted 32-state animated GLB. Rendered output keyframes are available only for the paper's qualitative example.",
+      "referenceGlb": {
+        "src": "/assets/references/articulated/gt-open.glb",
+        "alt": "Interactive ground-truth fully open articulated state.",
+        "poster": "/assets/references/articulated/reference-2.png"
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/articulated/reference.mp4",
+          "alt": "Ground-truth open-close articulated reference video.",
+          "poster": "/assets/references/articulated/reference-0.png"
+        }
+      ]
     },
     {
       "id": "reconstruction-minimax-m3-high",
@@ -2571,7 +3086,13 @@
         "src": "/assets/examples/reconstruction-minimax-m3-high/scene.glb",
         "alt": "Interactive MiniMax M3 High Reconstruction GLB.",
         "poster": "/assets/examples/reconstruction-minimax-m3-high/agent-view-0.png"
-      }
+      },
+      "referenceGlb": {
+        "src": "/assets/references/reconstruction/gt-scene.glb",
+        "alt": "Interactive ground-truth reconstruction scene."
+      },
+      "referenceGlbAnimated": false,
+      "referenceVideos": []
     },
     {
       "id": "dynamic-minimax-m3-high",
@@ -2618,7 +3139,25 @@
       "hasAnimation": false,
       "lowPolyPreviews": [],
       "photorealisticPreviews": [],
-      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure."
+      "notes": "The submitted low-poly base-condition GLB contains no animation; the interactive viewer preserves this static-scene failure.",
+      "referenceGlb": {
+        "src": "/assets/references/dynamic/gt-scene.glb",
+        "alt": "Interactive animated ground-truth Dynamic scene.",
+        "poster": "/assets/references/dynamic/t6_gt_0.png"
+      },
+      "referenceGlbAnimated": true,
+      "referenceVideos": [
+        {
+          "src": "/assets/references/dynamic/reference-lowpoly.mp4",
+          "alt": "Ground-truth low-poly Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t6_gt_0.png"
+        },
+        {
+          "src": "/assets/references/dynamic/reference-photoreal.mp4",
+          "alt": "Photo-realistic Dynamic reference video.",
+          "poster": "/assets/references/dynamic/t7_gt_0.png"
+        }
+      ]
     }
   ]
 }
