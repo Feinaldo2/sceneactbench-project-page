@@ -34,7 +34,18 @@ describe('SceneActBench project page', () => {
     const navigation = screen.getByRole('navigation', { name: 'Page sections' });
     expect(within(navigation).getAllByRole('link')).toHaveLength(8);
     expect(within(navigation).queryByRole('link', { name: 'Resources' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 2, name: 'Citation' })).toBeInTheDocument();
+    for (const title of [
+      'TL;DR',
+      'Leaderboard',
+      'Examples',
+      'Benchmark',
+      'Tasks',
+      'Metrics',
+      'Analysis',
+      'Citation',
+    ]) {
+      expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
+    }
     expect(screen.queryByText('Authors & citation')).not.toBeInTheDocument();
     expect(screen.getAllByText('Doubao Seed 2.0 Pro').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Claude Sonnet 5').length).toBeGreaterThan(0);

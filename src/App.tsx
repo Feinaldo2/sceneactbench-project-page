@@ -40,7 +40,7 @@ function SectionHeading({
   return (
     <div className="section-heading">
       <div className="section-index">{index}</div>
-      <div>
+      <div className="section-title">
         <span className="micro-label">{eyebrow}</span>
         <h2>{title}</h2>
       </div>
@@ -187,8 +187,8 @@ function Tldr() {
       <div className="page-shell">
         <SectionHeading
           index="01"
-          eyebrow="TL;DR"
-          title="Why action?"
+          eyebrow="Why action?"
+          title="TL;DR"
         >
           Action turns visual understanding into geometry that can be directly verified.
         </SectionHeading>
@@ -230,35 +230,11 @@ function BenchmarkSection() {
         <SectionHeading
           index="04"
           eyebrow="Benchmark loop"
-          title="Benchmark loop"
+          title="Benchmark"
         >
-          Every case closes the loop between visual evidence and an executable artifact. The
-          evaluator measures what the agent made, not what it claimed to make.
+          Visual evidence becomes an executable artifact that is measured after execution.
         </SectionHeading>
         <PipelineVisual />
-        <div className="benchmark-contract">
-          <div>
-            <span className="micro-label">The evaluation contract</span>
-            <h3>Same scene. Same task budget. Native output.</h3>
-          </div>
-          <div className="contract-items">
-            <article>
-              <span>01</span>
-              <strong>Controlled evidence</strong>
-              <p>Task-specific inputs expose only the views and metadata defined by the protocol.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <strong>Executable actions</strong>
-              <p>Tool calls modify scene state and produce machine-readable artifacts.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <strong>Fresh verification</strong>
-              <p>Renders, geometry, poses, and trajectories are evaluated after execution.</p>
-            </article>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -271,7 +247,7 @@ function TasksSection() {
         <SectionHeading
           index="05"
           eyebrow="Five tasks"
-          title="Five tasks"
+          title="Tasks"
         >
           The suite moves from spatial placement and camera control to part motion, surface
           reconstruction, and time-varying scenes.
@@ -307,7 +283,7 @@ function ExplorerSection() {
         <SectionHeading
           index="03"
           eyebrow="Model × task explorer"
-          title="Model × task explorer"
+          title="Examples"
         >
           Each curated example pairs reference evidence with task-native metrics, verification
           renders, structured poses, and interactive geometry.

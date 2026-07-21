@@ -71,14 +71,6 @@ export function HeroScene() {
   );
 }
 
-const stages = [
-  { index: '01', label: 'Observe', sub: 'images + scene' },
-  { index: '02', label: 'Reason', sub: 'state + intent' },
-  { index: '03', label: 'Act', sub: 'tool calls' },
-  { index: '04', label: 'Render', sub: 'fresh evidence' },
-  { index: '05', label: 'Measure', sub: 'native metrics' },
-] as const;
-
 export function PipelineVisual() {
   return (
     <div className="pipeline-visual">
@@ -92,34 +84,6 @@ export function PipelineVisual() {
         />
         <figcaption>Shared inspect–act–render loop and task-specific hidden evaluators.</figcaption>
       </figure>
-      <div className="pipeline-track" aria-label="Benchmark evaluation loop">
-        {stages.map((stage, index) => (
-          <div className="pipeline-stage" key={stage.label}>
-            <div className="pipeline-node">
-              <span>{stage.index}</span>
-              <strong>{stage.label}</strong>
-              <small>{stage.sub}</small>
-            </div>
-            {index < stages.length - 1 && (
-              <div className="pipeline-arrow" aria-hidden="true">
-                <span />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      <div className="pipeline-return" aria-hidden="true">
-        <span>updated scene state</span>
-        <svg viewBox="0 0 1000 55" preserveAspectRatio="none">
-          <path d="M930 6C745 64 243 66 69 8" />
-          <path d="m69 8 16 1M69 8l8 14" />
-        </svg>
-      </div>
-      <div className="pipeline-caption-row">
-        <p><span className="caption-mark blue" />Agent-facing loop</p>
-        <p><span className="caption-mark teal" />Evaluator-facing artifacts</p>
-        <p><span className="caption-mark amber" />Deterministic measurement</p>
-      </div>
     </div>
   );
 }

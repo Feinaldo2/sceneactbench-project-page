@@ -1308,14 +1308,14 @@ pre {
 }
 
 .pipeline-visual {
-  padding: 42px 34px 29px;
+  padding: 22px;
   border: 1px solid rgba(255, 255, 255, 0.17);
   background: rgba(7, 30, 57, 0.52);
 }
 
 .pipeline-paper-figure {
-  margin: 0 0 34px;
-  padding: 18px;
+  margin: 0;
+  padding: 12px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.96);
 }
@@ -1323,7 +1323,7 @@ pre {
 .pipeline-paper-figure img {
   display: block;
   width: 100%;
-  max-height: 520px;
+  max-height: 360px;
   object-fit: contain;
 }
 
@@ -4200,17 +4200,17 @@ body {
 }
 
 .section {
-  padding: 92px 0;
+  padding: 72px 0;
 }
 
 .section-heading {
   align-items: center;
   gap: 16px;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
   grid-template-columns: 42px minmax(300px, 0.82fr) minmax(320px, 1fr);
 }
 
-.section-heading > div {
+.section-heading > .section-title {
   display: grid;
   min-width: 0;
   align-items: baseline;
@@ -4241,12 +4241,16 @@ body {
 }
 
 .section-tldr {
-  padding-top: 92px;
+  padding-top: 72px;
   background: #eef8f4;
 }
 
 .section-tldr .section-heading {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+}
+
+.section-tldr .section-heading h2 {
+  font-size: clamp(2rem, 2.8vw, 2.65rem);
 }
 
 .contribution-grid {
@@ -4321,7 +4325,7 @@ body {
   }
 
   .section {
-    padding-block: 78px;
+    padding-block: 64px;
   }
 
   .section-heading {
@@ -4373,19 +4377,19 @@ body {
   }
 
   .section {
-    padding-block: 66px;
+    padding-block: 54px;
   }
 
   .section-tldr {
-    padding-top: 66px;
+    padding-top: 54px;
   }
 
   .section-heading {
-    margin-bottom: 34px;
+    margin-bottom: 26px;
     grid-template-columns: 1fr;
   }
 
-  .section-heading > div {
+  .section-heading > .section-title {
     gap: 6px;
     grid-template-columns: 1fr;
   }
