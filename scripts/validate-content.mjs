@@ -135,6 +135,18 @@ for (const example of examplesManifest.examples ?? []) {
           violations.push(`${example.id} references an invalid GLB container ${source}.`);
           continue;
         }
+        const jsonLength = glb.readUInt32LE(12);
+        const document = JSON.parse(glb.toString('utf8', 20, 20 + jsonLength).trim());
+        const invalidAnimations = (document.animations ?? []).filter(
+          (animation) =>
+            !Array.isArray(animation.channels) ||
+            animation.channels.length === 0 ||
+            !Array.isArray(animation.samplers) ||
+            animation.samplers.length === 0,
+        );
+        if (invalidAnimations.length > 0) {
+          violations.push(`${example.id} contains an invalid empty animation in ${source}.`);
+        }
         const animationFlag =
           source === example.animatedGlb?.src
             ? example.hasAnimation
@@ -142,8 +154,6 @@ for (const example of examplesManifest.examples ?? []) {
               ? example.pairedHasAnimation
               : null;
         if (animationFlag !== null) {
-          const jsonLength = glb.readUInt32LE(12);
-          const document = JSON.parse(glb.toString('utf8', 20, 20 + jsonLength).trim());
           const hasAnimation =
             Array.isArray(document.animations) &&
             document.animations.some(

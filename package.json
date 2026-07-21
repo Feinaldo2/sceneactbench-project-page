@@ -14,7 +14,7 @@
     "curate:examples": "node scripts/curate-examples.mjs"
   },
   "dependencies": {
-    "@google/model-viewer": "^4.3.1",
+    "@google/model-viewer": "4.1.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
+import struct
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -118,6 +119,55 @@ def copy_asset(source: Path, destination: Path) -> str:
         raise FileNotFoundError(source)
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, destination)
+    return f"/{destination.relative_to(SITE_ROOT / 'public').as_posix()}"
+
+
+def copy_web_glb(source: Path, destination: Path) -> str:
+    """Copy a GLB while dropping invalid empty animation records."""
+    data = source.read_bytes()
+    if len(data) < 20 or data[:4] != b"glTF":
+        raise ValueError(f"Invalid GLB: {source}")
+
+    chunks: list[tuple[int, bytes]] = []
+    offset = 12
+    changed = False
+    while offset < len(data):
+        chunk_length, chunk_type = struct.unpack_from("<II", data, offset)
+        offset += 8
+        payload = data[offset : offset + chunk_length]
+        offset += chunk_length
+        if chunk_type == 0x4E4F534A:
+            document = json.loads(payload.decode("utf-8").rstrip("\x00 \t\r\n"))
+            animations = document.get("animations", [])
+            valid_animations = [
+                animation
+                for animation in animations
+                if animation.get("channels") and animation.get("samplers")
+            ]
+            if len(valid_animations) != len(animations):
+                changed = True
+                if valid_animations:
+                    document["animations"] = valid_animations
+                else:
+                    document.pop("animations", None)
+                payload = json.dumps(
+                    document,
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+                payload += b" " * (-len(payload) % 4)
+        chunks.append((chunk_type, payload))
+
+    if not changed:
+        return copy_asset(source, destination)
+
+    body = b"".join(
+        struct.pack("<II", len(payload), chunk_type) + payload
+        for chunk_type, payload in chunks
+    )
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(struct.pack("<4sII", b"glTF", 2, 12 + len(body)) + body)
+    shutil.copystat(source, destination)
     return f"/{destination.relative_to(SITE_ROOT / 'public').as_posix()}"
 
 
@@ -264,7 +314,7 @@ def build_layout(
 ) -> dict[str, Any]:
     identifier = f"layout-{model_id}"
     output_dir = example_dir(identifier)
-    glb = copy_asset(case_dir / "agent_scene.glb", output_dir / "scene.glb")
+    glb = copy_web_glb(case_dir / "agent_scene.glb", output_dir / "scene.glb")
     size = (case_dir / "agent_scene.glb").stat().st_size
     notes = None
     if size < 100_000:
@@ -333,7 +383,7 @@ def build_articulated(
     keyframes: list[dict[str, str]] = []
     source_glb = case_dir / "agent_animation.glb"
     has_animation = glb_has_animation(source_glb)
-    glb = copy_asset(source_glb, output_dir / "animation.glb")
+    glb = copy_web_glb(source_glb, output_dir / "animation.glb")
     notes = (
         "The interactive viewer uses the submitted 32-state agent GLB."
         if has_animation
@@ -385,7 +435,7 @@ def build_reconstruction(
             output_dir / f"agent-view-{index}.png",
         )
         output_images.append(media(src, f"{model_name} reconstruction from calibrated view {index + 1}."))
-    glb = copy_asset(case_dir / "agent_scene.glb", output_dir / "scene.glb")
+    glb = copy_web_glb(case_dir / "agent_scene.glb", output_dir / "scene.glb")
     return {
         "id": identifier,
         "task": "reconstruction",
@@ -417,7 +467,7 @@ def build_dynamic(
     photorealistic: list[dict[str, str]] = []
     source_glb = case_dir / "agent_scene.glb"
     has_animation = glb_has_animation(source_glb)
-    glb = copy_asset(source_glb, output_dir / "animation.glb")
+    glb = copy_web_glb(source_glb, output_dir / "animation.glb")
     paired_case_dir = (
         case_dir.parents[1]
         / "task7_anim"
@@ -425,7 +475,7 @@ def build_dynamic(
     )
     paired_source_glb = paired_case_dir / "agent_scene.glb"
     paired_has_animation = glb_has_animation(paired_source_glb)
-    paired_glb = copy_asset(
+    paired_glb = copy_web_glb(
         paired_source_glb,
         output_dir / "paired-animation.glb",
     )

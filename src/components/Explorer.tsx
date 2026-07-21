@@ -69,7 +69,7 @@ function ImageSlot({
         rel="noreferrer"
         aria-label={`Open full-size ${label.toLowerCase()}`}
       >
-        <img src={asset.src} alt={asset.alt} loading="lazy" onError={() => setFailed(true)} />
+        <img src={asset.src} alt={asset.alt} loading="eager" onError={() => setFailed(true)} />
         <span className="explorer-open-badge">Open ↗</span>
       </a>
       <figcaption>{label}</figcaption>
@@ -135,18 +135,41 @@ function ModelViewer({
         if (active) setStatus('error');
       });
     return () => { active = false; };
-  }, [asset, inView]);
+  }, [asset?.src, inView]);
 
   useEffect(() => {
     const viewer = viewerRef.current;
     if (!viewer || !registered) return;
     const modelViewer = viewer as HTMLElement & { loaded?: boolean };
-    const handleLoad = () => setStatus('ready');
-    const handleError = () => setStatus('error');
+    let pollId: number | undefined;
+    let timeoutId: number | undefined;
+    const stopPolling = () => {
+      if (pollId !== undefined) window.clearInterval(pollId);
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
+    const handleLoad = () => {
+      stopPolling();
+      setStatus('ready');
+    };
+    const handleError = () => {
+      stopPolling();
+      setStatus('error');
+    };
+    const syncLoaded = () => {
+      if (!modelViewer.loaded) return false;
+      handleLoad();
+      return true;
+    };
     viewer.addEventListener('load', handleLoad);
     viewer.addEventListener('error', handleError);
-    if (modelViewer.loaded) handleLoad();
+    if (!syncLoaded()) {
+      pollId = window.setInterval(syncLoaded, 100);
+      timeoutId = window.setTimeout(() => {
+        if (pollId !== undefined) window.clearInterval(pollId);
+      }, 30_000);
+    }
     return () => {
+      stopPolling();
       viewer.removeEventListener('load', handleLoad);
       viewer.removeEventListener('error', handleError);
     };
@@ -191,7 +214,7 @@ function ModelViewer({
           autoplay={animated}
           shadow-intensity="0.8"
           exposure="1"
-          loading="lazy"
+          loading="eager"
           reveal="auto"
         />
       )}
