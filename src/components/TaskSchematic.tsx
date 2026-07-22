@@ -24,8 +24,8 @@ function LayoutSchematic() {
       <path className="schematic-line amber-line" d="m304 145 52 16 42-17-52-15-42 16Z" />
       <path className="schematic-line accent moving-dash" d="M181 124v-31m0 0-10 12m10-12 10 12" />
       <circle className="schematic-dot" cx="181" cy="124" r="4" />
-      <text className="schematic-label" x="118" y="213">object transforms</text>
-      <text className="schematic-label" x="314" y="192">support + scale</text>
+      <text className="schematic-label" x="118" y="213">Object transforms</text>
+      <text className="schematic-label" x="314" y="192">Support + scale</text>
     </Frame>
   );
 }
@@ -41,9 +41,9 @@ function CameraSchematic() {
       <circle className="schematic-fill amber" cx="208" cy="133" r="12" />
       <path className="schematic-line amber-line" d="M192 133h-24m40-16V93" />
       <path className="schematic-line accent moving-dash" d="M250 207c37 23 97 22 137-4" />
-      <text className="schematic-label" x="96" y="220">scene</text>
-      <text className="schematic-label" x="189" y="158">pose</text>
-      <text className="schematic-label" x="346" y="202">target view</text>
+      <text className="schematic-label" x="96" y="220">Scene</text>
+      <text className="schematic-label" x="189" y="158">Pose</text>
+      <text className="schematic-label" x="346" y="202">Target view</text>
     </Frame>
   );
 }
@@ -60,8 +60,8 @@ function ArticulatedSchematic() {
       <path className="schematic-line accent" d="m291 73 91 45v97l-91-25V73Z" />
       <circle className="schematic-fill amber" cx="306" cy="137" r="4" />
       <path className="schematic-line amber-line" d="M281 59v147" />
-      <text className="schematic-label" x="143" y="231">closed state</text>
-      <text className="schematic-label" x="307" y="231">open state</text>
+      <text className="schematic-label" x="143" y="231">Closed state</text>
+      <text className="schematic-label" x="307" y="231">Open state</text>
     </Frame>
   );
 }
@@ -81,8 +81,8 @@ function ReconstructionSchematic() {
       <circle className="schematic-dot" cx="335" cy="163" r="5" />
       <circle className="schematic-dot" cx="388" cy="183" r="5" />
       <circle className="schematic-dot" cx="436" cy="198" r="5" />
-      <text className="schematic-label" x="88" y="223">visual evidence</text>
-      <text className="schematic-label" x="350" y="223">surface</text>
+      <text className="schematic-label" x="88" y="223">Visual evidence</text>
+      <text className="schematic-label" x="350" y="223">Surface</text>
     </Frame>
   );
 }
@@ -102,7 +102,7 @@ function DynamicSchematic() {
       <text className="schematic-label centered" x="82" y="65">t₀</text>
       <text className="schematic-label centered" x="296" y="65">tₙ</text>
       <text className="schematic-label centered" x="429" y="65">t₁</text>
-      <text className="schematic-label" x="62" y="219">tracked movers across time</text>
+      <text className="schematic-label" x="62" y="219">Tracked movers across time</text>
     </Frame>
   );
 }

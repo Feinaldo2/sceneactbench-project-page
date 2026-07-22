@@ -345,7 +345,7 @@ function CameraOutput({
           <FileIcon />
           <span>
             <strong>camera_pose.json</strong>
-            <small>structured output</small>
+            <small>Structured output</small>
           </span>
           <span className="pose-toggle">
             <span className="pose-view">View JSON</span>

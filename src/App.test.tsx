@@ -40,9 +40,24 @@ describe('SceneActBench project page', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole('link', { name: 'SceneActBench home' }).querySelector('img'),
-    ).toHaveAttribute('src', expect.stringContaining('hunyuan-mark.png'));
+    ).toHaveAttribute('src', expect.stringContaining('hunyuan-logo.png'));
     const hero = document.querySelector<HTMLElement>('.hero');
     expect(hero).toBeInTheDocument();
+    expect(within(hero!).queryByAltText('Tencent Hunyuan')).not.toBeInTheDocument();
+    const authorLine = within(hero!).getByLabelText('Authors');
+    expect(authorLine.querySelectorAll('sup')).toHaveLength(14);
+    const authorBreak = authorLine.querySelector('.author-row-break');
+    expect(authorBreak?.nextElementSibling).toHaveTextContent('Haowei Lin');
+    const affiliationLine = hero!.querySelector('.affiliation-line');
+    expect(affiliationLine).toHaveTextContent('Tencent Hunyuan');
+    expect(affiliationLine).toHaveTextContent('THU');
+    expect(affiliationLine).toHaveTextContent('NJU');
+    expect(affiliationLine).toHaveTextContent('HKUST');
+    expect(affiliationLine).toHaveTextContent('UIUC');
+    expect(affiliationLine).toHaveTextContent('PKU');
+    const contributionLine = hero!.querySelector('.contribution-line');
+    expect(contributionLine).toHaveTextContent('* Equal contribution');
+    expect(contributionLine).toHaveTextContent('† Corresponding author');
     expect(within(hero!).getByRole('link', { name: 'Leaderboard ↓' })).toHaveAttribute(
       'href',
       '#leaderboard',
@@ -111,12 +126,9 @@ describe('SceneActBench project page', () => {
         name: 'Close Overall scores conceal different capabilities.',
       }),
     ).not.toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', {
-        level: 3,
-        name: 'One fixed loop makes every final artifact auditable.',
-      }),
-    ).toBeInTheDocument();
+    for (const stage of ['Observe', 'Act', 'Evaluate']) {
+      expect(screen.getByRole('heading', { level: 3, name: stage })).toBeInTheDocument();
+    }
     expect(screen.queryByText('Authors & citation')).not.toBeInTheDocument();
     expect(screen.getAllByText('Doubao Seed 2.0 Pro').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Claude Sonnet 5').length).toBeGreaterThan(0);
@@ -307,6 +319,31 @@ describe('SceneActBench project page', () => {
     fireEvent.keyDown(dialog, { key: 'Escape' });
     expect(
       screen.queryByRole('dialog', { name: 'How to read the leaderboard' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('opens paper insights without showing the Sonnet step curve', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Paper insights/i }));
+    const dialog = screen.getByRole('dialog', { name: 'Interactive research insights' });
+    expect(dialog).toBeInTheDocument();
+    expect(within(dialog).getByText('150 steps')).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: /Doubao/i })).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: /MiniMax/i })).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: /Qwen/i })).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: /MiMo/i })).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: /Kimi/i })).toBeInTheDocument();
+    expect(within(dialog).queryByText(/Claude Sonnet 5/i)).not.toBeInTheDocument();
+
+    fireEvent.click(within(dialog).getByRole('tab', { name: 'Input conditions' }));
+    expect(
+      within(dialog).getByAltText(/Input-condition score changes/i),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByText('9 / 11 improve')).toBeInTheDocument();
+    fireEvent.keyDown(dialog, { key: 'Escape' });
+    expect(
+      screen.queryByRole('dialog', { name: 'Interactive research insights' }),
     ).not.toBeInTheDocument();
   });
 

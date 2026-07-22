@@ -55,6 +55,24 @@ for (const section of requiredSections) {
   }
 }
 
+const styles = await readFile(path.join(root, 'src', 'styles.css'), 'utf8');
+const allowedFontSizes = new Set([
+  'var(--type-large)',
+  'var(--type-medium)',
+  'var(--type-small)',
+  '0.62em',
+  'inherit',
+]);
+for (const match of styles.matchAll(/font-size:\s*([^;]+);/g)) {
+  const value = match[1].trim();
+  if (!allowedFontSizes.has(value)) {
+    violations.push(`src/styles.css uses unsupported font size "${value}".`);
+  }
+}
+if (/text-transform:\s*uppercase/.test(styles)) {
+  violations.push('src/styles.css must use Title case text instead of forced uppercase.');
+}
+
 for (const decoder of [
   'public/assets/draco/draco_wasm_wrapper.js',
   'public/assets/draco/draco_decoder.wasm',

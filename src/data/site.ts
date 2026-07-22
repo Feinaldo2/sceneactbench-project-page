@@ -25,11 +25,11 @@ export const authors = [
 
 export const affiliations = [
   { id: 1, name: 'Tencent Hunyuan' },
-  { id: 2, name: 'Tsinghua University (THU)' },
-  { id: 3, name: 'Nanjing University (NJU)' },
-  { id: 4, name: 'Hong Kong University of Science and Technology (HKUST)' },
-  { id: 5, name: 'University of Illinois Urbana-Champaign (UIUC)' },
-  { id: 6, name: 'Peking University (PKU)' },
+  { id: 2, name: 'THU' },
+  { id: 3, name: 'NJU' },
+  { id: 4, name: 'HKUST' },
+  { id: 5, name: 'UIUC' },
+  { id: 6, name: 'PKU' },
 ] as const;
 
 export const bibtex = `@misc{sceneactbench2026,

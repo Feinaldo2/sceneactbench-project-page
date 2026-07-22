@@ -6,7 +6,7 @@ Production GitHub Pages site for **SceneActBench: Can Agents Act on the 3D Scene
 
 Deployed project page: <https://feinaldo2.github.io/sceneactbench-project-page/>
 
-The site is a React + Vite + TypeScript application at the repository root. It includes an interactive leaderboard, five-task benchmark guide with floating metric formulas, a typed model × task explorer, synchronized 3D comparison, unified media Focus Mode, dataset provenance, and citation UI.
+The site is a React + Vite + TypeScript application at the repository root. It includes an interactive leaderboard, five-task benchmark guide with floating metric formulas, a typed model × task explorer, synchronized 3D comparison, unified media Focus Mode, animated paper-insight views for step budgets and input conditions, dataset provenance, and citation UI.
 
 ## Development
 

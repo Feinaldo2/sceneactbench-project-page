@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Explorer } from './components/Explorer';
 import { ArrowUpRight, CheckIcon, CloseIcon, CopyIcon, MenuIcon } from './components/Icons';
 import { InteractiveLeaderboardChart } from './components/InteractiveLeaderboardChart';
 import { Leaderboard } from './components/Leaderboard';
+import { PaperInsights } from './components/PaperInsights';
 import { TaskTabs } from './components/TaskTabs';
 import { withBase } from './data/assetPath';
 import {
@@ -24,6 +25,17 @@ const navItems = [
 ] as const;
 
 function usePageMotion() {
+  useEffect(() => {
+    const targetId = window.location.hash.slice(1);
+    if (!targetId) return;
+    const frameId = window.requestAnimationFrame(() => {
+      const target = document.getElementById(targetId);
+      target?.classList.add('is-visible');
+      target?.scrollIntoView({ block: 'start' });
+    });
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
+
   useEffect(() => {
     let frameId = 0;
     const updateProgress = () => {
@@ -184,12 +196,11 @@ function Header() {
         <a className="brand" href="#top" aria-label="SceneActBench home">
           <img
             className="brand-mark"
-            src={withBase('assets/logos/hunyuan-mark.png')}
-            width="34"
-            height="34"
-            alt=""
+            src={withBase('assets/paper/hunyuan-logo.png')}
+            width="126"
+            height="36"
+            alt="Tencent Hunyuan"
           />
-          <span>SceneAct<span>Bench</span></span>
         </a>
         <nav
           ref={navigationRef}
@@ -238,14 +249,6 @@ function Hero() {
     <section className="hero" id="top">
       <div className="page-shell hero-shell">
         <div className="hero-copy">
-          <div className="hero-institution">
-            <img
-              src={withBase('assets/paper/hunyuan-logo.png')}
-              width="170"
-              height="48"
-              alt="Tencent Hunyuan"
-            />
-          </div>
           <h1 aria-label="SceneActBench: Can Agents Act on the 3D Scenes They See?">
             <span className="title-name">SceneActBench</span>
             <span className="title-question">
@@ -253,25 +256,34 @@ function Hero() {
             </span>
           </h1>
           <div className="author-line" aria-label="Authors">
-            {authors.map((author, index) => (
-              <span key={author.name}>
-                <a href="#citation">{author.name}</a>
-                <sup>
-                  {author.affiliations.join(',')}
-                  {'equal' in author && author.equal ? ',*' : ''}
-                  {'corresponding' in author && author.corresponding ? ',†' : ''}
-                </sup>
-                {index < authors.length - 1 && <i>·</i>}
-              </span>
-            ))}
+            {authors.map((author, index) => {
+              const startsSecondRow = author.name === 'Haowei Lin';
+              const nextStartsSecondRow = authors[index + 1]?.name === 'Haowei Lin';
+              return (
+                <Fragment key={author.name}>
+                  {startsSecondRow && <span className="author-row-break" aria-hidden="true" />}
+                  <span>
+                    <a href="#citation">{author.name}</a>
+                    <sup>
+                      {author.affiliations.join(',')}
+                      {'equal' in author && author.equal ? ',*' : ''}
+                      {'corresponding' in author && author.corresponding ? ',†' : ''}
+                    </sup>
+                    {index < authors.length - 1 && !nextStartsSecondRow && <i>·</i>}
+                  </span>
+                </Fragment>
+              );
+            })}
           </div>
-          <p className="affiliation-line">
+          <div className="affiliation-line">
             {affiliations.map((affiliation) => (
               <span key={affiliation.id}><sup>{affiliation.id}</sup>{affiliation.name}</span>
             ))}
+          </div>
+          <div className="contribution-line">
             <span>* Equal contribution</span>
             <span>† Corresponding author</span>
-          </p>
+          </div>
           <p className="hero-lede">
             An executable benchmark for measuring whether multimodal agents can perceive,
             reason about, and act on complete 3D scenes.
@@ -439,8 +451,7 @@ function BenchmarkSection() {
         >
           A controlled agent–environment loop makes every result reproducible and auditable.
         </SectionHeading>
-        <h3 className="protocol-title">One fixed loop makes every final artifact auditable.</h3>
-        <div className="protocol-grid">
+        <div className="protocol-flow">
           <article>
             <span>01</span>
             <h3>Observe</h3>
@@ -459,7 +470,7 @@ function BenchmarkSection() {
         </div>
         <div className="budget-panel">
           <div>
-            <span className="micro-label">Fixed interaction budgets</span>
+            <h3>Interaction budgets</h3>
             <p>
               Paired multi-view Layout and photo-realistic Dynamic conditions are reported
               separately and remain outside Overall.
@@ -470,7 +481,7 @@ function BenchmarkSection() {
               <li key={task.id}>
                 <span>{task.name}</span>
                 <strong>{task.budget.replace(' agent steps', '')}</strong>
-                <small>steps</small>
+                <small>Steps</small>
               </li>
             ))}
           </ul>
@@ -606,6 +617,7 @@ export default function App() {
         <BenchmarkSection />
         <CitationSection />
       </main>
+      <PaperInsights />
       <Footer />
     </>
   );
