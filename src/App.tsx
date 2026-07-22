@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { HeroScene, PipelineVisual } from './components/BenchmarkVisuals';
+import { PipelineVisual } from './components/BenchmarkVisuals';
 import { Explorer } from './components/Explorer';
 import { ArrowUpRight, CheckIcon, CloseIcon, CopyIcon, MenuIcon } from './components/Icons';
 import { Leaderboard } from './components/Leaderboard';
@@ -15,23 +15,28 @@ import { tasks } from './data/tasks';
 
 const navItems = [
   ['abstract', 'Abstract'],
-  ['leaderboard', 'Leaderboard'],
-  ['explorer', 'Examples'],
-  ['benchmark', 'Benchmark'],
   ['tasks', 'Tasks'],
+  ['leaderboard', 'Results'],
+  ['explorer', 'Examples'],
+  ['benchmark', 'Protocol'],
   ['citation', 'Citation'],
 ] as const;
 
 function SectionHeading({
+  number,
   title,
   children,
 }: {
+  number: string;
   title: string;
   children: ReactNode;
 }) {
   return (
     <div className="section-heading">
-      <h2>{title}</h2>
+      <div className="section-title">
+        <span className="section-number" aria-hidden="true">{number}</span>
+        <h2>{title}</h2>
+      </div>
       <p>{children}</p>
     </div>
   );
@@ -123,10 +128,18 @@ function Header() {
 function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="hero-grid page-shell">
+      <div className="page-shell hero-shell">
         <div className="hero-copy">
+          <div className="hero-institution">
+            <img
+              src={withBase('assets/paper/hunyuan-logo.png')}
+              width="170"
+              height="48"
+              alt="Tencent Hunyuan"
+            />
+          </div>
           <h1 aria-label="SceneActBench: Can Agents Act on the 3D Scenes They See?">
-            <span className="title-name">SceneActBench:</span>{' '}
+            <span className="title-name">SceneActBench</span>
             <span className="title-question">
               Can Agents Act on the <em>3D Scenes</em> They See?
             </span>
@@ -151,6 +164,10 @@ function Hero() {
             <span>* Equal contribution</span>
             <span>† Corresponding author</span>
           </p>
+          <p className="hero-lede">
+            An executable benchmark for measuring whether multimodal agents can perceive,
+            reason about, and act on complete 3D scenes.
+          </p>
           <div className="hero-actions">
             <a className="button primary" href={links.paper}>
               Paper <ArrowUpRight />
@@ -163,7 +180,25 @@ function Hero() {
             </a>
           </div>
         </div>
-        <HeroScene />
+        <dl className="hero-facts">
+          <div>
+            <dt>Tasks</dt>
+            <dd>5</dd>
+          </div>
+          <div>
+            <dt>Source instances</dt>
+            <dd>210</dd>
+          </div>
+          <div>
+            <dt>Task cases</dt>
+            <dd>520</dd>
+          </div>
+          <div>
+            <dt>VLM configurations</dt>
+            <dd>11</dd>
+          </div>
+        </dl>
+        <PipelineVisual />
       </div>
     </section>
   );
@@ -174,27 +209,53 @@ function AbstractSection() {
     <section className="section section-abstract" id="abstract">
       <div className="page-shell">
         <SectionHeading
+          number="01"
           title="Abstract"
         >
           SceneActBench evaluates whether multimodal agents can turn visual evidence into
           executable 3D action.
         </SectionHeading>
-        <div className="abstract-copy">
-          <p>
-            Vision-language model (VLM) agents increasingly use tools to act on 3D scenes rather
-            than only describe them. Existing 3D benchmarks score textual responses or
-            single-object operations, leaving agent action on complete multi-object 3D scenes
-            under-evaluated. We present <strong>SceneActBench</strong>, a benchmark for visually
-            conditioned action across five 3D tasks under a unified agent–environment loop. Given
-            PNG images or sampled video frames and, where applicable, supplied 3D assets, an agent
-            acts on a 3D environment. We evaluate each final output against hidden ground truth
-            with task-specific geometric metrics. SceneActBench comprises five tasks built from
-            210 source instances, yielding 520 task cases including paired input conditions. Every
-            task runs through one fixed agent loop to keep the comparison fair. Across eleven
-            proprietary VLM configurations, Overall scores range from 38.6 to 50.2, and no
-            configuration succeeds consistently across tasks. We further analyse where and{' '}
-            <span className="nowrap">how failures manifest.</span>
-          </p>
+        <div className="abstract-layout">
+          <div className="abstract-copy">
+            <p>
+              Vision-language model (VLM) agents increasingly use tools to act on 3D scenes rather
+              than only describe them. Existing 3D benchmarks score textual responses or
+              single-object operations, leaving agent action on complete multi-object 3D scenes
+              under-evaluated. We present <strong>SceneActBench</strong>, a benchmark for visually
+              conditioned action across five 3D tasks under a unified agent–environment loop. Given
+              PNG images or sampled video frames and, where applicable, supplied 3D assets, an agent
+              acts on a 3D environment. We evaluate each final output against hidden ground truth
+              with task-specific geometric metrics. SceneActBench comprises five tasks built from
+              210 source instances, yielding 520 task cases including paired input conditions. Every
+              task runs through one fixed agent loop to keep the comparison fair. Across eleven
+              proprietary VLM configurations, Overall scores range from 38.6 to 50.2, and no
+              configuration succeeds consistently across tasks. We further analyse where and{' '}
+              <span className="nowrap">how failures manifest.</span>
+            </p>
+          </div>
+          <div className="contribution-list" aria-label="Key benchmark properties">
+            <article>
+              <span>01</span>
+              <div>
+                <h3>Executable outputs</h3>
+                <p>Agents produce camera poses, scenes, state sequences, and animation—not text.</p>
+              </div>
+            </article>
+            <article>
+              <span>02</span>
+              <div>
+                <h3>Controlled protocol</h3>
+                <p>Every configuration acts through the same tools and fixed interaction budgets.</p>
+              </div>
+            </article>
+            <article>
+              <span>03</span>
+              <div>
+                <h3>Geometric verification</h3>
+                <p>Hidden 3D ground truth scores each artifact in its task-native metric space.</p>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -205,6 +266,7 @@ function MotivationSection() {
   return (
     <section className="section section-motivation" aria-labelledby="motivation-title">
       <div className="page-shell narrative-block">
+        <span className="question-label">Research question</span>
         <h2 id="motivation-title">
           Can an agent that sees a scene act on a 3D environment to match it?
         </h2>
@@ -232,6 +294,7 @@ function LeaderboardSection() {
     <section className="section section-leaderboard" id="leaderboard">
       <div className="page-shell">
         <SectionHeading
+          number="03"
           title="Leaderboard"
         >
           Overall averages five fixed task scores; the figure explains the aggregate and the table
@@ -248,26 +311,47 @@ function BenchmarkSection() {
     <section className="section section-benchmark" id="benchmark">
       <div className="page-shell">
         <SectionHeading
+          number="05"
           title="Benchmark"
         >
-          Visual evidence becomes an executable artifact that is measured after execution.
+          A controlled agent–environment loop makes every result reproducible and auditable.
         </SectionHeading>
-        <div className="benchmark-narrative">
-          <h3>One fixed loop makes every final artifact auditable.</h3>
-          <p>
-            Each configuration receives task-defined PNG images or sampled video frames and
-            controls headless Blender through the same tool interface. Depending on the task, the
-            final output is a camera pose in JSON, a static GLB, a sequence of GLB states, or an
-            animated GLB. Every output is scored once against hidden 3D ground truth.
-          </p>
-          <p>
-            The shared harness fixes the tools and interaction budget for each task: 30 steps for
-            Layout and Camera, 60 for Articulated, 35 for Reconstruction, and 80 for Dynamic. The
-            paired multi-view Layout and photo-realistic Dynamic conditions are reported
-            separately and remain outside Overall.
-          </p>
+        <h3 className="protocol-title">One fixed loop makes every final artifact auditable.</h3>
+        <div className="protocol-grid">
+          <article>
+            <span>01</span>
+            <h3>Observe</h3>
+            <p>Receive task-defined images or sampled video frames and, where applicable, supplied 3D assets.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Act</h3>
+            <p>Inspect, edit, and render through one shared headless Blender tool interface.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Evaluate</h3>
+            <p>Score the final JSON or GLB artifact once against hidden 3D ground truth.</p>
+          </article>
         </div>
-        <PipelineVisual />
+        <div className="budget-panel">
+          <div>
+            <span className="micro-label">Fixed interaction budgets</span>
+            <p>
+              Paired multi-view Layout and photo-realistic Dynamic conditions are reported
+              separately and remain outside Overall.
+            </p>
+          </div>
+          <ul>
+            {tasks.map((task) => (
+              <li key={task.id}>
+                <span>{task.name}</span>
+                <strong>{task.budget.replace(' agent steps', '')}</strong>
+                <small>steps</small>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
@@ -278,6 +362,7 @@ function TasksSection() {
     <section className="section section-tasks" id="tasks">
       <div className="page-shell">
         <SectionHeading
+          number="02"
           title="Tasks"
         >
           Each task pairs its executable workflow with native metrics; open any metric for its
@@ -294,6 +379,7 @@ function ExplorerSection() {
     <section className="section section-explorer" id="explorer">
       <div className="page-shell">
         <SectionHeading
+          number="04"
           title="Examples"
         >
           Each curated example pairs reference evidence with task-native metrics, verification
@@ -329,6 +415,7 @@ function CitationSection() {
     <section className="section section-citation" id="citation">
       <div className="page-shell">
         <SectionHeading
+          number="06"
           title="Citation"
         >
           Cite SceneActBench when using the benchmark, data, or evaluation protocol.
@@ -374,7 +461,7 @@ function Footer() {
       </div>
       <div className="footer-bottom page-shell">
         <span>© 2026 SceneActBench</span>
-        <span>Designed for research clarity · Built with accessible web standards</span>
+        <span>Research project page · Accessible by design</span>
       </div>
     </footer>
   );
@@ -388,10 +475,10 @@ export default function App() {
         <Hero />
         <AbstractSection />
         <MotivationSection />
+        <TasksSection />
         <LeaderboardSection />
         <ExplorerSection />
         <BenchmarkSection />
-        <TasksSection />
         <CitationSection />
       </main>
       <Footer />
