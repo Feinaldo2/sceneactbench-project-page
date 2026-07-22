@@ -2,8 +2,8 @@ import { withBase } from './assetPath';
 
 export const links = {
   paper: withBase('sceneactbench.pdf'),
-  code: 'https://github.com/harnessRL/3D_Bench',
-  dataset: 'https://huggingface.co/datasets/harnessRL/3D_Bench_Datasets',
+  code: 'https://github.com/Feinaldo2/SceneActBench',
+  dataset: 'https://huggingface.co/datasets/FEInaldo/SceneActBench',
 };
 
 export const authors = [
