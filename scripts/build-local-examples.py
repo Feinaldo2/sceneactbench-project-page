@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import shutil
 import struct
 from datetime import datetime, timezone
@@ -127,6 +128,7 @@ def copy_web_glb(
     destination: Path,
     *,
     merge_animations: bool = False,
+    double_sided: bool = False,
 ) -> str:
     """Copy a GLB while normalizing animations for browser playback."""
     data = source.read_bytes()
@@ -169,6 +171,11 @@ def copy_web_glb(
                     }
                 ]
                 changed = True
+            if double_sided:
+                for material in document.get("materials", []):
+                    if not material.get("doubleSided", False):
+                        material["doubleSided"] = True
+                        changed = True
             if changed:
                 if valid_animations:
                     document["animations"] = valid_animations
@@ -192,6 +199,203 @@ def copy_web_glb(
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(struct.pack("<4sII", b"glTF", 2, 12 + len(body)) + body)
     shutil.copystat(source, destination)
+    return f"/{destination.relative_to(SITE_ROOT / 'public').as_posix()}"
+
+
+def build_articulated_gt_animation(
+    sample_dir: Path,
+    destination: Path,
+    *,
+    fps: float = 16.0,
+) -> str:
+    """Pack baked GT frame geometry into one transform-animated web GLB."""
+    base_data = (sample_dir / "gt" / "gt_0000.glb").read_bytes()
+    if base_data[:4] != b"glTF":
+        raise ValueError(f"Invalid GT GLB: {sample_dir}")
+
+    document: dict[str, Any] | None = None
+    binary = b""
+    offset = 12
+    while offset < len(base_data):
+        chunk_length, chunk_type = struct.unpack_from("<II", base_data, offset)
+        offset += 8
+        payload = base_data[offset : offset + chunk_length]
+        offset += chunk_length
+        if chunk_type == 0x4E4F534A:
+            document = json.loads(payload.decode("utf-8").rstrip("\x00 \t\r\n"))
+        elif chunk_type == 0x004E4942:
+            binary = payload
+    if document is None:
+        raise ValueError(f"Missing JSON chunk: {sample_dir}")
+
+    frames = load_json(sample_dir / "layout" / "all_frames.json")["frames"]
+    part_map = load_json(sample_dir / "_scoring_partmap.json")
+    movable_parts = {
+        int(part["part_id"])
+        for part in load_json(sample_dir / "meta.json")["parts"]
+        if part["movable"]
+    }
+    mesh_to_part = {
+        int(segment["mesh_index"]): int(segment["pid"])
+        for segment in part_map["segments"]
+    }
+    nodes_by_part: dict[int, list[int]] = {part_id: [] for part_id in movable_parts}
+    for node_index, node in enumerate(document.get("nodes", [])):
+        mesh_index = node.get("mesh")
+        part_id = mesh_to_part.get(mesh_index) if mesh_index is not None else None
+        if part_id in nodes_by_part:
+            nodes_by_part[part_id].append(node_index)
+
+    binary_out = bytearray(binary)
+    buffer_views = list(document.get("bufferViews", []))
+    accessors = list(document.get("accessors", []))
+
+    def push_accessor(rows: list[list[float]], accessor_type: str) -> int:
+        while len(binary_out) % 4:
+            binary_out.append(0)
+        byte_offset = len(binary_out)
+        flat = [float(value) for row in rows for value in row]
+        payload = struct.pack(f"<{len(flat)}f", *flat)
+        binary_out.extend(payload)
+        view_index = len(buffer_views)
+        buffer_views.append(
+            {
+                "buffer": 0,
+                "byteOffset": byte_offset,
+                "byteLength": len(payload),
+            }
+        )
+        columns = list(zip(*rows))
+        accessor = {
+            "bufferView": view_index,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": len(rows),
+            "type": accessor_type,
+            "min": [min(column) for column in columns],
+            "max": [max(column) for column in columns],
+        }
+        accessors.append(accessor)
+        return len(accessors) - 1
+
+    times = [[index / fps] for index in range(len(frames))]
+    time_accessor = push_accessor(times, "SCALAR")
+    samplers = []
+    channels = []
+
+    for part_id in sorted(movable_parts):
+        translations: list[list[float]] = []
+        rotations: list[list[float]] = []
+        for frame in frames:
+            part = next(
+                item for item in frame["objects"] if int(item["part_id"]) == part_id
+            )
+            joint = part["joint"]
+            axis = [float(value) for value in joint["axis_world"]]
+            axis_norm = math.sqrt(sum(value * value for value in axis))
+            axis = [value / axis_norm for value in axis]
+            if joint["type"] == "rotation":
+                # Dataset joint angles follow the source convention; glTF node
+                # quaternions require the opposite sign in this coordinate frame.
+                angle = -float(joint["value_rad"])
+                origin = [float(value) for value in joint["origin_world"]]
+                cosine = math.cos(angle)
+                sine = math.sin(angle)
+                dot = sum(a * b for a, b in zip(axis, origin))
+                cross = [
+                    axis[1] * origin[2] - axis[2] * origin[1],
+                    axis[2] * origin[0] - axis[0] * origin[2],
+                    axis[0] * origin[1] - axis[1] * origin[0],
+                ]
+                rotated_origin = [
+                    origin[index] * cosine
+                    + cross[index] * sine
+                    + axis[index] * dot * (1 - cosine)
+                    for index in range(3)
+                ]
+                translations.append(
+                    [
+                        origin[index] - rotated_origin[index]
+                        for index in range(3)
+                    ]
+                )
+                half = angle / 2
+                rotations.append(
+                    [
+                        axis[0] * math.sin(half),
+                        axis[1] * math.sin(half),
+                        axis[2] * math.sin(half),
+                        math.cos(half),
+                    ]
+                )
+            else:
+                value = float(joint.get("value", joint.get("value_m", 0.0)))
+                translations.append([component * value for component in axis])
+                rotations.append([0.0, 0.0, 0.0, 1.0])
+
+        translation_accessor = push_accessor(translations, "VEC3")
+        rotation_accessor = push_accessor(rotations, "VEC4")
+        translation_sampler = len(samplers)
+        samplers.append(
+            {
+                "input": time_accessor,
+                "output": translation_accessor,
+                "interpolation": "LINEAR",
+            }
+        )
+        rotation_sampler = len(samplers)
+        samplers.append(
+            {
+                "input": time_accessor,
+                "output": rotation_accessor,
+                "interpolation": "LINEAR",
+            }
+        )
+        for node_index in nodes_by_part[part_id]:
+            channels.extend(
+                [
+                    {
+                        "sampler": translation_sampler,
+                        "target": {"node": node_index, "path": "translation"},
+                    },
+                    {
+                        "sampler": rotation_sampler,
+                        "target": {"node": node_index, "path": "rotation"},
+                    },
+                ]
+            )
+
+    for material in document.get("materials", []):
+        material["doubleSided"] = True
+    document["bufferViews"] = buffer_views
+    document["accessors"] = accessors
+    document["animations"] = [
+        {
+            "name": "ground_truth_motion",
+            "samplers": samplers,
+            "channels": channels,
+        }
+    ]
+    document["buffers"][0]["byteLength"] = len(binary_out)
+
+    json_payload = json.dumps(
+        document,
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    json_payload += b" " * (-len(json_payload) % 4)
+    binary_payload = bytes(binary_out)
+    binary_payload += b"\x00" * (-len(binary_payload) % 4)
+    body = (
+        struct.pack("<II", len(json_payload), 0x4E4F534A)
+        + json_payload
+        + struct.pack("<II", len(binary_payload), 0x004E4942)
+        + binary_payload
+    )
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(
+        struct.pack("<4sII", b"glTF", 2, 12 + len(body)) + body
+    )
     return f"/{destination.relative_to(SITE_ROOT / 'public').as_posix()}"
 
 
@@ -269,9 +473,9 @@ def copy_shared_references(
             "referenceVideos": [],
         }
 
-    articulated_glb = copy_asset(
-        articulated_case / "gt" / "gt_0016.glb",
-        root / "articulated" / "gt-open.glb",
+    articulated_glb = build_articulated_gt_animation(
+        articulated_case,
+        root / "articulated" / "gt-animation.glb",
     )
     articulated_video = copy_asset(
         articulated_case / "reference.mp4",
@@ -280,10 +484,10 @@ def copy_shared_references(
     artifacts["articulated"] = {
         "referenceGlb": media(
             articulated_glb,
-            "Interactive ground-truth fully open articulated state.",
-            references["articulated"][1]["src"],
+            "Interactive animated ground-truth articulated sequence.",
+            references["articulated"][0]["src"],
         ),
-        "referenceGlbAnimated": False,
+        "referenceGlbAnimated": True,
         "referenceVideos": [
             media(
                 articulated_video,
@@ -420,6 +624,7 @@ def build_articulated(
         source_glb,
         output_dir / "animation.glb",
         merge_animations=True,
+        double_sided=True,
     )
     notes = (
         "The interactive viewer uses the submitted 32-state agent GLB."

@@ -190,7 +190,17 @@ for (const example of examplesManifest.examples ?? []) {
             ? example.hasAnimation
             : source === example.pairedAnimatedGlb?.src
               ? example.pairedHasAnimation
-              : null;
+              : source === example.referenceGlb?.src &&
+                  typeof example.referenceGlbAnimated === 'boolean'
+                ? example.referenceGlbAnimated
+                : null;
+        if (
+          example.task === 'articulated' &&
+          [example.referenceGlb?.src, example.animatedGlb?.src].includes(source) &&
+          (document.materials ?? []).some((material) => !material.doubleSided)
+        ) {
+          violations.push(`${example.id} has a single-sided articulated web GLB in ${source}.`);
+        }
         if (animationFlag !== null) {
           const hasAnimation =
             Array.isArray(document.animations) &&

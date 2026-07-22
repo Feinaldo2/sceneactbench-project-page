@@ -92,10 +92,12 @@ function VideoSlot({ asset, label }: { asset: MediaAsset; label: string }) {
 function ModelViewer({
   asset,
   animated = false,
+  autoRotate,
   label,
 }: {
   asset?: MediaAsset;
   animated?: boolean;
+  autoRotate?: boolean;
   label: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -224,7 +226,7 @@ function ModelViewer({
           poster={asset.poster}
           alt={asset.alt}
           camera-controls
-          auto-rotate={!animated}
+          auto-rotate={autoRotate ?? !animated}
           autoplay={animated}
           shadow-intensity="0.8"
           exposure="1"
@@ -529,6 +531,7 @@ export function Explorer() {
               <ModelViewer
                 asset={example.referenceGlb}
                 animated={example.referenceGlbAnimated ?? false}
+                autoRotate={example.task === 'articulated' ? true : undefined}
                 label={example.referenceGlbAnimated ? 'Animated ground truth' : 'Ground-truth geometry'}
               />
             </div>
