@@ -63,6 +63,21 @@ for (const decoder of [
   }
 }
 
+for (const figure of [
+  'ranking-decomposition.svg',
+  'input-sensitivity.svg',
+  'failure-stages.svg',
+  'effective-budget.svg',
+  'step-curves.svg',
+  'agent-traces.svg',
+]) {
+  const figurePath = path.join(root, 'public', 'assets', 'analysis', figure);
+  const figureStat = await stat(figurePath).catch(() => null);
+  if (!figureStat?.isFile()) {
+    violations.push(`public/assets/analysis/${figure} is required.`);
+  }
+}
+
 const vite = await readFile(path.join(root, 'vite.config.ts'), 'utf8');
 if (!/base:\s*['"]\/sceneactbench-project-page\/['"]/.test(vite)) {
   violations.push('vite.config.ts must use the GitHub Pages project base "/sceneactbench-project-page/".');

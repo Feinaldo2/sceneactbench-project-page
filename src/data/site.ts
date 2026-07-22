@@ -61,7 +61,7 @@ export const analysisItems = [
     description:
       'The same aggregate score can come from very different strengths. Decomposing Overall shows which tasks create each model’s advantage—and where that advantage disappears.',
     kind: 'stacked' as const,
-    image: withBase('assets/paper/top3_analysis.webp'),
+    image: withBase('assets/analysis/ranking-decomposition.svg'),
     width: 841,
     height: 341,
     alt: 'Task contributions to the Overall score gaps among the top configurations.',
@@ -76,7 +76,7 @@ export const analysisItems = [
     description:
       'Multi-view evidence and photo-realistic inputs change models in different directions. The benchmark therefore reports paired conditions rather than assuming richer input is always easier.',
     kind: 'sensitivity' as const,
-    image: withBase('assets/paper/input_conditions.webp'),
+    image: withBase('assets/analysis/input-sensitivity.svg'),
     width: 748,
     height: 418,
     alt: 'Input-condition sensitivity across model configurations.',
@@ -91,7 +91,7 @@ export const analysisItems = [
     description:
       'Stage-aware diagnostics separate target selection, geometry, coverage, and motion errors, making similar endpoint scores technically distinguishable.',
     kind: 'stages' as const,
-    image: withBase('assets/paper/failure_stages.webp'),
+    image: withBase('assets/analysis/failure-stages.svg'),
     width: 866,
     height: 502,
     alt: 'Denominator-aware failure stages for leading configurations.',
@@ -106,7 +106,7 @@ export const analysisItems = [
     description:
       'Agents often stop early, repeat actions, or spend calls without improving the artifact. Effective budget exposes how much of the available interaction window becomes useful work.',
     kind: 'budget' as const,
-    image: withBase('assets/paper/effective_budget.webp'),
+    image: withBase('assets/analysis/effective-budget.svg'),
     width: 830,
     height: 405,
     alt: 'Effective interaction budget and realized tool calls.',
@@ -121,7 +121,7 @@ export const analysisItems = [
     description:
       'The animated Overall curves replay the exact frozen checkpoints from 10 to 150 agent steps. They reveal fast gains, plateaus, and late-stage instability that endpoint tables conceal.',
     kind: 'curves' as const,
-    image: withBase('assets/paper/step_curve.webp'),
+    image: withBase('assets/analysis/step-curves.svg'),
     width: 839,
     height: 714,
     alt: 'Step-budget sensitivity curves across Overall and five tasks.',
@@ -136,7 +136,7 @@ export const analysisItems = [
     description:
       'Representative traces expose recovery, repetition, verification, and premature stopping, linking final artifacts back to the actions that produced them.',
     kind: 'trace' as const,
-    image: withBase('assets/paper/agent_traces.webp'),
+    image: withBase('assets/analysis/agent-traces.svg'),
     width: 880,
     height: 911,
     alt: 'Representative agent-completion traces for three episodes.',
