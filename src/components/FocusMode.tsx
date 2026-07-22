@@ -132,8 +132,6 @@ export function FocusMode({
               poster={item.asset.poster}
               alt={item.asset.alt}
               camera-controls
-              camera-target="auto auto auto"
-              field-of-view="auto"
               auto-rotate={!item.animated}
               autoplay={item.animated}
               shadow-intensity="0.85"

@@ -12,7 +12,9 @@ const forbiddenTerms = [
   ['W', 'ME'].join(''),
 ];
 const requiredSections = [
+  'abstract',
   'leaderboard',
+  'benchmark',
   'tasks',
   'explorer',
   'citation',

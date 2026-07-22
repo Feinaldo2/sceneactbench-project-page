@@ -15,8 +15,7 @@
     "optimize:glbs": "node scripts/optimize-glbs.mjs"
   },
   "dependencies": {
-    "@fontsource-variable/manrope": "^5.3.0",
-    "@fontsource-variable/source-serif-4": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
     "@google/model-viewer": "4.1.0",
     "katex": "^0.18.1",
     "react": "^19.2.7",

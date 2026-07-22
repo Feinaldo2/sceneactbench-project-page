@@ -45,12 +45,9 @@ export function TaskTabs() {
               <span className="sr-only">
                 {task.index} {task.name} {task.eyebrow}
               </span>
-              <span className="task-tab-index" aria-hidden="true">{task.index}</span>
-              <span className="task-tab-copy" aria-hidden="true">
-                <strong>{task.name}</strong>
-                <small>{task.eyebrow}</small>
-              </span>
-              <span className="task-tab-metric" aria-hidden="true">{task.primaryMetric}</span>
+              <span aria-hidden="true">{task.index}</span>
+              <strong aria-hidden="true">{task.name}</strong>
+              <small aria-hidden="true">{task.eyebrow}</small>
             </button>
           );
         })}
@@ -64,11 +61,8 @@ export function TaskTabs() {
         key={activeTask.id}
       >
         <div className="task-panel-copy">
-          <div className="task-panel-intro">
-            <span className="micro-label">Task {activeTask.index} · {activeTask.name}</span>
-            <h3>{activeTask.capability}</h3>
-            <p className="task-description">{activeTask.description}</p>
-          </div>
+          <h3>{activeTask.capability}</h3>
+          <p className="task-description">{activeTask.description}</p>
           <dl className="task-specs">
             <div>
               <dt>Input</dt>
@@ -91,19 +85,13 @@ export function TaskTabs() {
               </dd>
             </div>
           </dl>
-          <div className="task-evaluation">
-            <div className="task-evaluation-head">
-              <span className="micro-label">How this task is scored</span>
-              <small>Open a metric for its formal definition</small>
-            </div>
-            <TaskMetrics taskId={activeTask.id} />
-          </div>
+          <TaskMetrics taskId={activeTask.id} />
         </div>
         <div className="task-panel-visual">
           <TaskSchematic task={activeTask} />
           <p>
             <span style={{ background: activeTask.color.solid }} />
-            Published workflow · the evaluator consumes the executable artifact
+            Published task workflow · evaluator consumes executable output
           </p>
         </div>
       </article>
