@@ -13,14 +13,11 @@ import {
   links,
 } from './data/site';
 import { datasetProvenance } from './data/provenance';
-import { tasks } from './data/tasks';
 
 const navItems = [
-  ['abstract', 'Abstract'],
+  ['explorer', 'Demos'],
+  ['leaderboard', 'Results'],
   ['tasks', 'Tasks'],
-  ['leaderboard', 'Leaderboard'],
-  ['explorer', 'Examples'],
-  ['benchmark', 'Benchmark'],
   ['citation', 'Citation'],
 ] as const;
 
@@ -102,7 +99,7 @@ function SectionHeading({
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('abstract');
+  const [activeSection, setActiveSection] = useState('');
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const navigationRef = useRef<HTMLElement>(null);
 
@@ -279,12 +276,6 @@ function Hero() {
             <a className="button secondary" href={links.dataset}>
               Dataset <ArrowUpRight />
             </a>
-            <a className="button secondary" href="#leaderboard">
-              Leaderboard ↓
-            </a>
-            <a className="button secondary" href="#explorer">
-              Explore examples ↓
-            </a>
           </div>
         </div>
         <dl className="hero-facts">
@@ -314,159 +305,57 @@ function Hero() {
             </div>
           ))}
         </div>
-        <InteractiveLeaderboardChart />
-      </div>
-    </section>
-  );
-}
-
-function AbstractSection() {
-  return (
-    <section className="section section-abstract" id="abstract">
-      <div className="page-shell">
-        <SectionHeading
-          number="01"
-          title="Abstract"
-        >
-          SceneActBench evaluates whether multimodal agents can turn visual evidence into
-          executable 3D action.
-        </SectionHeading>
-        <div className="abstract-layout">
-          <div className="abstract-copy">
-            <p>
-              Vision-language model (VLM) agents increasingly use tools to act on 3D scenes rather
-              than only describe them. Existing 3D benchmarks score textual responses or
-              single-object operations, leaving agent action on complete multi-object 3D scenes
-              under-evaluated. We present <strong>SceneActBench</strong>, a benchmark for visually
-              conditioned action across five 3D tasks under a unified agent–environment loop. Given
-              PNG images or sampled video frames and, where applicable, supplied 3D assets, an agent
-              acts on a 3D environment. We evaluate each final output against hidden ground truth
-              with task-specific geometric metrics. SceneActBench comprises five tasks built from
-              210 source instances, yielding 520 task cases including paired input conditions. Every
-              task runs through one fixed agent loop to keep the comparison fair. Across eleven
-              proprietary VLM configurations, Overall scores range from 38.6 to 50.2, and no
-              configuration succeeds consistently across tasks. We further analyse where and{' '}
-              <span className="nowrap">how failures manifest.</span>
-            </p>
-          </div>
-          <div className="contribution-list" aria-label="Key benchmark properties">
-            <article>
-              <span>01</span>
-              <div>
-                <h3>Executable outputs</h3>
-                <p>Agents produce camera poses, scenes, state sequences, and animation—not text.</p>
-              </div>
-            </article>
-            <article>
-              <span>02</span>
-              <div>
-                <h3>Controlled protocol</h3>
-                <p>Every configuration acts through the same tools and fixed interaction budgets.</p>
-              </div>
-            </article>
-            <article>
-              <span>03</span>
-              <div>
-                <h3>Geometric verification</h3>
-                <p>Hidden 3D ground truth scores each artifact in its task-native metric space.</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MotivationSection() {
-  return (
-    <section className="section section-motivation" aria-labelledby="motivation-title">
-      <div className="page-shell narrative-block">
-        <span className="question-label">Research question</span>
-        <h2 id="motivation-title">
-          Can an agent that sees a scene act on a 3D environment to match it?
-        </h2>
-        <div className="narrative-columns">
-          <p>
-            Acting on a scene, rather than describing it, is a stronger test of an agent&apos;s 3D
-            understanding. Text-answer benchmarks do not require the agent to change scene state,
-            while existing action benchmarks typically isolate one object or one static edit.
-            Practical 3D work instead requires coordinated decisions across complete scenes.
-          </p>
-          <p>
-            SceneActBench therefore evaluates executable outputs. An agent observes images or
-            sampled video frames, acts through a shared tool interface, and produces JSON or GLB
-            artifacts. The evaluator compares those artifacts with hidden 3D ground truth across
-            five tasks, 210 source instances, and 520 task cases.
-          </p>
-        </div>
       </div>
     </section>
   );
 }
 
 function LeaderboardSection() {
+  const [view, setView] = useState<'overview' | 'table'>('overview');
+
   return (
     <section className="section section-leaderboard" id="leaderboard">
       <div className="page-shell">
         <SectionHeading
-          number="03"
-          title="Leaderboard"
+          number="02"
+          title="Results"
         >
-          Overall averages five fixed task scores; the figure explains the aggregate and the table
-          preserves every exact score.
+          Switch between the visual overview and the sortable exact-score table.
         </SectionHeading>
-        <Leaderboard />
-      </div>
-    </section>
-  );
-}
-
-function BenchmarkSection() {
-  return (
-    <section className="section section-benchmark" id="benchmark">
-      <div className="page-shell">
-        <SectionHeading
-          number="05"
-          title="Benchmark"
-        >
-          A controlled agent–environment loop makes every result reproducible and auditable.
-        </SectionHeading>
-        <div className="protocol-flow">
-          <article>
-            <span>01</span>
-            <h3>Observe</h3>
-            <p>Receive task-defined images or sampled video frames and, where applicable, supplied 3D assets.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Act</h3>
-            <p>Inspect, edit, and render through one shared headless Blender tool interface.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Evaluate</h3>
-            <p>Score the final JSON or GLB artifact once against hidden 3D ground truth.</p>
-          </article>
-        </div>
-        <div className="budget-panel">
-          <div>
-            <h3>Interaction budgets</h3>
-            <p>
-              Paired multi-view Layout and photo-realistic Dynamic conditions are reported
-              separately and remain outside Overall.
-            </p>
+        <div className="results-view-toolbar">
+          <div className="results-view-tabs" role="tablist" aria-label="Choose results view">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'overview'}
+              aria-controls="results-overview-panel"
+              className={view === 'overview' ? 'active' : undefined}
+              onClick={() => setView('overview')}
+            >
+              Visual overview
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'table'}
+              aria-controls="results-table-panel"
+              className={view === 'table' ? 'active' : undefined}
+              onClick={() => setView('table')}
+            >
+              Exact scores
+            </button>
           </div>
-          <ul>
-            {tasks.map((task) => (
-              <li key={task.id}>
-                <span>{task.name}</span>
-                <strong>{task.budget.replace(' agent steps', '')}</strong>
-                <small>Steps</small>
-              </li>
-            ))}
-          </ul>
+          <span>11 configurations · 5 tasks</span>
         </div>
+        {view === 'overview' ? (
+          <div className="results-view-panel" id="results-overview-panel" role="tabpanel">
+            <InteractiveLeaderboardChart />
+          </div>
+        ) : (
+          <div className="results-view-panel" id="results-table-panel" role="tabpanel">
+            <Leaderboard />
+          </div>
+        )}
       </div>
     </section>
   );
@@ -477,11 +366,10 @@ function TasksSection() {
     <section className="section section-tasks" id="tasks">
       <div className="page-shell">
         <SectionHeading
-          number="02"
+          number="03"
           title="Tasks"
         >
-          Each task pairs its executable workflow with native metrics; open any metric for its
-          definition without expanding the page.
+          Select a task to inspect its input, artifact, workflow, and metric.
         </SectionHeading>
         <TaskTabs />
       </div>
@@ -494,11 +382,10 @@ function ExplorerSection() {
     <section className="section section-explorer" id="explorer">
       <div className="page-shell">
         <SectionHeading
-          number="04"
-          title="Examples"
+          number="01"
+          title="Demos"
         >
-          Each curated example pairs reference evidence with task-native metrics, verification
-          renders, structured poses, and interactive geometry.
+          Five task demos per model. Select a card to open its interactive artifact.
         </SectionHeading>
         <Explorer />
       </div>
@@ -506,8 +393,40 @@ function ExplorerSection() {
   );
 }
 
+function BibtexLine({ line }: { line: string }) {
+  const entry = line.match(/^(@\w+)(\{)([^,]+)(,?)$/);
+  if (entry) {
+    return (
+      <>
+        <span className="bibtex-entry">{entry[1]}</span>
+        <span className="bibtex-punctuation">{entry[2]}</span>
+        <span className="bibtex-key">{entry[3]}</span>
+        <span className="bibtex-punctuation">{entry[4]}</span>
+      </>
+    );
+  }
+
+  const field = line.match(/^(\s*)([A-Za-z]+)(\s*=\s*)(\{)(.*)(\})(,?)$/);
+  if (field) {
+    return (
+      <>
+        {field[1]}
+        <span className="bibtex-field">{field[2]}</span>
+        <span className="bibtex-operator">{field[3]}</span>
+        <span className="bibtex-punctuation">{field[4]}</span>
+        <span className="bibtex-value">{field[5]}</span>
+        <span className="bibtex-punctuation">{field[6]}{field[7]}</span>
+      </>
+    );
+  }
+
+  return <span className="bibtex-punctuation">{line}</span>;
+}
+
 function CitationSection() {
   const [copied, setCopied] = useState(false);
+  const bibtexLines = bibtex.split('\n');
+  const bibtexDownload = `data:text/plain;charset=utf-8,${encodeURIComponent(bibtex)}`;
 
   const copyCitation = async () => {
     try {
@@ -530,25 +449,48 @@ function CitationSection() {
     <section className="section section-citation" id="citation">
       <div className="page-shell">
         <SectionHeading
-          number="06"
+          number="04"
           title="Citation"
         >
-          Cite SceneActBench when using the benchmark, data, or evaluation protocol.
+          Copy the publication-ready BibTeX entry or download it as a file.
         </SectionHeading>
         <div className="citation-grid">
-          <div className="bibtex-card">
-            <div className="bibtex-head">
-              <div>
-                <span className="micro-label">BibTeX</span>
-                <strong>Provisional preprint citation</strong>
+          <div className="citation-card">
+            <aside className="citation-meta">
+              <div className="citation-mark" aria-hidden="true">{'{ }'}</div>
+              <span className="micro-label">Publication record</span>
+              <h3>SceneActBench</h3>
+              <p>2026 · Preprint</p>
+              <div className="citation-links">
+                <a href={links.paper}>Paper <ArrowUpRight /></a>
+                <a href={bibtexDownload} download="sceneactbench.bib">Download .bib</a>
               </div>
-              <button type="button" onClick={copyCitation}>
-                {copied ? <CheckIcon /> : <CopyIcon />}
-                {copied ? 'Copied' : 'Copy'}
-              </button>
+            </aside>
+            <div className="bibtex-card">
+              <div className="bibtex-head">
+                <div>
+                  <span>BibTeX</span>
+                  <strong>Ready to paste</strong>
+                </div>
+                <button
+                  type="button"
+                  className={copied ? 'copied' : undefined}
+                  onClick={copyCitation}
+                >
+                  {copied ? <CheckIcon /> : <CopyIcon />}
+                  {copied ? 'Copied' : 'Copy BibTeX'}
+                </button>
+              </div>
+              <pre aria-label="SceneActBench BibTeX citation"><code>{bibtexLines.map((line, index) => (
+                  <span className="bibtex-line" key={`${index}-${line}`}>
+                    <span className="bibtex-line-number" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span><BibtexLine line={line} /></span>
+                  </span>
+                ))}</code></pre>
+              <span className="sr-only" aria-live="polite">{copied ? 'Citation copied' : ''}</span>
             </div>
-            <pre><code>{bibtex}</code></pre>
-            <span className="sr-only" aria-live="polite">{copied ? 'Citation copied' : ''}</span>
           </div>
         </div>
       </div>
@@ -590,12 +532,9 @@ export default function App() {
       <Header />
       <main id="main-content">
         <Hero />
-        <AbstractSection />
-        <MotivationSection />
-        <TasksSection />
-        <LeaderboardSection />
         <ExplorerSection />
-        <BenchmarkSection />
+        <LeaderboardSection />
+        <TasksSection />
         <CitationSection />
       </main>
       <PaperInsights />

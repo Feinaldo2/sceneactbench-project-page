@@ -58,14 +58,8 @@ describe('SceneActBench project page', () => {
     const contributionLine = hero!.querySelector('.contribution-line');
     expect(contributionLine).toHaveTextContent('* Equal contribution');
     expect(contributionLine).toHaveTextContent('† Corresponding author');
-    expect(within(hero!).getByRole('link', { name: 'Leaderboard ↓' })).toHaveAttribute(
-      'href',
-      '#leaderboard',
-    );
-    expect(within(hero!).getByRole('link', { name: 'Explore examples ↓' })).toHaveAttribute(
-      'href',
-      '#explorer',
-    );
+    expect(within(hero!).queryByRole('link', { name: 'Leaderboard ↓' })).not.toBeInTheDocument();
+    expect(within(hero!).queryByRole('link', { name: 'Explore examples ↓' })).not.toBeInTheDocument();
     expect(screen.queryByText('Scene intelligence, made executable')).not.toBeInTheDocument();
     expect(
       screen.queryByText(/A unified benchmark that asks multimodal agents/i),
@@ -76,23 +70,16 @@ describe('SceneActBench project page', () => {
     expect(screen.queryByLabelText('Benchmark statistics')).not.toBeInTheDocument();
 
     const navigation = screen.getByRole('navigation', { name: 'Page sections' });
-    expect(within(navigation).getAllByRole('link')).toHaveLength(6);
+    expect(within(navigation).getAllByRole('link')).toHaveLength(4);
     expect(within(navigation).queryByRole('link', { name: 'Resources' })).not.toBeInTheDocument();
-    expect(within(navigation).getByRole('link', { name: 'Leaderboard' })).toHaveAttribute(
+    expect(within(navigation).getByRole('link', { name: 'Results' })).toHaveAttribute(
       'href',
       '#leaderboard',
     );
-    expect(within(navigation).getByRole('link', { name: 'Benchmark' })).toHaveAttribute(
-      'href',
-      '#benchmark',
-    );
-    expect(within(navigation).queryByRole('link', { name: 'Results' })).not.toBeInTheDocument();
     expect(within(navigation).queryByRole('link', { name: 'Protocol' })).not.toBeInTheDocument();
     for (const title of [
-      'Abstract',
-      'Leaderboard',
-      'Examples',
-      'Benchmark',
+      'Results',
+      'Demos',
       'Tasks',
       'Citation',
     ]) {
@@ -111,15 +98,13 @@ describe('SceneActBench project page', () => {
     expect(screen.queryByText(/^↓ lower$/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/^higher is better$/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/^lower is better$/i)).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { level: 2, name: 'Abstract' })).not.toBeInTheDocument();
     expect(
-      screen.getByText(/Vision-language model \(VLM\) agents increasingly use tools/i),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', {
+      screen.queryByRole('heading', {
         level: 2,
         name: 'Can an agent that sees a scene act on a 3D environment to match it?',
       }),
-    ).toBeInTheDocument();
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByRole('heading', {
         level: 3,
@@ -127,11 +112,22 @@ describe('SceneActBench project page', () => {
       }),
     ).not.toBeInTheDocument();
     for (const stage of ['Observe', 'Act', 'Evaluate']) {
-      expect(screen.getByRole('heading', { level: 3, name: stage })).toBeInTheDocument();
+      expect(screen.queryByRole('heading', { level: 3, name: stage })).not.toBeInTheDocument();
     }
+    expect(
+      screen.queryByRole('heading', {
+        level: 3,
+        name: 'One fixed loop makes every final artifact auditable.',
+      }),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText('Authors & citation')).not.toBeInTheDocument();
-    expect(screen.getAllByText('Doubao Seed 2.0 Pro').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Claude Sonnet 5').length).toBeGreaterThan(0);
+    const configuration = screen.getByRole('combobox', { name: /^Configuration$/i });
+    expect(
+      within(configuration).getByRole('option', { name: /Doubao Seed 2\.0 Pro · High/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(configuration).getByRole('option', { name: /Claude Sonnet 5 · High/i }),
+    ).toBeInTheDocument();
     expect(
       screen.getByAltText(/Stacked task contributions to Overall/i),
     ).toHaveAttribute('src', expect.stringContaining('leaderboard.svg'));
@@ -143,6 +139,9 @@ describe('SceneActBench project page', () => {
     expect(screen.getByText('3D-FRONT')).toBeInTheDocument();
     expect(screen.getByText('S2O ACD')).toBeInTheDocument();
     expect(screen.getByText('Kenney')).toBeInTheDocument();
+    expect(
+      within(screen.getByRole('group', { name: 'Choose explorer task' })).getAllByRole('button'),
+    ).toHaveLength(5);
 
     expect(await screen.findByText(/Schema v1/)).toBeInTheDocument();
   });
@@ -165,7 +164,8 @@ describe('SceneActBench project page', () => {
     expect(screen.getByText(/Camera examples use pose JSON and rendered images/i)).toBeInTheDocument();
   });
 
-  it('selects a different published example at random', async () => {
+  it('uses a distinct interaction for each of the five demos', async () => {
+    const media = (src: string) => ({ src, alt: src });
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValueOnce({
@@ -176,24 +176,92 @@ describe('SceneActBench project page', () => {
           assetBase: '/assets/examples/',
           examples: [
             {
-              id: 'random-layout',
+              id: 'layout-demo',
               task: 'layout',
               modelId: 'doubao-seed-2-pro-high',
-              title: 'Random layout example',
-              sourceInstance: 'layout-source',
+              title: 'Layout demo',
+              sourceInstance: 'layout-room',
               metrics: [],
-              referenceImages: [],
+              referenceImages: [media('/layout-input.png')],
               outputImages: [],
+              referenceGlb: media('/layout-reference.glb'),
+              outputGlb: media('/layout-output.glb'),
             },
             {
-              id: 'random-camera',
+              id: 'camera-demo',
               task: 'camera',
-              modelId: 'claude-opus-4-6-high',
-              title: 'Random camera example',
-              sourceInstance: 'camera-source',
+              modelId: 'doubao-seed-2-pro-high',
+              title: 'Camera demo',
+              sourceInstance: 'camera-room',
+              metrics: [
+                {
+                  id: 'AE',
+                  label: 'Angular Error',
+                  value: 155.4,
+                  unit: '°',
+                  direction: 'lower',
+                },
+              ],
+              referenceImages: [media('/camera-reference.png')],
+              outputImages: [media('/camera-prediction.png')],
+              poseJson: '{"position":[0,0,0]}',
+              notes: 'The predicted camera faces away from the furnished scene.',
+            },
+            {
+              id: 'articulated-demo',
+              task: 'articulated',
+              modelId: 'doubao-seed-2-pro-high',
+              title: 'Articulated demo',
+              sourceInstance: 'cabinet',
               metrics: [],
-              referenceImages: [],
+              referenceImages: [media('/articulated-frame.png')],
               outputImages: [],
+              referenceVideos: [media('/articulated-input.mp4')],
+              referenceGlb: media('/articulated-reference.glb'),
+              referenceGlbAnimated: true,
+              animatedGlb: media('/articulated-output.glb'),
+              hasAnimation: true,
+              keyframes: [],
+            },
+            {
+              id: 'reconstruction-demo',
+              task: 'reconstruction',
+              modelId: 'doubao-seed-2-pro-high',
+              title: 'Reconstruction demo',
+              sourceInstance: 'reconstruction-room',
+              metrics: [],
+              referenceImages: [
+                media('/reconstruction-view-1.png'),
+                media('/reconstruction-view-2.png'),
+              ],
+              outputImages: [],
+              referenceGlb: media('/reconstruction-reference.glb'),
+              outputGlb: media('/reconstruction-output.glb'),
+            },
+            {
+              id: 'dynamic-demo',
+              task: 'dynamic',
+              modelId: 'doubao-seed-2-pro-high',
+              title: 'Dynamic demo',
+              sourceInstance: 'dynamic-scene',
+              metrics: [],
+              referenceImages: [
+                media('/dynamic-low.png'),
+                media('/dynamic-photo.png'),
+              ],
+              outputImages: [],
+              referenceVideos: [
+                media('/dynamic-low.mp4'),
+                media('/dynamic-photo.mp4'),
+              ],
+              referenceGlb: media('/dynamic-reference.glb'),
+              referenceGlbAnimated: true,
+              animatedGlb: media('/dynamic-low.glb'),
+              hasAnimation: true,
+              pairedAnimatedGlb: media('/dynamic-photo.glb'),
+              pairedHasAnimation: true,
+              lowPolyPreviews: [],
+              photorealisticPreviews: [],
             },
           ],
         }),
@@ -201,16 +269,34 @@ describe('SceneActBench project page', () => {
     );
     render(<App />);
 
-    expect(await screen.findByText('Random layout example')).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: 'Random example' }));
-    expect(await screen.findByText('Random camera example')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Camera' })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByRole('combobox', { name: /Choose configuration/i })).toHaveValue(
-      'claude-opus-4-6-high',
-    );
+    const demos = screen.getByRole('group', { name: 'Choose explorer task' });
+    expect(await within(demos).findByText('layout-room')).toBeInTheDocument();
+    expect(screen.getByText('Spatial comparison')).toBeInTheDocument();
+    expect(screen.queryByText('Reference evidence')).not.toBeInTheDocument();
+    expect(screen.queryByText('Native evaluation')).not.toBeInTheDocument();
+
+    fireEvent.click(within(demos).getByRole('button', { name: 'Camera' }));
+    const cameraSwitch = screen.getByRole('group', { name: 'Choose camera view' });
+    fireEvent.click(within(cameraSwitch).getByRole('button', { name: 'Prediction' }));
+    expect(screen.getByText('Predicted view')).toBeInTheDocument();
+    expect(screen.getByText('Rendered output — not a loading state')).toBeInTheDocument();
+    expect(screen.getByText('AE 155.4°')).toBeInTheDocument();
+
+    fireEvent.click(within(demos).getByRole('button', { name: 'Articulated' }));
+    expect(screen.getByText('Motion playback')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Play both' })).toBeInTheDocument();
+
+    fireEvent.click(within(demos).getByRole('button', { name: 'Reconstruction' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Input view 2' }));
+    expect(screen.getByText('Calibrated input 2')).toBeInTheDocument();
+
+    fireEvent.click(within(demos).getByRole('button', { name: 'Dynamic' }));
+    const conditionSwitch = screen.getByRole('group', { name: 'Choose dynamic input condition' });
+    fireEvent.click(within(conditionSwitch).getByRole('button', { name: 'Photo-real' }));
+    expect(screen.getByRole('heading', { level: 4, name: 'Photo-real result' })).toBeInTheDocument();
   });
 
-  it('opens media focus mode and advances to the same scene from another model', async () => {
+  it('opens media focus mode and changes the selected configuration', async () => {
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValueOnce({
@@ -252,21 +338,19 @@ describe('SceneActBench project page', () => {
     );
     render(<App />);
 
-    expect(await screen.findByText('Same scene · Doubao')).toBeInTheDocument();
+    expect(await screen.findByText('shared-room')).toBeInTheDocument();
     fireEvent.click(
-      screen.getAllByRole('button', { name: 'Open input reference in focus mode' })[0],
+      screen.getAllByRole('button', { name: 'Open agent-visible room in focus mode' })[0],
     );
-    const focusDialog = screen.getByRole('dialog', { name: 'Input reference' });
+    const focusDialog = screen.getByRole('dialog', { name: 'Agent-visible room' });
     expect(focusDialog).toBeInTheDocument();
-    expect(within(focusDialog).getByText('1 / 2')).toBeInTheDocument();
-    fireEvent.keyDown(focusDialog, { key: 'ArrowRight' });
-    expect(within(focusDialog).getByText('2 / 2')).toBeInTheDocument();
+    expect(within(focusDialog).getByText('1 / 1')).toBeInTheDocument();
     fireEvent.keyDown(focusDialog, { key: 'Escape' });
-    expect(screen.queryByRole('dialog', { name: 'Input reference' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('dialog', { name: 'Agent-visible room' })).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: 'Next model · same scene' }));
-    expect(await screen.findByText('Same scene · Claude')).toBeInTheDocument();
-    expect(screen.getByRole('combobox', { name: /Choose configuration/i })).toHaveValue(
+    const configuration = screen.getByRole('combobox', { name: /^Configuration$/i });
+    fireEvent.change(configuration, { target: { value: 'claude-opus-4-6-high' } });
+    expect(configuration).toHaveValue(
       'claude-opus-4-6-high',
     );
   });
@@ -280,12 +364,12 @@ describe('SceneActBench project page', () => {
       'aria-expanded',
       'true',
     );
-    expect(screen.getByRole('link', { name: 'Abstract' })).toHaveFocus();
+    expect(screen.getByRole('link', { name: 'Demos' })).toHaveFocus();
     expect(document.body.style.overflow).toBe('hidden');
     expect(document.querySelector('main')).toHaveAttribute('inert');
 
     fireEvent.keyDown(window, { key: 'Tab' });
-    expect(screen.getByRole('link', { name: 'Tasks' })).toHaveFocus();
+    expect(screen.getByRole('link', { name: 'Results' })).toHaveFocus();
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(screen.getByRole('button', { name: 'Open navigation' })).toHaveFocus();
     expect(document.body.style.overflow).toBe('');
@@ -295,6 +379,7 @@ describe('SceneActBench project page', () => {
   it('exposes leaderboard sort state to assistive technology', () => {
     render(<App />);
 
+    fireEvent.click(screen.getByRole('tab', { name: 'Exact scores' }));
     const table = screen.getByRole('table', {
       name: 'SceneActBench model configurations and task scores',
     });
@@ -311,6 +396,7 @@ describe('SceneActBench project page', () => {
   it('opens floating leaderboard evaluation notes', () => {
     render(<App />);
 
+    fireEvent.click(screen.getByRole('tab', { name: 'Exact scores' }));
     fireEvent.click(screen.getByRole('button', { name: 'Evaluation notes' }));
     const dialog = screen.getByRole('dialog', { name: 'How to read the leaderboard' });
     expect(dialog).toBeInTheDocument();
