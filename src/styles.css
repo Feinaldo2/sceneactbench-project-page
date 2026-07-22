@@ -2129,8 +2129,9 @@ pre {
 
 .explorer-evidence {
   display: grid;
-  background: var(--line);
-  gap: 1px;
+  align-items: stretch;
+  gap: 14px;
+  background: #f8fafb;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -2138,6 +2139,7 @@ pre {
 .evidence-output {
   min-width: 0;
   padding: 30px;
+  border: 1px solid var(--line);
   background: white;
 }
 
@@ -2175,13 +2177,27 @@ pre {
   grid-template-columns: 1fr;
 }
 
-.reference-geometry,
-.reference-videos {
+.reference-grid .explorer-image {
+  height: 280px;
+  min-height: 280px;
+}
+
+.reference-grid .explorer-image-open,
+.reference-grid .explorer-image img {
+  height: 100%;
+  min-height: 0;
+}
+
+.reference-grid .explorer-image img {
+  background: #eef3f7;
+  object-fit: contain;
+}
+
+.reference-geometry {
   margin-top: 18px;
 }
 
-.reference-geometry > .micro-label,
-.reference-videos > .micro-label {
+.reference-geometry > .micro-label {
   margin-bottom: 9px;
 }
 
@@ -2189,6 +2205,16 @@ pre {
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reference-video-grid.single {
+  grid-template-columns: 1fr;
+}
+
+.explorer-reference-videos {
+  padding: 30px;
+  border-top: 1px solid var(--line);
+  background: white;
 }
 
 .explorer-video {
@@ -2391,19 +2417,58 @@ pre {
   min-height: 310px;
 }
 
+.scene-output-grid.has-render > .explorer-image {
+  height: 310px;
+  min-height: 310px;
+}
+
+.scene-output-grid.has-render > .explorer-image .explorer-image-open,
+.scene-output-grid.has-render > .explorer-image img {
+  height: 100%;
+  min-height: 0;
+}
+
+.scene-output-grid.has-render > .explorer-image img {
+  object-fit: contain;
+}
+
+.reference-geometry .model-viewer-frame,
+.reference-geometry .model-viewer-frame .media-placeholder {
+  min-height: 330px;
+}
+
+.reference-geometry .model-viewer-frame model-viewer {
+  height: 330px;
+}
+
 .scene-output-grid.viewer-only .model-viewer-frame,
 .articulated-output.viewer-only .model-viewer-frame {
-  min-height: 630px;
+  min-height: 660px;
 }
 
 .scene-output-grid.viewer-only .model-viewer-frame model-viewer,
 .articulated-output.viewer-only .model-viewer-frame model-viewer {
-  height: 630px;
+  height: 660px;
 }
 
 .scene-output-grid.viewer-only .model-viewer-frame .media-placeholder,
 .articulated-output.viewer-only .model-viewer-frame .media-placeholder {
-  min-height: 630px;
+  min-height: 660px;
+}
+
+.camera-output > .explorer-image {
+  height: 580px;
+  min-height: 580px;
+}
+
+.camera-output > .explorer-image .explorer-image-open,
+.camera-output > .explorer-image img {
+  height: 100%;
+  min-height: 0;
+}
+
+.camera-output > .explorer-image img {
+  object-fit: contain;
 }
 
 .pose-card {
@@ -4800,6 +4865,11 @@ footer {
   .task-panel-visual {
     min-height: 0;
   }
+
+  .camera-output > .explorer-image {
+    height: 460px;
+    min-height: 460px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -4936,6 +5006,34 @@ footer {
   .task-panel-visual {
     min-height: 0;
     padding: 22px 12px 18px;
+  }
+
+  .reference-grid .explorer-image {
+    height: 240px;
+    min-height: 240px;
+  }
+
+  .reference-geometry .model-viewer-frame,
+  .reference-geometry .model-viewer-frame .media-placeholder {
+    min-height: 300px;
+  }
+
+  .reference-geometry .model-viewer-frame model-viewer {
+    height: 300px;
+  }
+
+  .camera-output > .explorer-image {
+    height: 360px;
+    min-height: 360px;
+  }
+
+  .scene-output-grid.has-render > .explorer-image {
+    height: 280px;
+    min-height: 280px;
+  }
+
+  .explorer-reference-videos {
+    padding: 24px 18px;
   }
 
   .reference-video-grid {

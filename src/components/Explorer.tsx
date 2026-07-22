@@ -507,7 +507,11 @@ export function Explorer() {
               <p>{example?.sourceInstance ?? 'Source instance will be recorded here'}</p>
             </div>
           </div>
-          <div className={`reference-grid ${referenceImages.length <= 1 ? 'single' : ''}`}>
+          <div
+            className={`reference-grid reference-grid-${taskId} ${
+              referenceImages.length <= 1 ? 'single' : ''
+            }`}
+          >
             {referenceImages.length > 0 ? (
               referenceImages.slice(0, 2).map((asset, index) => (
                 <ImageSlot
@@ -536,20 +540,6 @@ export function Explorer() {
               />
             </div>
           )}
-          {example?.referenceVideos && example.referenceVideos.length > 0 && (
-            <div className="reference-videos">
-              <span className="micro-label">Reference video</span>
-              <div className="reference-video-grid">
-                {example.referenceVideos.map((video, index) => (
-                  <VideoSlot
-                    key={video.src}
-                    asset={video}
-                    label={referenceVideoLabel(taskId, index)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
         </section>
 
         <section className="evidence-output" aria-labelledby="explorer-output-title">
@@ -563,6 +553,31 @@ export function Explorer() {
           <TaskOutput taskId={taskId} example={example} />
         </section>
       </div>
+
+      {example?.referenceVideos && example.referenceVideos.length > 0 && (
+        <section className="explorer-reference-videos" aria-labelledby="explorer-video-title">
+          <div className="panel-heading">
+            <span>03</span>
+            <div>
+              <h4 id="explorer-video-title">Reference motion</h4>
+              <p>Agent-visible temporal evidence for the selected case</p>
+            </div>
+          </div>
+          <div
+            className={`reference-video-grid ${
+              example.referenceVideos.length === 1 ? 'single' : ''
+            }`}
+          >
+            {example.referenceVideos.map((video, index) => (
+              <VideoSlot
+                key={video.src}
+                asset={video}
+                label={referenceVideoLabel(taskId, index)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="native-metrics">
         <div className="native-metrics-intro">
