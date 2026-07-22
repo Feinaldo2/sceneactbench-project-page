@@ -4289,7 +4289,7 @@ footer {
 }
 
 .hero-copy {
-  max-width: 930px;
+  max-width: 1060px;
   margin-inline: auto;
   padding: 20px 0 44px;
   text-align: center;
@@ -4299,29 +4299,29 @@ footer {
   max-width: 1060px;
   margin-inline: auto;
   color: #f4f8fd;
+  font-size: clamp(2.05rem, 2.8vw, 2.6rem);
+  line-height: 1.06;
+  white-space: nowrap;
+}
+
+.hero h1 .title-name,
+.hero h1 .title-question {
+  display: inline;
+  font-family: var(--serif);
+  font-size: inherit;
+  letter-spacing: -0.042em;
+  line-height: inherit;
 }
 
 .hero h1 .title-name {
-  margin-bottom: 16px;
   color: #f4f8fd;
-  font-family: var(--serif);
-  font-size: clamp(4.3rem, 7.2vw, 6.6rem);
   font-weight: 650;
-  letter-spacing: -0.055em;
-  line-height: 0.92;
   text-transform: none;
 }
 
 .hero h1 .title-question {
-  display: block;
-  max-width: none;
-  margin-inline: auto;
   color: #d7e8f7;
-  font-size: clamp(2.15rem, 3.35vw, 3.05rem);
   font-weight: 500;
-  letter-spacing: -0.038em;
-  line-height: 1.04;
-  white-space: nowrap;
 }
 
 .hero h1 em {
@@ -4479,10 +4479,6 @@ footer {
 .abstract-copy p {
   margin: 0;
   color: var(--ink-soft);
-  hyphens: auto;
-  text-align: justify;
-  text-align-last: left;
-  text-wrap: pretty;
 }
 
 .abstract-copy strong {
@@ -4533,10 +4529,6 @@ footer {
 .benchmark-narrative p {
   margin: 0;
   color: var(--ink-soft);
-  hyphens: auto;
-  text-align: justify;
-  text-align-last: left;
-  text-wrap: pretty;
 }
 
 .benchmark-narrative h3 {
@@ -4658,6 +4650,24 @@ footer {
   color: var(--ink);
 }
 
+.section-heading > p,
+.abstract-copy p,
+.narrative-columns p,
+.benchmark-narrative p,
+.data-notice p,
+.leaderboard-footnotes p,
+.task-description,
+.metric-card > p,
+.metric-card details p,
+.explorer-context p,
+.analysis-panel-copy p,
+.lightbox-foot > p {
+  hyphens: auto;
+  text-align: justify;
+  text-align-last: left;
+  text-wrap: pretty;
+}
+
 @media (max-width: 1200px) {
   :root {
     --sidebar-width: 0px;
@@ -4761,8 +4771,7 @@ footer {
     padding-bottom: 44px;
   }
 
-  .hero h1 .title-question {
-    max-width: 780px;
+  .hero h1 {
     white-space: normal;
   }
 
@@ -4844,15 +4853,7 @@ footer {
   }
 
   .hero h1 {
-    font-size: clamp(2.4rem, 11vw, 3.35rem);
-  }
-
-  .hero h1 .title-name {
-    font-size: clamp(3.15rem, 14vw, 4.15rem);
-  }
-
-  .hero h1 .title-question {
-    font-size: clamp(1.75rem, 7.5vw, 2.35rem);
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
   }
 
   .stat-strip {

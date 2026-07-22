@@ -138,7 +138,7 @@ function Hero() {
       <div className="hero-grid page-shell">
         <div className="hero-copy">
           <h1 aria-label="SceneActBench: Can Agents Act on the 3D Scenes They See?">
-            <span className="title-name">SceneActBench:</span>
+            <span className="title-name">SceneActBench:</span>{' '}
             <span className="title-question">
               Can Agents Act on the <em>3D Scenes</em> They See?
             </span>
