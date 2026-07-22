@@ -2690,6 +2690,7 @@ pre {
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1.08;
+  text-wrap: balance;
 }
 
 .analysis-panel-copy p {
@@ -4501,10 +4502,24 @@ footer {
   margin: 11px 0 20px;
   color: var(--ink);
   font-family: var(--serif);
-  font-size: clamp(2.2rem, 3.6vw, 3.35rem);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1.08;
+}
+
+.narrative-block > h2 {
+  font-size: clamp(1.9rem, 2.8vw, 2.55rem);
+}
+
+.benchmark-narrative h3 {
+  font-size: clamp(1.35rem, 1.8vw, 1.7rem);
+}
+
+.analysis-panel-copy h3 {
+  font-size: clamp(1.45rem, 2vw, 1.85rem);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 .narrative-columns,
@@ -4518,6 +4533,10 @@ footer {
 .benchmark-narrative p {
   margin: 0;
   color: var(--ink-soft);
+  hyphens: auto;
+  text-align: justify;
+  text-align-last: left;
+  text-wrap: pretty;
 }
 
 .benchmark-narrative h3 {
@@ -4537,7 +4556,7 @@ footer {
 }
 
 .benchmark-narrative p {
-  color: #c3d3e2;
+  color: #e8f0f8;
 }
 
 .contribution-grid {
@@ -4628,6 +4647,15 @@ footer {
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.7;
+}
+
+.abstract-copy p,
+.narrative-columns p,
+.task-description,
+.metric-card > p,
+.explorer-context p,
+.analysis-panel-copy p {
+  color: var(--ink);
 }
 
 @media (max-width: 1200px) {
@@ -4851,9 +4879,12 @@ footer {
     padding: 25px 22px;
   }
 
-  .narrative-block > h2,
+  .narrative-block > h2 {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+  }
+
   .benchmark-narrative h3 {
-    font-size: clamp(1.9rem, 9vw, 2.45rem);
+    font-size: clamp(1.3rem, 6vw, 1.6rem);
   }
 
   .benchmark-narrative {
@@ -4894,7 +4925,7 @@ footer {
   }
 
   .analysis-panel-copy h3 {
-    font-size: clamp(1.85rem, 9vw, 2.45rem);
+    font-size: clamp(1.4rem, 6.5vw, 1.75rem);
   }
 
   .analysis-panel-copy p {

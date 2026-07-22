@@ -71,7 +71,7 @@ describe('SceneActBench project page', () => {
     expect(
       screen.getByRole('heading', {
         level: 2,
-        name: 'Acting makes 3D understanding observable.',
+        name: 'Can an agent that sees a scene act on a 3D environment to match it?',
       }),
     ).toBeInTheDocument();
     expect(

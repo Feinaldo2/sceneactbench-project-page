@@ -220,7 +220,9 @@ function MotivationSection() {
     <section className="section section-motivation" aria-labelledby="motivation-title">
       <div className="page-shell narrative-block">
         <span className="micro-label">Why action</span>
-        <h2 id="motivation-title">Acting makes 3D understanding observable.</h2>
+        <h2 id="motivation-title">
+          Can an agent that sees a scene act on a 3D environment to match it?
+        </h2>
         <div className="narrative-columns">
           <p>
             Acting on a scene, rather than describing it, is a stronger test of an agent&apos;s 3D
