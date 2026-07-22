@@ -38,6 +38,7 @@ describe('typed benchmark data', () => {
     expect(metrics.find((metric) => metric.id === 'MME')?.name).toBe('Maximum Mover Error');
     expect(metrics.find((metric) => metric.id === 'AME')?.name).toBe('Average Mover Error');
     expect(metrics.find((metric) => metric.id === 'LE')?.name).toBe('Layout Error');
+    expect(metrics.every((metric) => metric.formula && metric.calculation)).toBe(true);
     expect(tasks.find((task) => task.id === 'dynamic')?.primaryMetric).toBe('MME / LE');
   });
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Explorer } from './components/Explorer';
 import { ArrowUpRight, CheckIcon, CloseIcon, CopyIcon, MenuIcon } from './components/Icons';
+import { InteractiveLeaderboardChart } from './components/InteractiveLeaderboardChart';
 import { Leaderboard } from './components/Leaderboard';
 import { TaskTabs } from './components/TaskTabs';
 import { withBase } from './data/assetPath';
@@ -246,19 +247,7 @@ function Hero() {
             <dd>11</dd>
           </div>
         </dl>
-        <figure className="hero-result-figure">
-          <img
-            src={withBase('assets/analysis/leaderboard.svg')}
-            alt="Stacked task contributions to Overall for all eleven SceneActBench configurations."
-            width="1120"
-            height="540"
-            loading="eager"
-          />
-          <figcaption>
-            Overall decomposed into five equally weighted task contributions; exact scores remain
-            sortable in the leaderboard.
-          </figcaption>
-        </figure>
+        <InteractiveLeaderboardChart />
       </div>
     </section>
   );

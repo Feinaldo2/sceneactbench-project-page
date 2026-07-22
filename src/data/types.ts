@@ -39,6 +39,8 @@ export type MetricDefinition = {
   unit?: string;
   summary: string;
   detail: string;
+  formula: string;
+  calculation: string;
   primary?: boolean;
 };
 

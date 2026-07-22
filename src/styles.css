@@ -533,6 +533,130 @@ code {
   text-align: center;
 }
 
+.interactive-chart-stage {
+  position: relative;
+}
+
+.interactive-chart-hotspots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.interactive-chart-hotspots button {
+  position: absolute;
+  top: 7%;
+  bottom: 17%;
+  left: var(--hotspot-left);
+  width: 6.5%;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.interactive-chart-hotspots button:hover,
+.interactive-chart-hotspots button:focus-visible,
+.interactive-chart-hotspots button[aria-pressed="true"] {
+  border-color: rgba(31, 95, 151, 0.42);
+  background: rgba(93, 164, 204, 0.1);
+}
+
+.hero-result-figure .interactive-chart-caption {
+  padding: 13px 10px 3px;
+  font-family: var(--sans);
+  font-style: normal;
+  text-align: left;
+}
+
+.interactive-chart-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.interactive-chart-selection > div strong,
+.interactive-chart-selection > div span {
+  display: block;
+}
+
+.interactive-chart-selection > div strong {
+  color: var(--ink-strong);
+  font-family: var(--serif);
+  font-size: 1rem;
+}
+
+.interactive-chart-selection > div span {
+  margin-top: 2px;
+  color: var(--ink-faint);
+  font-size: 0.62rem;
+}
+
+.interactive-chart-selection > p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+}
+
+.interactive-chart-selection > p strong {
+  margin-left: 5px;
+  color: var(--blue);
+  font-family: var(--serif);
+  font-size: 1.15rem;
+}
+
+.interactive-chart-caption dl {
+  display: grid;
+  margin: 11px 0 0;
+  border: 1px solid var(--line);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.interactive-chart-caption dl div {
+  padding: 8px 10px;
+  border-right: 1px solid var(--line);
+}
+
+.interactive-chart-caption dl div:last-child {
+  border-right: 0;
+}
+
+.interactive-chart-caption dt {
+  color: var(--ink-faint);
+  font-size: 0.56rem;
+  font-weight: 750;
+}
+
+.interactive-chart-caption dd {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 3px 0 0;
+  color: var(--ink-strong);
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.interactive-chart-caption dd small {
+  color: var(--blue);
+  font-family: var(--sans);
+  font-size: 0.54rem;
+  font-weight: 700;
+}
+
+.interactive-chart-help {
+  margin: 8px 0 0;
+  color: var(--ink-faint);
+  font-size: 0.58rem;
+  line-height: 1.5;
+}
+
 /* Shared section structure */
 
 .section {
@@ -1119,11 +1243,52 @@ code {
 }
 
 .metric-dialog-summary,
+.metric-dialog-formula p,
 .metric-dialog-detail p {
   margin: 0;
   color: var(--ink);
   font-size: 0.92rem;
   line-height: 1.72;
+}
+
+.metric-dialog-formula {
+  margin-top: 21px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.metric-dialog-formula h4,
+.metric-dialog-detail h4 {
+  margin: 0 0 9px;
+  color: var(--metric-color);
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.metric-dialog-formula pre {
+  margin: 0 0 12px;
+  overflow-x: auto;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #f7f9fb;
+}
+
+.metric-dialog-formula code {
+  color: var(--ink-strong);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.metric-dialog-formula p,
+.metric-dialog-detail p {
+  text-align: justify;
+  text-align-last: left;
+  text-wrap: pretty;
 }
 
 .metric-dialog-detail {
@@ -2808,6 +2973,19 @@ footer {
   .hero-result-figure {
     margin-top: 36px;
     padding: 8px;
+  }
+
+  .interactive-chart-selection {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .interactive-chart-caption dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .interactive-chart-caption dl div {
+    border-bottom: 1px solid var(--line);
   }
 
   .section,

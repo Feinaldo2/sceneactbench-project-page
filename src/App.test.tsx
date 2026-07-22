@@ -232,6 +232,28 @@ describe('SceneActBench project page', () => {
     expect(overallHeader).toHaveAttribute('aria-sort', 'none');
   });
 
+  it('inspects exact scores from the interactive leaderboard chart', () => {
+    render(<App />);
+
+    const chart = screen
+      .getByAltText(/Stacked task contributions to Overall/i)
+      .closest('figure');
+    expect(chart).toBeInTheDocument();
+    expect(within(chart!).getByText('Doubao Seed 2.0 Pro')).toBeInTheDocument();
+
+    fireEvent.click(
+      within(chart!).getByRole('button', {
+        name: 'Inspect MiniMax M3 High scores',
+      }),
+    );
+    expect(within(chart!).getByText('MiniMax M3')).toBeInTheDocument();
+    expect(
+      within(chart!).getByRole('button', {
+        name: 'Inspect MiniMax M3 High scores',
+      }),
+    ).toHaveAttribute('aria-pressed', 'true');
+  });
+
   it('opens task metrics in a floating dialog', () => {
     render(<App />);
 
@@ -248,6 +270,10 @@ describe('SceneActBench project page', () => {
     expect(
       within(layoutDialog).getByText(/nearest compatible point under the reference placement/i),
     ).toBeInTheDocument();
+    expect(
+      within(layoutDialog).getByRole('heading', { level: 4, name: 'Calculation' }),
+    ).toBeInTheDocument();
+    expect(within(layoutDialog).getByText(/ADD-S =/i)).toBeInTheDocument();
     expect(document.querySelector('.task-panel')).not.toContainElement(layoutDialog);
     expect(document.body.style.overflow).toBe('hidden');
     fireEvent.keyDown(layoutDialog, { key: 'Escape' });

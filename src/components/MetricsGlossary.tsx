@@ -124,7 +124,13 @@ export function TaskMetrics({ taskId }: { taskId: TaskId }) {
                 </div>
                 <h3 id={titleId}>{selectedMetric.name}</h3>
                 <p className="metric-dialog-summary">{selectedMetric.summary}</p>
+                <div className="metric-dialog-formula">
+                  <h4>Calculation</h4>
+                  <pre><code>{selectedMetric.formula}</code></pre>
+                  <p>{selectedMetric.calculation}</p>
+                </div>
                 <div className="metric-dialog-detail">
+                  <h4>Interpretation</h4>
                   <p>{selectedMetric.detail}</p>
                 </div>
               </article>
