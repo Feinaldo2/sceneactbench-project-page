@@ -11,6 +11,7 @@ import {
   bibtex,
   links,
 } from './data/site';
+import { datasetProvenance } from './data/provenance';
 import { tasks } from './data/tasks';
 
 const navItems = [
@@ -21,6 +22,70 @@ const navItems = [
   ['benchmark', 'Benchmark'],
   ['citation', 'Citation'],
 ] as const;
+
+function usePageMotion() {
+  useEffect(() => {
+    let frameId = 0;
+    const updateProgress = () => {
+      frameId = 0;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0;
+      document.documentElement.style.setProperty('--scroll-progress', String(progress));
+    };
+    const handleScroll = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(updateProgress);
+    };
+    updateProgress();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.section'));
+    if (reduced || typeof IntersectionObserver === 'undefined') {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      return;
+    }
+    sections.forEach((section) => section.classList.add('reveal-ready'));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          (entry.target as HTMLElement).classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.08 },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const numbers = Array.from(
+      document.querySelectorAll<HTMLElement>('.hero-facts [data-count]'),
+    );
+    const startedAt = performance.now();
+    let frameId = 0;
+    const animate = (time: number) => {
+      const progress = Math.min(1, (time - startedAt) / 850);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      numbers.forEach((element) => {
+        const target = Number(element.dataset.count ?? 0);
+        element.textContent = String(Math.round(target * eased));
+      });
+      if (progress < 1) frameId = window.requestAnimationFrame(animate);
+    };
+    frameId = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
+}
 
 function SectionHeading({
   number,
@@ -232,21 +297,30 @@ function Hero() {
         <dl className="hero-facts">
           <div>
             <dt>Tasks</dt>
-            <dd>5</dd>
+            <dd data-count="5">5</dd>
           </div>
           <div>
             <dt>Source instances</dt>
-            <dd>210</dd>
+            <dd data-count="210">210</dd>
           </div>
           <div>
             <dt>Task cases</dt>
-            <dd>520</dd>
+            <dd data-count="520">520</dd>
           </div>
           <div>
             <dt>VLM configurations</dt>
-            <dd>11</dd>
+            <dd data-count="11">11</dd>
           </div>
         </dl>
+        <div className="provenance-strip" aria-label="Dataset provenance">
+          {datasetProvenance.map((source) => (
+            <div key={source.name}>
+              <strong>{source.name}</strong>
+              <span>{source.count}</span>
+              <small>{source.detail}</small>
+            </div>
+          ))}
+        </div>
         <InteractiveLeaderboardChart />
       </div>
     </section>
@@ -517,6 +591,8 @@ function Footer() {
 }
 
 export default function App() {
+  usePageMotion();
+
   return (
     <>
       <Header />

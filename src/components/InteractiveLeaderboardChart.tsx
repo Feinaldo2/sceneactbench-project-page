@@ -23,6 +23,20 @@ const chartEntries = chartOrder
   .map((id) => leaderboard.find((entry) => entry.id === id))
   .filter((entry): entry is LeaderboardEntry => Boolean(entry));
 
+const chartBarCenters = [
+  9.793,
+  18.324,
+  26.854,
+  35.385,
+  43.914,
+  52.444,
+  60.976,
+  69.507,
+  78.035,
+  86.566,
+  95.096,
+] as const;
+
 const taskKeys: TaskId[] = [
   'layout',
   'camera',
@@ -194,10 +208,9 @@ export function InteractiveLeaderboardChart() {
                 key={entry.id}
                 aria-haspopup="dialog"
                 aria-label={`Show ${entry.model} ${entry.configuration} task scores`}
-                title={`${entry.model} ${entry.configuration}: Overall ${formatScore(entry.scores.overall)}`}
                 style={
                   {
-                    '--hotspot-left': `${7.8 + index * 8.35}%`,
+                    '--hotspot-left': `${chartBarCenters[index] - 2.475}%`,
                   } as CSSProperties
                 }
                 onPointerEnter={() => setHovered(entry)}
@@ -213,7 +226,7 @@ export function InteractiveLeaderboardChart() {
               className="interactive-chart-tooltip"
               style={
                 {
-                  '--tooltip-left': `${11 + hoveredIndex * 8.25}%`,
+                  '--tooltip-left': `${chartBarCenters[hoveredIndex]}%`,
                 } as CSSProperties
               }
             >

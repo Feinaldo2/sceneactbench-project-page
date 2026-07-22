@@ -9,6 +9,11 @@ type ModelViewerAttributes = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTML
   autoplay?: boolean;
   'shadow-intensity'?: string;
   exposure?: string;
+  'camera-orbit'?: string;
+  'camera-target'?: string;
+  'field-of-view'?: string;
+  'interaction-prompt'?: 'auto' | 'none';
+  'touch-action'?: string;
   loading?: 'auto' | 'lazy' | 'eager';
   reveal?: 'auto' | 'interaction' | 'manual';
 };

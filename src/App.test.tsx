@@ -128,8 +128,11 @@ describe('SceneActBench project page', () => {
     expect(screen.queryByText('Comparison set')).not.toBeInTheDocument();
     expect(screen.getByText('Symmetry-aware average distance')).toBeInTheDocument();
     expect(screen.queryByText('Maximum Part Error')).not.toBeInTheDocument();
+    expect(screen.getByText('3D-FRONT')).toBeInTheDocument();
+    expect(screen.getByText('S2O ACD')).toBeInTheDocument();
+    expect(screen.getByText('Kenney')).toBeInTheDocument();
 
-    expect(await screen.findByText('Schema v1')).toBeInTheDocument();
+    expect(await screen.findByText(/Schema v1/)).toBeInTheDocument();
   });
 
   it('supports keyboard-friendly task selection and camera-specific output', () => {
@@ -195,6 +198,67 @@ describe('SceneActBench project page', () => {
     );
   });
 
+  it('opens media focus mode and advances to the same scene from another model', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          schemaVersion: 1,
+          generatedAt: null,
+          assetBase: '/assets/examples/',
+          examples: [
+            {
+              id: 'same-scene-a',
+              task: 'layout',
+              modelId: 'doubao-seed-2-pro-high',
+              title: 'Same scene · Doubao',
+              sourceInstance: 'shared-room',
+              metrics: [],
+              referenceImages: [
+                { src: 'assets/examples/ref-a.png', alt: 'First shared view' },
+                { src: 'assets/examples/ref-b.png', alt: 'Second shared view' },
+              ],
+              outputImages: [],
+            },
+            {
+              id: 'same-scene-b',
+              task: 'layout',
+              modelId: 'claude-opus-4-6-high',
+              title: 'Same scene · Claude',
+              sourceInstance: 'shared-room',
+              metrics: [],
+              referenceImages: [
+                { src: 'assets/examples/ref-a.png', alt: 'First shared view' },
+                { src: 'assets/examples/ref-b.png', alt: 'Second shared view' },
+              ],
+              outputImages: [],
+            },
+          ],
+        }),
+      }),
+    );
+    render(<App />);
+
+    expect(await screen.findByText('Same scene · Doubao')).toBeInTheDocument();
+    fireEvent.click(
+      screen.getAllByRole('button', { name: 'Open input reference in focus mode' })[0],
+    );
+    const focusDialog = screen.getByRole('dialog', { name: 'Input reference' });
+    expect(focusDialog).toBeInTheDocument();
+    expect(within(focusDialog).getByText('1 / 2')).toBeInTheDocument();
+    fireEvent.keyDown(focusDialog, { key: 'ArrowRight' });
+    expect(within(focusDialog).getByText('2 / 2')).toBeInTheDocument();
+    fireEvent.keyDown(focusDialog, { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: 'Input reference' })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Next model · same scene' }));
+    expect(await screen.findByText('Same scene · Claude')).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: /Choose configuration/i })).toHaveValue(
+      'claude-opus-4-6-high',
+    );
+  });
+
   it('manages focus and scrolling in the mobile navigation', () => {
     render(<App />);
 
@@ -230,6 +294,20 @@ describe('SceneActBench project page', () => {
     fireEvent.click(within(table).getByRole('button', { name: 'Sort by Layout' }));
     expect(layoutHeader).toHaveAttribute('aria-sort', 'descending');
     expect(overallHeader).toHaveAttribute('aria-sort', 'none');
+  });
+
+  it('opens floating leaderboard evaluation notes', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Evaluation notes' }));
+    const dialog = screen.getByRole('dialog', { name: 'How to read the leaderboard' });
+    expect(dialog).toBeInTheDocument();
+    expect(within(dialog).getByText(/one completed run/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/targeted stress test/i)).toBeInTheDocument();
+    fireEvent.keyDown(dialog, { key: 'Escape' });
+    expect(
+      screen.queryByRole('dialog', { name: 'How to read the leaderboard' }),
+    ).not.toBeInTheDocument();
   });
 
   it('inspects exact scores from the interactive leaderboard chart', () => {

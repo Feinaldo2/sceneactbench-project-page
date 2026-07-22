@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   compareEntries,
   hasPublishedScores,
@@ -7,7 +8,7 @@ import {
   scoreLabels,
 } from '../data/leaderboard';
 import type { LeaderboardEntry, ScoreKey } from '../data/types';
-import { ChevronDown } from './Icons';
+import { ChevronDown, CloseIcon } from './Icons';
 
 const scoreKeys: ScoreKey[] = [
   'overall',
@@ -35,6 +36,11 @@ function ConfigurationName({ entry }: { entry: LeaderboardEntry }) {
 
 export function Leaderboard() {
   const [sortKey, setSortKey] = useState<ScoreKey>('overall');
+  const [notesOpen, setNotesOpen] = useState(false);
+  const notesTriggerRef = useRef<HTMLButtonElement>(null);
+  const notesCloseRef = useRef<HTMLButtonElement>(null);
+  const notesDialogRef = useRef<HTMLElement>(null);
+  const notesTitleId = useId();
   const published = hasPublishedScores();
 
   const sorted = useMemo(
@@ -44,6 +50,26 @@ export function Leaderboard() {
     }),
     [sortKey],
   );
+
+  useEffect(() => {
+    if (!notesOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const appRoot = document.getElementById('root');
+    document.body.style.overflow = 'hidden';
+    appRoot?.setAttribute('inert', '');
+    notesCloseRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      appRoot?.removeAttribute('inert');
+    };
+  }, [notesOpen]);
+
+  const closeNotes = (restoreFocus = true) => {
+    setNotesOpen(false);
+    if (restoreFocus) {
+      window.requestAnimationFrame(() => notesTriggerRef.current?.focus());
+    }
+  };
 
   return (
     <div className="leaderboard-shell">
@@ -59,6 +85,15 @@ export function Leaderboard() {
             <ChevronDown />
           </span>
         </label>
+        <button
+          ref={notesTriggerRef}
+          className="leaderboard-notes-trigger"
+          type="button"
+          aria-haspopup="dialog"
+          onClick={() => setNotesOpen(true)}
+        >
+          Evaluation notes
+        </button>
       </div>
 
       {!published && (
@@ -147,14 +182,74 @@ export function Leaderboard() {
         ))}
       </div>
 
-      <div className="leaderboard-footnotes">
-        <p>
-          <span>Reading Overall</span>
-          Overall is a fixed normalized summary across the five tasks. It is not a claim of
-          statistical significance; inspect native metrics and case-level evidence before drawing
-          model conclusions.
-        </p>
-      </div>
+      {notesOpen && typeof document !== 'undefined'
+        ? createPortal(
+            <div
+              className="metric-dialog-backdrop"
+              onMouseDown={(event) => {
+                if (event.target === event.currentTarget) closeNotes();
+              }}
+            >
+              <article
+                ref={notesDialogRef}
+                className="metric-dialog notes-dialog"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={notesTitleId}
+                style={{ '--metric-color': '#1e4a8f' } as React.CSSProperties}
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape') {
+                    event.preventDefault();
+                    closeNotes();
+                  } else if (event.key === 'Tab') {
+                    const focusable = Array.from(
+                      notesDialogRef.current?.querySelectorAll<HTMLElement>(
+                        'a[href], button:not([disabled])',
+                      ) ?? [],
+                    );
+                    if (focusable.length === 0) return;
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+                    if (event.shiftKey && document.activeElement === first) {
+                      event.preventDefault();
+                      last?.focus();
+                    } else if (!event.shiftKey && document.activeElement === last) {
+                      event.preventDefault();
+                      first?.focus();
+                    }
+                  }
+                }}
+              >
+                <div className="metric-dialog-head">
+                  <span>Evaluation scope</span>
+                  <button
+                    ref={notesCloseRef}
+                    type="button"
+                    onClick={() => closeNotes()}
+                    aria-label="Close evaluation notes"
+                  >
+                    <CloseIcon />
+                  </button>
+                </div>
+                <h3 id={notesTitleId}>How to read the leaderboard</h3>
+                <ul className="evaluation-notes-list">
+                  <li>Each configuration–case pair has one completed run; scores are not repeated-run estimates.</li>
+                  <li>Overall uses fixed normalization references; native task metrics define the geometric meaning.</li>
+                  <li>Multi-view Layout and photo-realistic Dynamic are reported separately and excluded from Overall.</li>
+                  <li>Dynamic contains 10 scenes and should be read as a targeted stress test.</li>
+                </ul>
+                <a
+                  className="notes-explorer-link"
+                  href="#explorer"
+                  onClick={() => closeNotes(false)}
+                >
+                  Inspect case-level examples ↓
+                </a>
+              </article>
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }

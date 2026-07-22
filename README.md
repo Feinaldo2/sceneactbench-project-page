@@ -6,7 +6,7 @@ Production GitHub Pages site for **SceneActBench: Can Agents Act on the 3D Scene
 
 Deployed project page: <https://feinaldo2.github.io/sceneactbench-project-page/>
 
-The site is a React + Vite + TypeScript application at the repository root. It includes an interactive leaderboard, five-task benchmark guide, metric glossary, typed model × task explorer, analysis lightbox, resources, limitations, and citation UI.
+The site is a React + Vite + TypeScript application at the repository root. It includes an interactive leaderboard, five-task benchmark guide with floating metric formulas, a typed model × task explorer, synchronized 3D comparison, unified media Focus Mode, dataset provenance, and citation UI.
 
 ## Development
 
@@ -70,7 +70,7 @@ Do not estimate missing values, reorder configurations by visual inspection, or 
 
 ## Paper figures
 
-Optimized WebP exports of compact paper figures live in `public/assets/paper/`. The leaderboard overview and Analysis panels use editable SVG outputs under `public/assets/analysis/`, while Step Curves are rendered as native animated SVG in the browser. Refresh the vector assets with:
+Optimized WebP exports of compact paper figures live in `public/assets/paper/`. The interactive leaderboard reuses an editable SVG under `public/assets/analysis/`; retained analysis SVGs remain available as paper-sync artifacts but are not a standalone website section. Refresh the vector assets with:
 
 ```bash
 python3 scripts/build-leaderboard-figure.py --paper-root /absolute/path/to/llm3dbench
@@ -96,7 +96,7 @@ npm run optimize:glbs
 
 The optimization step converts embedded textures to WebP and applies Draco geometry compression to published GLBs above 4 MiB. The generic `npm run curate:examples` workflow and schema remain available for alternate hand-authored manifests. Camera examples use JSON pose plus scoring renders. Articulated examples expose the submitted state sequence as an interactive GLB. Dynamic examples pair the T6 low-poly-input submission with the corresponding T7 photo-realistic-input submission and record animation metadata for both; displayed native metrics remain bound to T6.
 
-`@google/model-viewer` is dynamically imported only when a manifest supplies a GLB and its panel approaches the viewport. Missing models, posters, and failed loads all have explicit accessible fallbacks.
+`@google/model-viewer` is initialized through one shared loader only when a manifest supplies a GLB and its panel approaches the viewport. Primary viewers are prioritized, secondary viewers remain lazy, and missing models, posters, progress states, and failed loads all have explicit accessible fallbacks. Articulated and Dynamic comparisons synchronize camera state and, when both assets animate, expose one shared timeline.
 
 ## Deployment
 
@@ -113,8 +113,10 @@ No custom domain is required; GitHub serves this repository beneath `/sceneactbe
 
 - semantic landmarks, headings, tables, tabs, and dialog roles;
 - keyboard tab navigation with Arrow/Home/End handling;
-- focus management and Escape/Arrow controls in the analysis lightbox;
+- focus management and Escape/Arrow controls in media Focus Mode, metric dialogs, score dashboards, and evaluation notes;
 - skip link and visible focus treatments;
 - reduced-motion and forced-colors support;
+- a reduced-motion-safe scroll progress indicator and section reveals;
 - desktop table plus compact mobile leaderboard cards; and
-- descriptive placeholder states that do not imply unavailable assets or results exist.
+- descriptive placeholder states that do not imply unavailable assets or results exist;
+- deterministic same-scene model cycling plus random published-example discovery.

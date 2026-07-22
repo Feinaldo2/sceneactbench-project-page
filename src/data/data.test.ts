@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { emptyExamplesManifest, parseExamplesManifest } from './examples';
 import { hasPublishedScores, leaderboard } from './leaderboard';
 import { metrics } from './metrics';
+import { datasetProvenance } from './provenance';
 import { tasks } from './tasks';
 
 describe('typed benchmark data', () => {
@@ -40,6 +41,7 @@ describe('typed benchmark data', () => {
     expect(metrics.find((metric) => metric.id === 'LE')?.name).toBe('Layout Error');
     expect(metrics.every((metric) => metric.formula && metric.calculation)).toBe(true);
     expect(tasks.find((task) => task.id === 'dynamic')?.primaryMetric).toBe('MME / LE');
+    expect(datasetProvenance.reduce((sum, source) => sum + source.count, 0)).toBe(210);
   });
 
   it('accepts the empty curation manifest and rejects malformed input', () => {
