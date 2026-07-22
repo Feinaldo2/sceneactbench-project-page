@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { emptyExamplesManifest, parseExamplesManifest } from './examples';
 import { hasPublishedScores, leaderboard } from './leaderboard';
 import { metrics } from './metrics';
-import { analysisItems } from './site';
 import { tasks } from './tasks';
 
 describe('typed benchmark data', () => {
@@ -40,11 +39,6 @@ describe('typed benchmark data', () => {
     expect(metrics.find((metric) => metric.id === 'AME')?.name).toBe('Average Mover Error');
     expect(metrics.find((metric) => metric.id === 'LE')?.name).toBe('Layout Error');
     expect(tasks.find((task) => task.id === 'dynamic')?.primaryMetric).toBe('MME / LE');
-  });
-
-  it('publishes every analysis figure as a scalable vector', () => {
-    expect(analysisItems).toHaveLength(6);
-    expect(analysisItems.every((item) => item.image.endsWith('.svg'))).toBe(true);
   });
 
   it('accepts the empty curation manifest and rejects malformed input', () => {

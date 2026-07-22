@@ -1,65 +1,113 @@
+import { useEffect, useId, useRef, useState, type MouseEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { metrics } from '../data/metrics';
 import { taskById } from '../data/tasks';
+import type { MetricDefinition, TaskId } from '../data/types';
+import { CloseIcon } from './Icons';
 
-export function MetricsGlossary() {
+export function TaskMetrics({ taskId }: { taskId: TaskId }) {
+  const [selectedMetric, setSelectedMetric] = useState<MetricDefinition | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const titleId = useId();
+  const task = taskById[taskId];
+  const taskMetrics = metrics.filter((metric) => metric.task === taskId);
+  const overall = metrics.find((metric) => metric.task === 'summary');
+  const availableMetrics = overall ? [...taskMetrics, overall] : taskMetrics;
+
+  useEffect(() => {
+    if (selectedMetric) closeRef.current?.focus();
+  }, [selectedMetric]);
+
+  const openMetric = (
+    metric: MetricDefinition,
+    event: MouseEvent<HTMLButtonElement>,
+  ) => {
+    triggerRef.current = event.currentTarget;
+    setSelectedMetric(metric);
+  };
+
+  const closeMetric = () => {
+    setSelectedMetric(null);
+    window.requestAnimationFrame(() => triggerRef.current?.focus());
+  };
+
   return (
-    <div className="metrics-module">
-      <div className="metric-disambiguation">
-        <div className="metric-family">
-          <span className="metric-token teal">MPE</span>
-          <div>
-            <strong>Maximum <u>Part</u> Error</strong>
-            <p>Articulated · maximum moving-part state error</p>
-          </div>
-        </div>
-        <span className="not-equal" aria-label="is not equal to">≠</span>
-        <div className="metric-family">
-          <span className="metric-token coral">MME</span>
-          <div>
-            <strong>Maximum <u>Mover</u> Error</strong>
-            <p>Dynamic · maximum mover trajectory error</p>
-          </div>
-        </div>
-        <span className="versus" aria-hidden="true">vs.</span>
-        <div className="metric-family">
-          <span className="metric-token amber">AME</span>
-          <div>
-            <strong>Average <u>Mover</u> Error</strong>
-            <p>Dynamic · diagnostic mean</p>
-          </div>
-        </div>
+    <>
+      <div className="task-metrics" aria-label={`${task.name} metrics`}>
+        {availableMetrics.map((metric) => (
+          <button
+            className={metric.task === 'summary' ? 'task-metric-button summary' : 'task-metric-button'}
+            key={metric.id}
+            type="button"
+            aria-haspopup="dialog"
+            aria-label={`Open ${metric.name} metric details`}
+            style={
+              {
+                '--metric-color':
+                  metric.task === 'summary' ? '#1e4a8f' : task.color.solid,
+              } as React.CSSProperties
+            }
+            onClick={(event) => openMetric(metric, event)}
+          >
+            <strong>{metric.id}</strong>
+            <span>{metric.name}</span>
+          </button>
+        ))}
       </div>
 
-      <div className="metric-grid">
-        {metrics.map((metric) => {
-          const task = metric.task === 'summary' ? null : taskById[metric.task];
-          return (
-            <article className="metric-card" key={metric.id}>
-              <div className="metric-card-head">
-                <span
-                  className="metric-id"
-                  style={{ '--metric-color': task?.color.solid ?? '#1e4a8f' } as React.CSSProperties}
-                >
-                  {metric.id}
-                </span>
-                <span className={`direction ${metric.direction}`}>
-                  {metric.direction === 'higher'
-                    ? '↑ higher'
-                    : metric.direction === 'lower'
-                      ? '↓ lower'
-                      : 'diagnostic'}
-                </span>
-              </div>
-              <h3>{metric.name}</h3>
-              <p>{metric.summary}</p>
-              <details>
-                <summary>How to read it</summary>
-                <p>{metric.detail}</p>
-              </details>
-            </article>
-          );
-        })}
-      </div>
-    </div>
+      {selectedMetric && typeof document !== 'undefined'
+        ? createPortal(
+            <div
+              className="metric-dialog-backdrop"
+              onMouseDown={(event) => {
+                if (event.target === event.currentTarget) closeMetric();
+              }}
+            >
+              <article
+                className="metric-dialog"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={titleId}
+                style={
+                  {
+                    '--metric-color':
+                      selectedMetric.task === 'summary'
+                        ? '#1e4a8f'
+                        : task.color.solid,
+                  } as React.CSSProperties
+                }
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape') {
+                    event.preventDefault();
+                    closeMetric();
+                  } else if (event.key === 'Tab') {
+                    event.preventDefault();
+                    closeRef.current?.focus();
+                  }
+                }}
+              >
+                <div className="metric-dialog-head">
+                  <span>{selectedMetric.id}</span>
+                  <button
+                    ref={closeRef}
+                    type="button"
+                    onClick={closeMetric}
+                    aria-label="Close metric details"
+                  >
+                    <CloseIcon />
+                  </button>
+                </div>
+                <h3 id={titleId}>{selectedMetric.name}</h3>
+                <p className="metric-dialog-summary">{selectedMetric.summary}</p>
+                <div className="metric-dialog-detail">
+                  <p>{selectedMetric.detail}</p>
+                </div>
+              </article>
+            </div>,
+            document.body,
+          )
+        : null}
+    </>
   );
 }

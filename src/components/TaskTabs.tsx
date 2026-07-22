@@ -1,6 +1,7 @@
 import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import { tasks } from '../data/tasks';
 import type { TaskId } from '../data/types';
+import { TaskMetrics } from './MetricsGlossary';
 import { TaskSchematic } from './TaskSchematic';
 
 export function TaskTabs() {
@@ -60,9 +61,6 @@ export function TaskTabs() {
         key={activeTask.id}
       >
         <div className="task-panel-copy">
-          <span className="micro-label" style={{ color: activeTask.color.solid }}>
-            Task {activeTask.index} · {activeTask.eyebrow}
-          </span>
           <h3>{activeTask.capability}</h3>
           <p className="task-description">{activeTask.description}</p>
           <dl className="task-specs">
@@ -87,11 +85,7 @@ export function TaskTabs() {
               </dd>
             </div>
           </dl>
-          <div className="primary-metric">
-            <span>Primary metric</span>
-            <strong>{activeTask.primaryMetric}</strong>
-            <small>{activeTask.direction === 'higher' ? 'higher is better' : 'lower is better'}</small>
-          </div>
+          <TaskMetrics taskId={activeTask.id} />
         </div>
         <div className="task-panel-visual">
           <TaskSchematic task={activeTask} />

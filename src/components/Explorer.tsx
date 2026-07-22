@@ -592,13 +592,6 @@ export function Explorer() {
                 <dt>{metric.id}</dt>
                 <dd>
                   {value ? `${value.value}${value.unit ?? ''}` : '—'}
-                  <small>
-                    {metric.direction === 'higher'
-                      ? 'higher is better'
-                      : metric.direction === 'lower'
-                        ? 'lower is better'
-                        : 'diagnostic'}
-                  </small>
                 </dd>
               </div>
             );

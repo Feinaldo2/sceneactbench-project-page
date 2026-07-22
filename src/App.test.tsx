@@ -51,7 +51,7 @@ describe('SceneActBench project page', () => {
     expect(screen.queryByLabelText('Benchmark statistics')).not.toBeInTheDocument();
 
     const navigation = screen.getByRole('navigation', { name: 'Page sections' });
-    expect(within(navigation).getAllByRole('link')).toHaveLength(8);
+    expect(within(navigation).getAllByRole('link')).toHaveLength(6);
     expect(within(navigation).queryByRole('link', { name: 'Resources' })).not.toBeInTheDocument();
     for (const title of [
       'Abstract',
@@ -59,12 +59,23 @@ describe('SceneActBench project page', () => {
       'Examples',
       'Benchmark',
       'Tasks',
-      'Metrics',
-      'Analysis',
       'Citation',
     ]) {
       expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
     }
+    expect(screen.queryByRole('heading', { level: 2, name: 'Analysis' })).not.toBeInTheDocument();
+    expect(within(navigation).queryByRole('link', { name: 'Analysis' })).not.toBeInTheDocument();
+    for (const redundantLabel of [
+      'Paper overview',
+      'Metrics glossary',
+      '01 · Result structure',
+      'Why action',
+    ]) {
+      expect(screen.queryByText(redundantLabel)).not.toBeInTheDocument();
+    }
+    expect(screen.queryByText(/^↓ lower$/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^higher is better$/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^lower is better$/i)).not.toBeInTheDocument();
     expect(
       screen.getByText(/Vision-language model \(VLM\) agents increasingly use tools/i),
     ).toBeInTheDocument();
@@ -95,9 +106,8 @@ describe('SceneActBench project page', () => {
     expect(screen.queryByText('Task profile')).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /to comparison/i })).not.toBeInTheDocument();
     expect(screen.queryByText('Comparison set')).not.toBeInTheDocument();
-    expect(screen.getByText('Maximum Part Error')).toBeInTheDocument();
-    expect(screen.getByText('Maximum Mover Error')).toBeInTheDocument();
-    expect(screen.getByText('Average Mover Error')).toBeInTheDocument();
+    expect(screen.getByText('Symmetry-aware average distance')).toBeInTheDocument();
+    expect(screen.queryByText('Maximum Part Error')).not.toBeInTheDocument();
 
     expect(await screen.findByText('Schema v1')).toBeInTheDocument();
   });
@@ -120,34 +130,40 @@ describe('SceneActBench project page', () => {
     expect(screen.getByText(/Camera examples use pose JSON and rendered images/i)).toBeInTheDocument();
   });
 
-  it('opens and closes analysis figures as an accessible dialog', () => {
+  it('opens task metrics in a floating dialog', () => {
     render(<App />);
-    fireEvent.click(screen.getByRole('button', { name: 'Enlarge Ranking decomposition' }));
 
-    const dialog = screen.getByRole('dialog', { name: 'Ranking decomposition' });
-    expect(dialog).toBeInTheDocument();
-    fireEvent.click(within(dialog).getByRole('button', { name: 'Close figure' }));
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-  });
-
-  it('switches analysis panels and exposes the animated step curve', () => {
-    render(<App />);
-    const analysisTabs = screen.getByRole('tablist', { name: 'Analysis figures' });
-    const tabs = within(analysisTabs).getAllByRole('tab');
-    expect(tabs).toHaveLength(6);
-    expect(screen.getByRole('button', { name: 'Pause auto' })).toBeInTheDocument();
-    fireEvent.click(within(analysisTabs).getByRole('tab', { name: 'Step curves' }));
-    expect(
-      screen.getByRole('heading', {
-        level: 3,
-        name: /More steps help—until the agent saturates or regresses/i,
+    expect(screen.queryByRole('heading', { level: 2, name: 'Metrics' })).not.toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole('button', {
+        name: 'Open Symmetry-aware average distance metric details',
       }),
+    );
+    const layoutDialog = screen.getByRole('dialog', {
+      name: 'Symmetry-aware average distance',
+    });
+    expect(layoutDialog).toBeInTheDocument();
+    expect(
+      within(layoutDialog).getByText(/nearest compatible point under the reference placement/i),
+    ).toBeInTheDocument();
+    expect(document.querySelector('.task-panel')).not.toContainElement(layoutDialog);
+    fireEvent.click(within(layoutDialog).getByRole('button', { name: 'Close metric details' }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    const taskTabs = screen.getByRole('tablist', { name: 'SceneActBench tasks' });
+    fireEvent.click(within(taskTabs).getByRole('tab', { name: /Dynamic Move/i }));
+    expect(
+      screen.getByRole('button', { name: 'Open Maximum Mover Error metric details' }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('img', { name: 'Animated Overall score curves from 10 to 150 agent steps' }),
+      screen.getByRole('button', { name: 'Open Average Mover Error metric details' }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Replay' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Resume auto' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Open Layout Error metric details' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Open Fixed normalized summary metric details' }),
+    ).toBeInTheDocument();
   });
 
   it('does not expose superseded metric labels', () => {

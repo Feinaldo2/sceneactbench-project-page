@@ -1,10 +1,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { AnalysisGallery } from './components/AnalysisGallery';
 import { HeroScene, PipelineVisual } from './components/BenchmarkVisuals';
 import { Explorer } from './components/Explorer';
 import { ArrowUpRight, CheckIcon, CloseIcon, CopyIcon, MenuIcon } from './components/Icons';
 import { Leaderboard } from './components/Leaderboard';
-import { MetricsGlossary } from './components/MetricsGlossary';
 import { TaskTabs } from './components/TaskTabs';
 import { withBase } from './data/assetPath';
 import {
@@ -21,29 +19,19 @@ const navItems = [
   ['explorer', 'Examples'],
   ['benchmark', 'Benchmark'],
   ['tasks', 'Tasks'],
-  ['metrics', 'Metrics'],
-  ['analysis', 'Analysis'],
   ['citation', 'Citation'],
 ] as const;
 
 function SectionHeading({
-  index,
-  eyebrow,
   title,
   children,
 }: {
-  index: string;
-  eyebrow: string;
   title: string;
   children: ReactNode;
 }) {
   return (
     <div className="section-heading">
-      <div className="section-index">{index}</div>
-      <div className="section-title">
-        <span className="micro-label">{eyebrow}</span>
-        <h2>{title}</h2>
-      </div>
+      <h2>{title}</h2>
       <p>{children}</p>
     </div>
   );
@@ -186,8 +174,6 @@ function AbstractSection() {
     <section className="section section-abstract" id="abstract">
       <div className="page-shell">
         <SectionHeading
-          index="01"
-          eyebrow="Paper overview"
           title="Abstract"
         >
           SceneActBench evaluates whether multimodal agents can turn visual evidence into
@@ -219,7 +205,6 @@ function MotivationSection() {
   return (
     <section className="section section-motivation" aria-labelledby="motivation-title">
       <div className="page-shell narrative-block">
-        <span className="micro-label">Why action</span>
         <h2 id="motivation-title">
           Can an agent that sees a scene act on a 3D environment to match it?
         </h2>
@@ -247,8 +232,6 @@ function LeaderboardSection() {
     <section className="section section-leaderboard" id="leaderboard">
       <div className="page-shell">
         <SectionHeading
-          index="02"
-          eyebrow="Interactive leaderboard"
           title="Leaderboard"
         >
           Overall averages five fixed task scores; the figure explains the aggregate and the table
@@ -265,8 +248,6 @@ function BenchmarkSection() {
     <section className="section section-benchmark" id="benchmark">
       <div className="page-shell">
         <SectionHeading
-          index="04"
-          eyebrow="Benchmark loop"
           title="Benchmark"
         >
           Visual evidence becomes an executable artifact that is measured after execution.
@@ -297,32 +278,12 @@ function TasksSection() {
     <section className="section section-tasks" id="tasks">
       <div className="page-shell">
         <SectionHeading
-          index="05"
-          eyebrow="Five tasks"
           title="Tasks"
         >
-          The suite moves from spatial placement and camera control to part motion, surface
-          reconstruction, and time-varying scenes.
+          Each task pairs its executable workflow with native metrics; open any metric for its
+          definition without expanding the page.
         </SectionHeading>
         <TaskTabs />
-      </div>
-    </section>
-  );
-}
-
-function MetricsSection() {
-  return (
-    <section className="section section-metrics" id="metrics">
-      <div className="page-shell">
-        <SectionHeading
-          index="06"
-          eyebrow="Metrics glossary"
-          title="Metrics"
-        >
-          SceneActBench keeps each task in its natural metric space, then normalizes only the
-          frozen components used by Overall.
-        </SectionHeading>
-        <MetricsGlossary />
       </div>
     </section>
   );
@@ -333,32 +294,12 @@ function ExplorerSection() {
     <section className="section section-explorer" id="explorer">
       <div className="page-shell">
         <SectionHeading
-          index="03"
-          eyebrow="Model × task explorer"
           title="Examples"
         >
           Each curated example pairs reference evidence with task-native metrics, verification
           renders, structured poses, and interactive geometry.
         </SectionHeading>
         <Explorer />
-      </div>
-    </section>
-  );
-}
-
-function AnalysisSection() {
-  return (
-    <section className="section section-analysis" id="analysis">
-      <div className="page-shell">
-        <SectionHeading
-          index="07"
-          eyebrow="Analysis"
-          title="Analysis"
-        >
-          Move from aggregate rankings to input effects, failure stages, budgets, scaling curves,
-          and representative action traces.
-        </SectionHeading>
-        <AnalysisGallery />
       </div>
     </section>
   );
@@ -388,8 +329,6 @@ function CitationSection() {
     <section className="section section-citation" id="citation">
       <div className="page-shell">
         <SectionHeading
-          index="08"
-          eyebrow="Citation"
           title="Citation"
         >
           Cite SceneActBench when using the benchmark, data, or evaluation protocol.
@@ -453,8 +392,6 @@ export default function App() {
         <ExplorerSection />
         <BenchmarkSection />
         <TasksSection />
-        <MetricsSection />
-        <AnalysisSection />
         <CitationSection />
       </main>
       <Footer />

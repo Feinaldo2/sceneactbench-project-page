@@ -16,9 +16,7 @@ const requiredSections = [
   'leaderboard',
   'benchmark',
   'tasks',
-  'metrics',
   'explorer',
-  'analysis',
   'citation',
 ];
 
@@ -69,12 +67,6 @@ for (const decoder of [
 
 for (const figure of [
   'leaderboard.svg',
-  'ranking-decomposition.svg',
-  'input-sensitivity.svg',
-  'failure-stages.svg',
-  'effective-budget.svg',
-  'step-curves.svg',
-  'agent-traces.svg',
 ]) {
   const figurePath = path.join(root, 'public', 'assets', 'analysis', figure);
   const figureStat = await stat(figurePath).catch(() => null);
