@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
+import { links } from './data/site';
 
 const emptyManifest = {
   schemaVersion: 1,
@@ -40,6 +41,9 @@ describe('SceneActBench project page', () => {
     expect(
       screen.getByRole('link', { name: 'SceneActBench home' }).querySelector('img'),
     ).toHaveAttribute('src', expect.stringContaining('hunyuan-mark.png'));
+    expect(
+      within(screen.getByRole('banner')).getByRole('link', { name: /Dataset/i }),
+    ).toHaveAttribute('href', links.dataset);
     expect(screen.queryByLabelText('Benchmark statistics')).not.toBeInTheDocument();
 
     const navigation = screen.getByRole('navigation', { name: 'Page sections' });

@@ -109,9 +109,14 @@ function Header() {
             </a>
           ))}
         </nav>
-        <a className="nav-code-link" href={links.code}>
-          Code <ArrowUpRight />
-        </a>
+        <div className="nav-resource-links">
+          <a className="nav-code-link" href={links.code}>
+            Code <ArrowUpRight />
+          </a>
+          <a className="nav-code-link nav-dataset-link" href={links.dataset}>
+            Dataset <ArrowUpRight />
+          </a>
+        </div>
         <button
           className="menu-button"
           type="button"

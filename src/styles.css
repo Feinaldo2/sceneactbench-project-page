@@ -4310,9 +4310,16 @@ body {
   transform: scaleY(1);
 }
 
-.nav-code-link {
-  justify-content: center;
+.nav-resource-links {
+  display: grid;
+  gap: 10px;
   margin-top: auto;
+}
+
+.nav-resource-links .nav-code-link {
+  width: 100%;
+  justify-content: center;
+  margin: 0;
 }
 
 main,
@@ -4714,9 +4721,20 @@ footer {
     display: none;
   }
 
-  .nav-code-link {
+  .nav-resource-links {
+    display: flex;
     margin-top: 0;
     margin-left: auto;
+  }
+
+  .nav-resource-links .nav-code-link {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+  }
+
+  .nav-dataset-link {
+    display: none;
   }
 
   .menu-button {
