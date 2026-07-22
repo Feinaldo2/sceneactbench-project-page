@@ -7,7 +7,6 @@ import {
   scoreLabels,
 } from '../data/leaderboard';
 import type { LeaderboardEntry, ScoreKey } from '../data/types';
-import { withBase } from '../data/assetPath';
 import { ChevronDown } from './Icons';
 
 const scoreKeys: ScoreKey[] = [
@@ -48,20 +47,6 @@ export function Leaderboard() {
 
   return (
     <div className="leaderboard-shell">
-      <figure className="leaderboard-hero-figure">
-        <img
-          src={withBase('assets/analysis/leaderboard.svg')}
-          alt="Stacked task contributions to Overall for all eleven SceneActBench configurations."
-          width="1120"
-          height="540"
-          loading="eager"
-        />
-        <figcaption>
-          Overall decomposed into five equally weighted task contributions. Exact task scores remain
-          sortable below.
-        </figcaption>
-      </figure>
-
       <div className="leaderboard-controls">
         <label className="sort-select">
           <span>Sort configurations by</span>
@@ -101,7 +86,11 @@ export function Leaderboard() {
               <th scope="col" className="rank-column">{published ? 'Rank' : 'No.'}</th>
               <th scope="col" className="model-column">Configuration</th>
               {scoreKeys.map((key) => (
-                <th scope="col" key={key}>
+                <th
+                  scope="col"
+                  key={key}
+                  aria-sort={sortKey === key ? 'descending' : 'none'}
+                >
                   <button
                     type="button"
                     className={sortKey === key ? 'sort-button active' : 'sort-button'}

@@ -8,6 +8,7 @@ import { CloseIcon } from './Icons';
 export function TaskMetrics({ taskId }: { taskId: TaskId }) {
   const [selectedMetric, setSelectedMetric] = useState<MetricDefinition | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const titleId = useId();
   const task = taskById[taskId];
@@ -16,7 +17,16 @@ export function TaskMetrics({ taskId }: { taskId: TaskId }) {
   const availableMetrics = overall ? [...taskMetrics, overall] : taskMetrics;
 
   useEffect(() => {
-    if (selectedMetric) closeRef.current?.focus();
+    if (!selectedMetric) return;
+    const previousOverflow = document.body.style.overflow;
+    const appRoot = document.getElementById('root');
+    document.body.style.overflow = 'hidden';
+    appRoot?.setAttribute('inert', '');
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      appRoot?.removeAttribute('inert');
+    };
   }, [selectedMetric]);
 
   const openMetric = (
@@ -65,6 +75,7 @@ export function TaskMetrics({ taskId }: { taskId: TaskId }) {
               }}
             >
               <article
+                ref={dialogRef}
                 className="metric-dialog"
                 role="dialog"
                 aria-modal="true"
@@ -82,8 +93,21 @@ export function TaskMetrics({ taskId }: { taskId: TaskId }) {
                     event.preventDefault();
                     closeMetric();
                   } else if (event.key === 'Tab') {
-                    event.preventDefault();
-                    closeRef.current?.focus();
+                    const focusable = Array.from(
+                      dialogRef.current?.querySelectorAll<HTMLElement>(
+                        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])',
+                      ) ?? [],
+                    );
+                    if (focusable.length === 0) return;
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+                    if (event.shiftKey && document.activeElement === first) {
+                      event.preventDefault();
+                      last?.focus();
+                    } else if (!event.shiftKey && document.activeElement === last) {
+                      event.preventDefault();
+                      first?.focus();
+                    }
                   }
                 }}
               >

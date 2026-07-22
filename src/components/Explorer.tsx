@@ -436,6 +436,16 @@ export function Explorer() {
   const nativeMetrics = metrics.filter((metric) => metric.task === taskId);
   const referenceImages = example?.referenceImages ?? [];
 
+  const showRandomExample = () => {
+    const alternatives = manifest.examples.filter((item) => item.id !== example?.id);
+    const pool = alternatives.length > 0 ? alternatives : manifest.examples;
+    if (pool.length === 0) return;
+    const next = pool[Math.floor(Math.random() * pool.length)];
+    if (!next) return;
+    setTaskId(next.task);
+    setModelId(next.modelId);
+  };
+
   return (
     <div className="explorer-shell">
       <div className="explorer-controls">
@@ -469,6 +479,14 @@ export function Explorer() {
             <ChevronDown />
           </span>
         </label>
+        <button
+          className="random-example-button"
+          type="button"
+          disabled={manifestState !== 'ready' || manifest.examples.length < 2}
+          onClick={showRandomExample}
+        >
+          Random example
+        </button>
       </div>
 
       <div className="explorer-context">

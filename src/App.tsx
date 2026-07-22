@@ -1,5 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
-import { PipelineVisual } from './components/BenchmarkVisuals';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Explorer } from './components/Explorer';
 import { ArrowUpRight, CheckIcon, CloseIcon, CopyIcon, MenuIcon } from './components/Icons';
 import { Leaderboard } from './components/Leaderboard';
@@ -16,9 +15,9 @@ import { tasks } from './data/tasks';
 const navItems = [
   ['abstract', 'Abstract'],
   ['tasks', 'Tasks'],
-  ['leaderboard', 'Results'],
+  ['leaderboard', 'Leaderboard'],
   ['explorer', 'Examples'],
-  ['benchmark', 'Protocol'],
+  ['benchmark', 'Benchmark'],
   ['citation', 'Citation'],
 ] as const;
 
@@ -45,6 +44,8 @@ function SectionHeading({
 function Header() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('abstract');
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const navigationRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const sections = navItems
@@ -66,11 +67,50 @@ function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 980) setOpen(false);
+      if (window.innerWidth > 1120) setOpen(false);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    const main = document.querySelector('main');
+    const footer = document.querySelector('footer');
+    document.body.style.overflow = 'hidden';
+    main?.setAttribute('inert', '');
+    footer?.setAttribute('inert', '');
+
+    const links = Array.from(navigationRef.current?.querySelectorAll('a') ?? []);
+    links[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusable: HTMLElement[] = [...links];
+      if (menuButtonRef.current) focusable.push(menuButtonRef.current);
+      const currentIndex = focusable.indexOf(document.activeElement as HTMLElement);
+      if (currentIndex < 0) return;
+      event.preventDefault();
+      const step = event.shiftKey ? -1 : 1;
+      const nextIndex = (currentIndex + step + focusable.length) % focusable.length;
+      focusable[nextIndex]?.focus();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      main?.removeAttribute('inert');
+      footer?.removeAttribute('inert');
+    };
+  }, [open]);
 
   return (
     <header className="site-header">
@@ -86,6 +126,7 @@ function Header() {
           <span>SceneAct<span>Bench</span></span>
         </a>
         <nav
+          ref={navigationRef}
           id="mobile-navigation"
           className={open ? 'primary-nav open' : 'primary-nav'}
           aria-label="Page sections"
@@ -111,6 +152,7 @@ function Header() {
           </a>
         </div>
         <button
+          ref={menuButtonRef}
           className="menu-button"
           type="button"
           aria-expanded={open}
@@ -178,6 +220,12 @@ function Hero() {
             <a className="button secondary" href={links.dataset}>
               Dataset <ArrowUpRight />
             </a>
+            <a className="button secondary" href="#leaderboard">
+              Leaderboard ↓
+            </a>
+            <a className="button secondary" href="#explorer">
+              Explore examples ↓
+            </a>
           </div>
         </div>
         <dl className="hero-facts">
@@ -198,7 +246,19 @@ function Hero() {
             <dd>11</dd>
           </div>
         </dl>
-        <PipelineVisual />
+        <figure className="hero-result-figure">
+          <img
+            src={withBase('assets/analysis/leaderboard.svg')}
+            alt="Stacked task contributions to Overall for all eleven SceneActBench configurations."
+            width="1120"
+            height="540"
+            loading="eager"
+          />
+          <figcaption>
+            Overall decomposed into five equally weighted task contributions; exact scores remain
+            sortable in the leaderboard.
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

@@ -41,6 +41,16 @@ describe('SceneActBench project page', () => {
     expect(
       screen.getByRole('link', { name: 'SceneActBench home' }).querySelector('img'),
     ).toHaveAttribute('src', expect.stringContaining('hunyuan-mark.png'));
+    const hero = document.querySelector<HTMLElement>('.hero');
+    expect(hero).toBeInTheDocument();
+    expect(within(hero!).getByRole('link', { name: 'Leaderboard ↓' })).toHaveAttribute(
+      'href',
+      '#leaderboard',
+    );
+    expect(within(hero!).getByRole('link', { name: 'Explore examples ↓' })).toHaveAttribute(
+      'href',
+      '#explorer',
+    );
     expect(screen.queryByText('Scene intelligence, made executable')).not.toBeInTheDocument();
     expect(
       screen.queryByText(/A unified benchmark that asks multimodal agents/i),
@@ -53,6 +63,16 @@ describe('SceneActBench project page', () => {
     const navigation = screen.getByRole('navigation', { name: 'Page sections' });
     expect(within(navigation).getAllByRole('link')).toHaveLength(6);
     expect(within(navigation).queryByRole('link', { name: 'Resources' })).not.toBeInTheDocument();
+    expect(within(navigation).getByRole('link', { name: 'Leaderboard' })).toHaveAttribute(
+      'href',
+      '#leaderboard',
+    );
+    expect(within(navigation).getByRole('link', { name: 'Benchmark' })).toHaveAttribute(
+      'href',
+      '#benchmark',
+    );
+    expect(within(navigation).queryByRole('link', { name: 'Results' })).not.toBeInTheDocument();
+    expect(within(navigation).queryByRole('link', { name: 'Protocol' })).not.toBeInTheDocument();
     for (const title of [
       'Abstract',
       'Leaderboard',
@@ -130,6 +150,88 @@ describe('SceneActBench project page', () => {
     expect(screen.getByText(/Camera examples use pose JSON and rendered images/i)).toBeInTheDocument();
   });
 
+  it('selects a different published example at random', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          schemaVersion: 1,
+          generatedAt: null,
+          assetBase: '/assets/examples/',
+          examples: [
+            {
+              id: 'random-layout',
+              task: 'layout',
+              modelId: 'doubao-seed-2-pro-high',
+              title: 'Random layout example',
+              sourceInstance: 'layout-source',
+              metrics: [],
+              referenceImages: [],
+              outputImages: [],
+            },
+            {
+              id: 'random-camera',
+              task: 'camera',
+              modelId: 'claude-opus-4-6-high',
+              title: 'Random camera example',
+              sourceInstance: 'camera-source',
+              metrics: [],
+              referenceImages: [],
+              outputImages: [],
+            },
+          ],
+        }),
+      }),
+    );
+    render(<App />);
+
+    expect(await screen.findByText('Random layout example')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Random example' }));
+    expect(await screen.findByText('Random camera example')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Camera' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('combobox', { name: /Choose configuration/i })).toHaveValue(
+      'claude-opus-4-6-high',
+    );
+  });
+
+  it('manages focus and scrolling in the mobile navigation', () => {
+    render(<App />);
+
+    const menuButton = screen.getByRole('button', { name: 'Open navigation' });
+    fireEvent.click(menuButton);
+    expect(screen.getByRole('button', { name: 'Close navigation' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+    expect(screen.getByRole('link', { name: 'Abstract' })).toHaveFocus();
+    expect(document.body.style.overflow).toBe('hidden');
+    expect(document.querySelector('main')).toHaveAttribute('inert');
+
+    fireEvent.keyDown(window, { key: 'Tab' });
+    expect(screen.getByRole('link', { name: 'Tasks' })).toHaveFocus();
+    fireEvent.keyDown(window, { key: 'Escape' });
+    expect(screen.getByRole('button', { name: 'Open navigation' })).toHaveFocus();
+    expect(document.body.style.overflow).toBe('');
+    expect(document.querySelector('main')).not.toHaveAttribute('inert');
+  });
+
+  it('exposes leaderboard sort state to assistive technology', () => {
+    render(<App />);
+
+    const table = screen.getByRole('table', {
+      name: 'SceneActBench model configurations and task scores',
+    });
+    const overallHeader = within(table).getByRole('columnheader', { name: /Overall/i });
+    const layoutHeader = within(table).getByRole('columnheader', { name: /Layout/i });
+    expect(overallHeader).toHaveAttribute('aria-sort', 'descending');
+    expect(layoutHeader).toHaveAttribute('aria-sort', 'none');
+
+    fireEvent.click(within(table).getByRole('button', { name: 'Sort by Layout' }));
+    expect(layoutHeader).toHaveAttribute('aria-sort', 'descending');
+    expect(overallHeader).toHaveAttribute('aria-sort', 'none');
+  });
+
   it('opens task metrics in a floating dialog', () => {
     render(<App />);
 
@@ -147,8 +249,10 @@ describe('SceneActBench project page', () => {
       within(layoutDialog).getByText(/nearest compatible point under the reference placement/i),
     ).toBeInTheDocument();
     expect(document.querySelector('.task-panel')).not.toContainElement(layoutDialog);
-    fireEvent.click(within(layoutDialog).getByRole('button', { name: 'Close metric details' }));
+    expect(document.body.style.overflow).toBe('hidden');
+    fireEvent.keyDown(layoutDialog, { key: 'Escape' });
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(document.body.style.overflow).toBe('');
 
     const taskTabs = screen.getByRole('tablist', { name: 'SceneActBench tasks' });
     fireEvent.click(within(taskTabs).getByRole('tab', { name: /Dynamic Move/i }));
