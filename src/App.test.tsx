@@ -46,7 +46,7 @@ describe('SceneActBench project page', () => {
     expect(within(navigation).getAllByRole('link')).toHaveLength(8);
     expect(within(navigation).queryByRole('link', { name: 'Resources' })).not.toBeInTheDocument();
     for (const title of [
-      'TL;DR',
+      'Abstract',
       'Leaderboard',
       'Examples',
       'Benchmark',
@@ -57,6 +57,9 @@ describe('SceneActBench project page', () => {
     ]) {
       expect(screen.getByRole('heading', { level: 2, name: title })).toBeInTheDocument();
     }
+    expect(
+      screen.getByText(/Vision-language model \(VLM\) agents increasingly use tools/i),
+    ).toBeInTheDocument();
     expect(screen.queryByText('Authors & citation')).not.toBeInTheDocument();
     expect(screen.getAllByText('Doubao Seed 2.0 Pro').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Claude Sonnet 5').length).toBeGreaterThan(0);

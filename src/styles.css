@@ -715,9 +715,9 @@ pre {
   line-height: 1.8;
 }
 
-/* TL;DR */
+/* Abstract */
 
-.section-tldr {
+.section-abstract {
   background: var(--blue-pale);
 }
 
@@ -4406,17 +4406,36 @@ body {
   line-height: 1.6;
 }
 
-.section-tldr {
+.section-abstract {
   padding-top: 72px;
   background: #edf5fc;
 }
 
-.section-tldr .section-heading {
+.section-abstract .section-heading {
   margin-bottom: 24px;
 }
 
-.section-tldr .section-heading h2 {
+.section-abstract .section-heading h2 {
   font-size: clamp(2rem, 2.8vw, 2.65rem);
+}
+
+.abstract-copy {
+  max-width: 980px;
+  margin-inline: auto;
+  padding: 34px 40px;
+  border: 1px solid #d6e4f2;
+  border-left: 4px solid var(--blue);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 32px rgba(31, 79, 132, 0.07);
+}
+
+.abstract-copy p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.abstract-copy strong {
+  color: var(--blue-deep);
 }
 
 .contribution-grid {
@@ -4496,7 +4515,7 @@ body {
 
 .hero-tagline,
 .section-heading > p,
-.contribution-grid p,
+.abstract-copy p,
 .task-description,
 .metric-card > p,
 .metric-card details p,
@@ -4598,8 +4617,12 @@ body {
     padding-block: 54px;
   }
 
-  .section-tldr {
+  .section-abstract {
     padding-top: 54px;
+  }
+
+  .abstract-copy {
+    padding: 25px 22px;
   }
 
   .section-heading {

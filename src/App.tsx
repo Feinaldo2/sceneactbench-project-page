@@ -11,13 +11,12 @@ import {
   affiliations,
   authors,
   bibtex,
-  contributions,
   links,
 } from './data/site';
 import { tasks } from './data/tasks';
 
 const navItems = [
-  ['tldr', 'TL;DR'],
+  ['abstract', 'Abstract'],
   ['leaderboard', 'Leaderboard'],
   ['explorer', 'Examples'],
   ['benchmark', 'Benchmark'],
@@ -52,7 +51,7 @@ function SectionHeading({
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('tldr');
+  const [activeSection, setActiveSection] = useState('abstract');
 
   useEffect(() => {
     const sections = navItems
@@ -184,24 +183,34 @@ function Hero() {
   );
 }
 
-function Tldr() {
+function AbstractSection() {
   return (
-    <section className="section section-tldr" id="tldr">
+    <section className="section section-abstract" id="abstract">
       <div className="page-shell">
         <SectionHeading
           index="01"
-          eyebrow="Why action?"
-          title="TL;DR"
+          eyebrow="Paper overview"
+          title="Abstract"
         >
-          Action turns visual understanding into geometry that can be directly verified.
+          SceneActBench evaluates whether multimodal agents can turn visual evidence into
+          executable 3D action.
         </SectionHeading>
-        <div className="contribution-grid">
-          {contributions.map((item) => (
-            <article key={item.number}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
+        <div className="abstract-copy">
+          <p>
+            Vision-language model (VLM) agents increasingly use tools to act on 3D scenes rather
+            than only describe them. Existing 3D benchmarks score textual responses or
+            single-object operations, leaving agent action on complete multi-object 3D scenes
+            under-evaluated. We present <strong>SceneActBench</strong>, a benchmark for visually
+            conditioned action across five 3D tasks under a unified agent–environment loop. Given
+            PNG images or sampled video frames and, where applicable, supplied 3D assets, an agent
+            acts on a 3D environment. We evaluate each final output against hidden ground truth
+            with task-specific geometric metrics. SceneActBench comprises five tasks built from
+            210 source instances, yielding 520 task cases including paired input conditions. Every
+            task runs through one fixed agent loop to keep the comparison fair. Across eleven
+            proprietary VLM configurations, Overall scores range from 38.6 to 50.2, and no
+            configuration succeeds consistently across tasks. We further analyse where and how
+            failures manifest.
+          </p>
         </div>
       </div>
     </section>
@@ -398,7 +407,7 @@ export default function App() {
       <Header />
       <main id="main-content">
         <Hero />
-        <Tldr />
+        <AbstractSection />
         <LeaderboardSection />
         <ExplorerSection />
         <BenchmarkSection />

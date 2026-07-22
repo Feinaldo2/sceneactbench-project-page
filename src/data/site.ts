@@ -32,24 +32,6 @@ export const affiliations = [
   { id: 6, name: 'Peking University (PKU)' },
 ] as const;
 
-export const contributions = [
-  {
-    number: '01',
-    title: 'From seeing to doing',
-    text: 'Five executable tasks turn visual evidence into layouts, cameras, geometry, and motion.',
-  },
-  {
-    number: '02',
-    title: 'Native metrics',
-    text: 'Task-native metrics expose geometric and temporal errors directly.',
-  },
-  {
-    number: '03',
-    title: 'Diagnosable traces',
-    text: 'Action traces reveal where agents recover, repeat, or stop early.',
-  },
-] as const;
-
 export const analysisItems = [
   {
     id: 'ranking',
