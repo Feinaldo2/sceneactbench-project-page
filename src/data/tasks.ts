@@ -33,7 +33,7 @@ export const tasks: TaskDefinition[] = [
     primaryMetric: 'PE / AE',
     secondaryMetrics: [],
     direction: 'lower',
-    color: { solid: '#6c76bf', soft: '#e8e8f7' },
+    color: { solid: '#4f78b8', soft: '#e6edf8' },
   },
   {
     id: 'articulated',
@@ -50,7 +50,7 @@ export const tasks: TaskDefinition[] = [
     primaryMetric: 'MPE',
     secondaryMetrics: [],
     direction: 'lower',
-    color: { solid: '#1f9c91', soft: '#d9f2ee' },
+    color: { solid: '#2d83b5', soft: '#e0f0f8' },
   },
   {
     id: 'reconstruction',
@@ -67,7 +67,7 @@ export const tasks: TaskDefinition[] = [
     primaryMetric: 'F@5%',
     secondaryMetrics: [],
     direction: 'higher',
-    color: { solid: '#d7903d', soft: '#faead5' },
+    color: { solid: '#5e79c7', soft: '#e9edfa' },
   },
   {
     id: 'dynamic',
@@ -84,7 +84,7 @@ export const tasks: TaskDefinition[] = [
     primaryMetric: 'MME / LE',
     secondaryMetrics: ['AME'],
     direction: 'lower',
-    color: { solid: '#d25f53', soft: '#f8dfdc' },
+    color: { solid: '#3e5f9d', soft: '#e4eaf5' },
   },
 ];
 

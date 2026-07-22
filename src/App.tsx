@@ -6,6 +6,7 @@ import { ArrowUpRight, CheckIcon, CloseIcon, CopyIcon, MenuIcon } from './compon
 import { Leaderboard } from './components/Leaderboard';
 import { MetricsGlossary } from './components/MetricsGlossary';
 import { TaskTabs } from './components/TaskTabs';
+import { withBase } from './data/assetPath';
 import {
   affiliations,
   authors,
@@ -83,11 +84,13 @@ function Header() {
     <header className="site-header">
       <div className="nav-shell">
         <a className="brand" href="#top" aria-label="SceneActBench home">
-          <svg viewBox="0 0 42 42" aria-hidden="true">
-            <path d="m7 11 14-8 14 8v20l-14 8-14-8V11Z" />
-            <path d="m7 11 14 8 14-8M21 19v20" />
-            <circle cx="31" cy="28" r="4" />
-          </svg>
+          <img
+            className="brand-mark"
+            src={withBase('assets/logos/hunyuan-mark.png')}
+            width="34"
+            height="34"
+            alt=""
+          />
           <span>SceneAct<span>Bench</span></span>
         </a>
         <nav

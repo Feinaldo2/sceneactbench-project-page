@@ -7,11 +7,11 @@
   --blue-mid: #2f6bb2;
   --blue-pale: #f0f7fc;
   --blue-line: #d6e6f2;
-  --teal: #14766f;
-  --teal-pale: #e4f5f2;
-  --amber: #d7903d;
-  --amber-pale: #fbf0df;
-  --coral: #d25f53;
+  --teal: #3979b5;
+  --teal-pale: #e8f2fb;
+  --amber: #607fc2;
+  --amber-pale: #edf1fb;
+  --coral: #6d72bd;
   --paper: #ffffff;
   --paper-warm: #fbfcfd;
   --line: #dfe7ed;
@@ -19,6 +19,7 @@
   --shadow-sm: 0 8px 26px rgba(16, 37, 61, 0.07);
   --shadow-lg: 0 28px 80px rgba(16, 53, 99, 0.14);
   --sans: "Inter", "Aptos", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "Avenir Next", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   --page: min(1320px, calc(100vw - 64px));
   color: var(--ink);
@@ -33,7 +34,6 @@
 }
 
 html {
-  font-size: 18px;
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
 }
@@ -51,6 +51,10 @@ body,
 button,
 select {
   font-family: var(--sans);
+}
+
+p {
+  font-family: var(--body);
 }
 
 button,
@@ -86,7 +90,7 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid #e5a345;
+  outline: 3px solid #4f88c9;
   outline-offset: 3px;
 }
 
@@ -173,24 +177,12 @@ pre {
   letter-spacing: -0.025em;
 }
 
-.brand svg {
-  width: 32px;
-  height: 32px;
-  overflow: visible;
-}
-
-.brand svg path {
-  fill: none;
-  stroke: var(--blue);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-}
-
-.brand svg circle {
-  fill: var(--amber);
-  stroke: white;
-  stroke-width: 1.5;
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(51, 116, 194, 0.2));
 }
 
 .brand span span,
@@ -2711,7 +2703,7 @@ pre {
   max-width: 920px;
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.96rem;
+  font-size: 1rem;
   line-height: 1.65;
 }
 
@@ -4199,13 +4191,13 @@ footer {
 }
 
 body {
-  background: #f5faf8;
+  background: #f4f8fc;
 }
 
 .site-header {
   height: 64px;
-  border-color: rgba(156, 201, 194, 0.18);
-  background: rgba(5, 27, 31, 0.94);
+  border-color: rgba(126, 168, 214, 0.2);
+  background: rgba(7, 27, 52, 0.95);
 }
 
 .nav-shell {
@@ -4220,26 +4212,22 @@ body {
   color: #eaf7f3;
 }
 
-.brand svg path {
-  stroke: #85d9c3;
-}
-
 .primary-nav a::after {
-  background: #85d9c3;
+  background: #79b8f2;
 }
 
 .nav-code-link,
 .menu-button {
-  border-color: rgba(222, 243, 237, 0.25);
+  border-color: rgba(205, 226, 247, 0.28);
   background: rgba(255, 255, 255, 0.06);
 }
 
 .hero {
   padding: 56px 0 0;
   background:
-    radial-gradient(circle at 18% 15%, rgba(21, 118, 91, 0.24), transparent 32%),
-    radial-gradient(circle at 90% 5%, rgba(47, 107, 178, 0.2), transparent 34%),
-    linear-gradient(135deg, #041d19 0%, #071922 54%, #0a2031 100%);
+    radial-gradient(circle at 18% 15%, rgba(51, 113, 190, 0.3), transparent 34%),
+    radial-gradient(circle at 90% 5%, rgba(92, 111, 199, 0.23), transparent 36%),
+    linear-gradient(135deg, #071a32 0%, #0a2343 54%, #0d315d 100%);
 }
 
 .hero::before {
@@ -4260,17 +4248,17 @@ body {
 .hero-kicker {
   justify-content: center;
   margin-bottom: 22px;
-  color: #8de0c3;
+  color: #8dc7f7;
 }
 
 .hero-kicker i {
-  background: rgba(141, 224, 195, 0.36);
+  background: rgba(141, 199, 247, 0.38);
 }
 
 .hero h1 {
   max-width: 900px;
   margin-inline: auto;
-  color: #f4fbf9;
+  color: #f4f8fd;
   font-size: clamp(3.1rem, 5.7vw, 4.85rem);
   letter-spacing: -0.045em;
   line-height: 0.98;
@@ -4278,17 +4266,17 @@ body {
 
 .hero h1 .title-name {
   margin-bottom: 10px;
-  color: #8de0c3;
+  color: #78b9f0;
 }
 
 .hero h1 em {
-  color: #91bfe8;
+  color: #abd6fb;
 }
 
 .hero-tagline {
   max-width: 750px;
   margin: 24px auto 18px;
-  color: #c0d3d5;
+  color: #cad9e8;
   font-size: 1rem;
   line-height: 1.65;
 }
@@ -4296,17 +4284,17 @@ body {
 .author-line {
   justify-content: center;
   margin-inline: auto;
-  color: #edf7f5;
+  color: #edf5fc;
   font-size: 0.78rem;
 }
 
 .author-line i {
-  color: rgba(217, 239, 234, 0.32);
+  color: rgba(211, 229, 247, 0.34);
 }
 
 .author-line sup,
 .affiliation-line sup {
-  color: #8de0c3;
+  color: #8dc7f7;
 }
 
 .affiliation-line {
@@ -4316,7 +4304,7 @@ body {
   justify-content: center;
   gap: 3px 12px;
   margin: 8px auto 0;
-  color: #91a9ad;
+  color: #9db3c8;
   font-size: 0.65rem;
 }
 
@@ -4327,15 +4315,15 @@ body {
 
 .hero .button {
   min-height: 42px;
-  border-color: rgba(225, 244, 239, 0.26);
+  border-color: rgba(215, 233, 250, 0.28);
   background: rgba(255, 255, 255, 0.08);
-  color: #f5fbfa;
+  color: #f5f9fd;
 }
 
 .hero .button.primary {
-  border-color: #78cdb5;
-  background: #f5fbfa;
-  color: #0a4439;
+  border-color: #80b9ec;
+  background: #f5f9fd;
+  color: #123e6c;
 }
 
 .hero-visual {
@@ -4414,13 +4402,13 @@ body {
   max-width: none;
   margin: 0;
   padding-left: 18px;
-  font-size: 0.88rem;
-  line-height: 1.55;
+  font-size: 0.94rem;
+  line-height: 1.6;
 }
 
 .section-tldr {
   padding-top: 72px;
-  background: #eef8f4;
+  background: #edf5fc;
 }
 
 .section-tldr .section-heading {
@@ -4440,14 +4428,14 @@ body {
 .contribution-grid article {
   min-height: 158px;
   padding: 25px 27px;
-  border: 1px solid #d9e9e3;
+  border: 1px solid #d6e4f2;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 10px 28px rgba(16, 74, 63, 0.06);
+  box-shadow: 0 10px 28px rgba(31, 79, 132, 0.07);
 }
 
 .contribution-grid article:last-child {
-  border-right: 1px solid #d9e9e3;
+  border-right: 1px solid #d6e4f2;
 }
 
 .contribution-grid h3 {
@@ -4456,8 +4444,8 @@ body {
 }
 
 .contribution-grid p {
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.62;
 }
 
 .section-leaderboard,
@@ -4481,33 +4469,34 @@ body {
 }
 
 .leaderboard-footnotes p {
-  font-size: 0.76rem;
-}
-
-.task-description {
   font-size: 0.9rem;
 }
 
+.task-description {
+  font-size: 0.95rem;
+}
+
 .task-specs dd {
-  font-size: 0.74rem;
+  font-size: 0.78rem;
 }
 
 .metric-card > p,
 .metric-card details p {
-  font-size: 0.78rem;
+  font-size: 0.9rem;
 }
 
 .explorer-context p {
-  font-size: 0.78rem;
+  font-size: 0.9rem;
+}
+
+.metric-family p {
+  font-size: 0.72rem;
+  line-height: 1.5;
 }
 
 @media (max-width: 980px) {
   :root {
     --page: min(900px, calc(100vw - 36px));
-  }
-
-  html {
-    font-size: 17px;
   }
 
   .hero {
@@ -4557,10 +4546,6 @@ body {
 @media (max-width: 700px) {
   :root {
     --page: calc(100vw - 30px);
-  }
-
-  html {
-    font-size: 16px;
   }
 
   .site-header {
@@ -4641,7 +4626,7 @@ body {
   }
 
   .analysis-panel-copy p {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
   }
 
   .analysis-panel-visual {

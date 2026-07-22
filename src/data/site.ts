@@ -55,7 +55,7 @@ export const analysisItems = [
     id: 'ranking',
     kicker: '01 · Result structure',
     tab: 'Ranking',
-    accent: '#2f6bb2',
+    accent: '#245fa8',
     title: 'Ranking decomposition',
     headline: 'Overall rankings hide sharply different task profiles.',
     description:
@@ -70,7 +70,7 @@ export const analysisItems = [
     id: 'sensitivity',
     kicker: '02 · Observation',
     tab: 'Inputs',
-    accent: '#6d6fc4',
+    accent: '#4a72b8',
     title: 'Input sensitivity',
     headline: 'More visual evidence does not help every agent equally.',
     description:
@@ -85,7 +85,7 @@ export const analysisItems = [
     id: 'failures',
     kicker: '03 · Diagnosis',
     tab: 'Failures',
-    accent: '#1f9c91',
+    accent: '#2f82b7',
     title: 'Failure stages',
     headline: 'Failures emerge at different stages of the action pipeline.',
     description:
@@ -100,7 +100,7 @@ export const analysisItems = [
     id: 'budget',
     kicker: '04 · Efficiency',
     tab: 'Budget',
-    accent: '#d7903d',
+    accent: '#5b79c9',
     title: 'Effective budget',
     headline: 'Allocated steps and useful steps are not the same.',
     description:
@@ -115,7 +115,7 @@ export const analysisItems = [
     id: 'steps',
     kicker: '05 · Scaling',
     tab: 'Step curves',
-    accent: '#8b61cf',
+    accent: '#6d67c5',
     title: 'Step curves',
     headline: 'More steps help—until the agent saturates or regresses.',
     description:
@@ -130,7 +130,7 @@ export const analysisItems = [
     id: 'traces',
     kicker: '06 · Behavior',
     tab: 'Traces',
-    accent: '#cf5f72',
+    accent: '#3e65a5',
     title: 'Representative traces',
     headline: 'The same score can come from very different behavior.',
     description:

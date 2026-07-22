@@ -37,6 +37,9 @@ describe('SceneActBench project page', () => {
         name: /SceneActBench: Can Agents Act on the 3D Scenes They See\?/i,
       }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'SceneActBench home' }).querySelector('img'),
+    ).toHaveAttribute('src', expect.stringContaining('hunyuan-mark.png'));
     expect(screen.queryByLabelText('Benchmark statistics')).not.toBeInTheDocument();
 
     const navigation = screen.getByRole('navigation', { name: 'Page sections' });
