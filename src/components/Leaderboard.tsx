@@ -6,7 +6,6 @@ import {
   leaderboardProvenance,
   scoreLabels,
 } from '../data/leaderboard';
-import { tasks } from '../data/tasks';
 import type { LeaderboardEntry, ScoreKey } from '../data/types';
 import { withBase } from '../data/assetPath';
 import { CheckIcon, ChevronDown } from './Icons';
@@ -31,44 +30,6 @@ function ConfigurationName({ entry }: { entry: LeaderboardEntry }) {
       <span>
         {entry.organization} · {entry.configuration}
       </span>
-    </div>
-  );
-}
-
-function TaskComposition({ entry }: { entry: LeaderboardEntry }) {
-  const values = tasks.map((task) => ({
-    task,
-    score: entry.scores[task.id],
-  }));
-  const total = values.reduce((sum, item) => sum + (item.score ?? 0), 0);
-
-  if (total === 0) {
-    return (
-      <div className="composition composition-empty" aria-label="Task score profile unavailable">
-        {values.map(({ task }) => (
-          <span
-            key={task.id}
-            style={{ background: task.color.solid, width: `${100 / tasks.length}%` }}
-          />
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div className="composition" aria-label="Task score profile">
-      {values.map(({ task, score }) =>
-        score === null ? null : (
-          <span
-            key={task.id}
-            title={`${task.name}: ${formatScore(score)}`}
-            style={{
-              background: task.color.solid,
-              width: `${(score / total) * 100}%`,
-            }}
-          />
-        ),
-      )}
     </div>
   );
 }
@@ -106,7 +67,6 @@ function CompareTray({
               ×
             </button>
             <ConfigurationName entry={entry} />
-            <TaskComposition entry={entry} />
             <dl>
               {scoreKeys.map((key) => (
                 <div key={key}>
@@ -149,6 +109,20 @@ export function Leaderboard() {
 
   return (
     <div className="leaderboard-shell">
+      <figure className="leaderboard-hero-figure">
+        <img
+          src={withBase('assets/analysis/leaderboard.svg')}
+          alt="Stacked task contributions to Overall for all eleven SceneActBench configurations."
+          width="1120"
+          height="540"
+          loading="eager"
+        />
+        <figcaption>
+          Overall decomposed into five equally weighted task contributions. Exact task scores remain
+          sortable below.
+        </figcaption>
+      </figure>
+
       <div className="leaderboard-controls">
         <label className="sort-select">
           <span>Sort configurations by</span>
@@ -161,14 +135,6 @@ export function Leaderboard() {
             <ChevronDown />
           </span>
         </label>
-        <div className="task-legend" aria-label="Task color legend">
-          {tasks.map((task) => (
-            <span key={task.id}>
-              <i style={{ background: task.color.solid }} />
-              {task.name}
-            </span>
-          ))}
-        </div>
       </div>
 
       {!published && (
@@ -208,7 +174,6 @@ export function Leaderboard() {
                   </button>
                 </th>
               ))}
-              <th scope="col" className="composition-column">Task profile</th>
               <th scope="col" className="compare-column"><span className="sr-only">Compare</span></th>
             </tr>
           </thead>
@@ -229,7 +194,6 @@ export function Leaderboard() {
                       {formatScore(entry.scores[key])}
                     </td>
                   ))}
-                  <td><TaskComposition entry={entry} /></td>
                   <td>
                     <button
                       type="button"
@@ -270,7 +234,6 @@ export function Leaderboard() {
                 <span>{scoreLabels[sortKey]}</span>
                 <strong>{formatScore(entry.scores[sortKey])}</strong>
               </div>
-              <TaskComposition entry={entry} />
               <div className="mobile-task-scores">
                 {scoreKeys.filter((key) => key !== sortKey).map((key) => (
                   <span key={key}>
@@ -282,17 +245,6 @@ export function Leaderboard() {
           );
         })}
       </div>
-
-      <details className="paper-ranking-preview">
-        <summary>View the published static leaderboard figure</summary>
-        <img
-          src={withBase('assets/paper/ranking.webp')}
-          alt="Published SceneActBench leaderboard with task contributions stacked into Overall score."
-          width="844"
-          height="404"
-          loading="lazy"
-        />
-      </details>
 
       <CompareTray
         entries={comparedEntries}
@@ -306,11 +258,6 @@ export function Leaderboard() {
           Overall is a fixed normalized summary across the five tasks. It is not a claim of
           statistical significance; inspect native metrics and case-level evidence before drawing
           model conclusions.
-        </p>
-        <p>
-          <span>Task profile</span>
-          Segment widths show each task&apos;s share of the achieved five-task score sum. Overall
-          still gives every task equal 20% weight.
         </p>
       </div>
     </div>

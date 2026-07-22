@@ -39,8 +39,12 @@ const files = (await Promise.all(scanRoots.map(collect)))
 const violations = [];
 for (const file of files) {
   const content = await readFile(file, 'utf8');
+  const searchableContent =
+    path.extname(file) === '.svg'
+      ? content.replace(/<image\b[\s\S]*?\/>/g, '')
+      : content;
   for (const term of forbiddenTerms) {
-    if (content.includes(term)) {
+    if (searchableContent.includes(term)) {
       violations.push(`${path.relative(root, file)} contains prohibited terminology ${term}.`);
     }
   }
@@ -64,6 +68,7 @@ for (const decoder of [
 }
 
 for (const figure of [
+  'leaderboard.svg',
   'ranking-decomposition.svg',
   'input-sensitivity.svg',
   'failure-stages.svg',

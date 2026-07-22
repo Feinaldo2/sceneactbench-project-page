@@ -41,6 +41,10 @@ describe('SceneActBench project page', () => {
     expect(
       screen.getByRole('link', { name: 'SceneActBench home' }).querySelector('img'),
     ).toHaveAttribute('src', expect.stringContaining('hunyuan-mark.png'));
+    expect(screen.queryByText('Scene intelligence, made executable')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/A unified benchmark that asks multimodal agents/i),
+    ).not.toBeInTheDocument();
     expect(
       within(screen.getByRole('banner')).getByRole('link', { name: /Dataset/i }),
     ).toHaveAttribute('href', links.dataset);
@@ -67,6 +71,10 @@ describe('SceneActBench project page', () => {
     expect(screen.queryByText('Authors & citation')).not.toBeInTheDocument();
     expect(screen.getAllByText('Doubao Seed 2.0 Pro').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Claude Sonnet 5').length).toBeGreaterThan(0);
+    expect(
+      screen.getByAltText(/Stacked task contributions to Overall/i),
+    ).toHaveAttribute('src', expect.stringContaining('leaderboard.svg'));
+    expect(screen.queryByText('Task profile')).not.toBeInTheDocument();
     expect(screen.getByText('Maximum Part Error')).toBeInTheDocument();
     expect(screen.getByText('Maximum Mover Error')).toBeInTheDocument();
     expect(screen.getByText('Average Mover Error')).toBeInTheDocument();

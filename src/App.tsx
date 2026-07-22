@@ -137,19 +137,12 @@ function Hero() {
     <section className="hero" id="top">
       <div className="hero-grid page-shell">
         <div className="hero-copy">
-          <div className="hero-kicker">
-            <span>Scene intelligence, made executable</span>
-            <i />
-            <span>2026</span>
-          </div>
           <h1 aria-label="SceneActBench: Can Agents Act on the 3D Scenes They See?">
             <span className="title-name">SceneActBench:</span>
-            Can Agents Act on the <em>3D Scenes</em> They See?
+            <span className="title-question">
+              Can Agents Act on the <em>3D Scenes</em> They See?
+            </span>
           </h1>
-          <p className="hero-tagline">
-            A unified benchmark that asks multimodal agents to do more than describe a scene:
-            arrange it, frame it, articulate it, reconstruct it, and set it in motion.
-          </p>
           <div className="author-line" aria-label="Authors">
             {authors.map((author, index) => (
               <span key={author.name}>

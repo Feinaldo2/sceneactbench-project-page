@@ -70,9 +70,10 @@ Do not estimate missing values, reorder configurations by visual inspection, or 
 
 ## Paper figures
 
-Optimized WebP exports of compact paper figures live in `public/assets/paper/`. The interactive leaderboard remains data-driven; `ranking.webp` is an optional static preview/fallback. Analysis panels use the paper generators' editable SVG outputs under `public/assets/analysis/`, while Step Curves are rendered as native animated SVG in the browser. Refresh the vector assets with:
+Optimized WebP exports of compact paper figures live in `public/assets/paper/`. The leaderboard overview and Analysis panels use editable SVG outputs under `public/assets/analysis/`, while Step Curves are rendered as native animated SVG in the browser. Refresh the vector assets with:
 
 ```bash
+python3 scripts/build-leaderboard-figure.py --paper-root /absolute/path/to/llm3dbench
 python3 scripts/sync-analysis-vectors.py --paper-root /absolute/path/to/llm3dbench
 python3 scripts/build-analysis-step-curve.py \
   --data /absolute/path/to/llm3dbench/paper_figure_repro_bundle/data/step_curve_scores.json
