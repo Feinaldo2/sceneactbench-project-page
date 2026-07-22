@@ -41,7 +41,7 @@ export const analysisItems = [
     title: 'Ranking decomposition',
     headline: 'Overall rankings hide sharply different task profiles.',
     description:
-      'The same aggregate score can come from very different strengths. Decomposing Overall shows which tasks create each model’s advantage—and where that advantage disappears.',
+      'Doubao’s 1.34-point lead over Claude Opus comes almost entirely from Dynamic: that task contributes +1.49 points, while the other four tasks sum to −0.15. Overall therefore reflects the magnitude and concentration of task deficits, not simply the number of task wins.',
     kind: 'stacked' as const,
     image: withBase('assets/analysis/ranking-decomposition.svg'),
     width: 841,
@@ -56,7 +56,7 @@ export const analysisItems = [
     title: 'Input sensitivity',
     headline: 'More visual evidence does not help every agent equally.',
     description:
-      'Multi-view evidence and photo-realistic inputs change models in different directions. The benchmark therefore reports paired conditions rather than assuming richer input is always easier.',
+      'Multi-view Layout improves nine of eleven configurations, but Step and MiMo decline. Photo-realistic Dynamic is more mixed: four configurations improve, six decline, and Claude Opus is unchanged at one-decimal precision. Richer visual input is therefore configuration- and condition-dependent.',
     kind: 'sensitivity' as const,
     image: withBase('assets/analysis/input-sensitivity.svg'),
     width: 748,
@@ -71,7 +71,7 @@ export const analysisItems = [
     title: 'Failure stages',
     headline: 'Failures emerge at different stages of the action pipeline.',
     description:
-      'Stage-aware diagnostics separate target selection, geometry, coverage, and motion errors, making similar endpoint scores technically distinguishable.',
+      'Similar primary scores conceal different mechanisms. Doubao moves only 13 of 391 articulated parts, while Claude Opus moves 255; the three leading reconstruction runs match 425–432 of 515 targets but cover only 24–44. Stage-aware diagnostics separate frozen outputs, wrong actions, incomplete surfaces, and direction failures.',
     kind: 'stages' as const,
     image: withBase('assets/analysis/failure-stages.svg'),
     width: 866,
@@ -86,7 +86,7 @@ export const analysisItems = [
     title: 'Effective budget',
     headline: 'Allocated steps and useful steps are not the same.',
     description:
-      'Agents often stop early, repeat actions, or spend calls without improving the artifact. Effective budget exposes how much of the available interaction window becomes useful work.',
+      'Task-balanced interaction volume does not positively track Overall across the evaluated configurations (Spearman ρ = −0.68). Claude Opus uses 82.9% of its available budget, while top-ranked Doubao uses 34.3%; these values describe different interaction regimes rather than a causal effect of more steps.',
     kind: 'budget' as const,
     image: withBase('assets/analysis/effective-budget.svg'),
     width: 830,
@@ -101,7 +101,7 @@ export const analysisItems = [
     title: 'Step curves',
     headline: 'More steps help—until the agent saturates or regresses.',
     description:
-      'The animated Overall curves replay the exact frozen checkpoints from 10 to 150 agent steps. They reveal fast gains, plateaus, and late-stage instability that endpoint tables conceal.',
+      'Across 10–150 step checkpoints, Overall rises by 12.0–27.7 points. Camera has the largest mean gain at 51.3 points, Articulated changes little, and the model ordering changes with budget. The animated curves replay the same frozen checkpoints used in the appendix.',
     kind: 'curves' as const,
     image: withBase('assets/analysis/step-curves.svg'),
     width: 839,
@@ -116,7 +116,7 @@ export const analysisItems = [
     title: 'Representative traces',
     headline: 'The same score can come from very different behavior.',
     description:
-      'Representative traces expose recovery, repetition, verification, and premature stopping, linking final artifacts back to the actions that produced them.',
+      'Aggregate step and tool-call counts do not reveal how an agent spends its budget. These scored episodes expose input reads, code edits, render checks, tool errors, and stopping events. They are illustrative process records rather than estimates of how often each behavior occurs.',
     kind: 'trace' as const,
     image: withBase('assets/analysis/agent-traces.svg'),
     width: 880,

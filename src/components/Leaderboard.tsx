@@ -8,7 +8,7 @@ import {
 } from '../data/leaderboard';
 import type { LeaderboardEntry, ScoreKey } from '../data/types';
 import { withBase } from '../data/assetPath';
-import { CheckIcon, ChevronDown } from './Icons';
+import { ChevronDown } from './Icons';
 
 const scoreKeys: ScoreKey[] = [
   'overall',
@@ -34,57 +34,8 @@ function ConfigurationName({ entry }: { entry: LeaderboardEntry }) {
   );
 }
 
-function CompareTray({
-  entries,
-  onRemove,
-  onClear,
-}: {
-  entries: LeaderboardEntry[];
-  onRemove: (id: string) => void;
-  onClear: () => void;
-}) {
-  if (entries.length === 0) return null;
-  return (
-    <div className="compare-tray" aria-live="polite">
-      <div className="compare-tray-head">
-        <div>
-          <span className="micro-label">Comparison set</span>
-          <strong>{entries.length} of 3 configurations</strong>
-        </div>
-        <button className="text-button" type="button" onClick={onClear}>
-          Clear
-        </button>
-      </div>
-      <div className="compare-grid">
-        {entries.map((entry) => (
-          <article className="compare-card" key={entry.id}>
-            <button
-              className="compare-remove"
-              type="button"
-              onClick={() => onRemove(entry.id)}
-              aria-label={`Remove ${entry.model} ${entry.configuration} from comparison`}
-            >
-              ×
-            </button>
-            <ConfigurationName entry={entry} />
-            <dl>
-              {scoreKeys.map((key) => (
-                <div key={key}>
-                  <dt>{scoreLabels[key]}</dt>
-                  <dd>{formatScore(entry.scores[key])}</dd>
-                </div>
-              ))}
-            </dl>
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function Leaderboard() {
   const [sortKey, setSortKey] = useState<ScoreKey>('overall');
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const published = hasPublishedScores();
 
   const sorted = useMemo(
@@ -94,18 +45,6 @@ export function Leaderboard() {
     }),
     [sortKey],
   );
-
-  const comparedEntries = selectedIds
-    .map((id) => leaderboard.find((entry) => entry.id === id))
-    .filter((entry): entry is LeaderboardEntry => Boolean(entry));
-
-  const toggleSelected = (id: string) => {
-    setSelectedIds((current) => {
-      if (current.includes(id)) return current.filter((item) => item !== id);
-      if (current.length >= 3) return [...current.slice(1), id];
-      return [...current, id];
-    });
-  };
 
   return (
     <div className="leaderboard-shell">
@@ -174,14 +113,11 @@ export function Leaderboard() {
                   </button>
                 </th>
               ))}
-              <th scope="col" className="compare-column"><span className="sr-only">Compare</span></th>
             </tr>
           </thead>
           <tbody>
-            {sorted.map(({ entry }, index) => {
-              const selected = selectedIds.includes(entry.id);
-              return (
-                <tr key={entry.id} className={selected ? 'selected' : undefined}>
+            {sorted.map(({ entry }, index) => (
+                <tr key={entry.id}>
                   <td className="rank-cell">
                     <span>{String(index + 1).padStart(2, '0')}</span>
                   </td>
@@ -194,41 +130,18 @@ export function Leaderboard() {
                       {formatScore(entry.scores[key])}
                     </td>
                   ))}
-                  <td>
-                    <button
-                      type="button"
-                      className={selected ? 'compare-toggle selected' : 'compare-toggle'}
-                      onClick={() => toggleSelected(entry.id)}
-                      aria-pressed={selected}
-                      aria-label={`${selected ? 'Remove' : 'Add'} ${entry.model} ${entry.configuration} ${selected ? 'from' : 'to'} comparison`}
-                    >
-                      {selected ? <CheckIcon /> : '+'}
-                    </button>
-                  </td>
                 </tr>
-              );
-            })}
+            ))}
           </tbody>
         </table>
       </div>
 
       <div className="leaderboard-mobile">
-        {sorted.map(({ entry }, index) => {
-          const selected = selectedIds.includes(entry.id);
-          return (
-            <article className={selected ? 'leader-card selected' : 'leader-card'} key={entry.id}>
+        {sorted.map(({ entry }, index) => (
+            <article className="leader-card" key={entry.id}>
               <div className="leader-card-head">
                 <span className="leader-rank">{String(index + 1).padStart(2, '0')}</span>
                 <ConfigurationName entry={entry} />
-                <button
-                  type="button"
-                  className={selected ? 'compare-toggle selected' : 'compare-toggle'}
-                  onClick={() => toggleSelected(entry.id)}
-                  aria-pressed={selected}
-                  aria-label={`${selected ? 'Remove' : 'Add'} ${entry.model} ${entry.configuration} ${selected ? 'from' : 'to'} comparison`}
-                >
-                  {selected ? <CheckIcon /> : '+'}
-                </button>
               </div>
               <div className="mobile-score">
                 <span>{scoreLabels[sortKey]}</span>
@@ -242,15 +155,8 @@ export function Leaderboard() {
                 ))}
               </div>
             </article>
-          );
-        })}
+        ))}
       </div>
-
-      <CompareTray
-        entries={comparedEntries}
-        onRemove={(id) => setSelectedIds((current) => current.filter((item) => item !== id))}
-        onClear={() => setSelectedIds([])}
-      />
 
       <div className="leaderboard-footnotes">
         <p>

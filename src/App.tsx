@@ -215,6 +215,31 @@ function AbstractSection() {
   );
 }
 
+function MotivationSection() {
+  return (
+    <section className="section section-motivation" aria-labelledby="motivation-title">
+      <div className="page-shell narrative-block">
+        <span className="micro-label">Why action</span>
+        <h2 id="motivation-title">Acting makes 3D understanding observable.</h2>
+        <div className="narrative-columns">
+          <p>
+            Acting on a scene, rather than describing it, is a stronger test of an agent&apos;s 3D
+            understanding. Text-answer benchmarks do not require the agent to change scene state,
+            while existing action benchmarks typically isolate one object or one static edit.
+            Practical 3D work instead requires coordinated decisions across complete scenes.
+          </p>
+          <p>
+            SceneActBench therefore evaluates executable outputs. An agent observes images or
+            sampled video frames, acts through a shared tool interface, and produces JSON or GLB
+            artifacts. The evaluator compares those artifacts with hidden 3D ground truth across
+            five tasks, 210 source instances, and 520 task cases.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LeaderboardSection() {
   return (
     <section className="section section-leaderboard" id="leaderboard">
@@ -224,9 +249,24 @@ function LeaderboardSection() {
           eyebrow="Interactive leaderboard"
           title="Leaderboard"
         >
-          Sort by any task, select up to three configurations, and inspect how their task
-          profiles differ behind the fixed Overall summary.
+          Overall averages five fixed task scores; the figure explains the aggregate and the table
+          preserves every exact score.
         </SectionHeading>
+        <div className="results-narrative">
+          <h3>Close Overall scores conceal different capabilities.</h3>
+          <p>
+            Doubao leads at 50.2 Overall, followed by Claude Opus at 48.9 and GPT 5.4 Medium at
+            48.7. The three leaders are separated by only 1.5 points, yet they exchange task
+            leadership: Doubao leads Layout, Camera, and Dynamic; Claude Opus leads Articulated;
+            GPT 5.4 Medium leads Reconstruction.
+          </p>
+          <p>
+            Overall rewards balance across tasks rather than the number of task wins. GPT 5.4 High
+            leads three tasks but ranks fourth because its Dynamic score trails GPT 5.4 Medium by
+            21.8 points. This is why the page keeps both the stacked decomposition and the complete
+            task-level table.
+          </p>
+        </div>
         <Leaderboard />
       </div>
     </section>
@@ -244,6 +284,21 @@ function BenchmarkSection() {
         >
           Visual evidence becomes an executable artifact that is measured after execution.
         </SectionHeading>
+        <div className="benchmark-narrative">
+          <h3>One fixed loop makes every final artifact auditable.</h3>
+          <p>
+            Each configuration receives task-defined PNG images or sampled video frames and
+            controls headless Blender through the same tool interface. Depending on the task, the
+            final output is a camera pose in JSON, a static GLB, a sequence of GLB states, or an
+            animated GLB. Every output is scored once against hidden 3D ground truth.
+          </p>
+          <p>
+            The shared harness fixes the tools and interaction budget for each task: 30 steps for
+            Layout and Camera, 60 for Articulated, 35 for Reconstruction, and 80 for Dynamic. The
+            paired multi-view Layout and photo-realistic Dynamic conditions are reported
+            separately and remain outside Overall.
+          </p>
+        </div>
         <PipelineVisual />
       </div>
     </section>
@@ -406,6 +461,7 @@ export default function App() {
       <main id="main-content">
         <Hero />
         <AbstractSection />
+        <MotivationSection />
         <LeaderboardSection />
         <ExplorerSection />
         <BenchmarkSection />

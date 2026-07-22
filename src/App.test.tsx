@@ -68,6 +68,24 @@ describe('SceneActBench project page', () => {
     expect(
       screen.getByText(/Vision-language model \(VLM\) agents increasingly use tools/i),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: 'Acting makes 3D understanding observable.',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 3,
+        name: 'Close Overall scores conceal different capabilities.',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 3,
+        name: 'One fixed loop makes every final artifact auditable.',
+      }),
+    ).toBeInTheDocument();
     expect(screen.queryByText('Authors & citation')).not.toBeInTheDocument();
     expect(screen.getAllByText('Doubao Seed 2.0 Pro').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Claude Sonnet 5').length).toBeGreaterThan(0);
@@ -75,6 +93,8 @@ describe('SceneActBench project page', () => {
       screen.getByAltText(/Stacked task contributions to Overall/i),
     ).toHaveAttribute('src', expect.stringContaining('leaderboard.svg'));
     expect(screen.queryByText('Task profile')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /to comparison/i })).not.toBeInTheDocument();
+    expect(screen.queryByText('Comparison set')).not.toBeInTheDocument();
     expect(screen.getByText('Maximum Part Error')).toBeInTheDocument();
     expect(screen.getByText('Maximum Mover Error')).toBeInTheDocument();
     expect(screen.getByText('Average Mover Error')).toBeInTheDocument();
