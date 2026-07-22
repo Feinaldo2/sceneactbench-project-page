@@ -239,19 +239,25 @@ describe('SceneActBench project page', () => {
       .getByAltText(/Stacked task contributions to Overall/i)
       .closest('figure');
     expect(chart).toBeInTheDocument();
-    expect(within(chart!).getByText('Doubao Seed 2.0 Pro')).toBeInTheDocument();
+    expect(screen.queryByRole('dialog', { name: 'MiniMax M3' })).not.toBeInTheDocument();
 
     fireEvent.click(
       within(chart!).getByRole('button', {
-        name: 'Inspect MiniMax M3 High scores',
+        name: 'Show MiniMax M3 High task scores',
       }),
     );
-    expect(within(chart!).getByText('MiniMax M3')).toBeInTheDocument();
-    expect(
-      within(chart!).getByRole('button', {
-        name: 'Inspect MiniMax M3 High scores',
-      }),
-    ).toHaveAttribute('aria-pressed', 'true');
+    const scoreDialog = screen.getByRole('dialog', { name: 'MiniMax M3' });
+    expect(scoreDialog).toBeInTheDocument();
+    const overallOrbit = scoreDialog.querySelector<HTMLElement>('.score-overall-orbit');
+    expect(overallOrbit).toBeInTheDocument();
+    expect(within(overallOrbit!).getByText('Overall')).toBeInTheDocument();
+    expect(within(overallOrbit!).getByText('38.6')).toBeInTheDocument();
+    expect(within(scoreDialog).getByText('58.1')).toBeInTheDocument();
+    expect(within(scoreDialog).getByText('25.6')).toBeInTheDocument();
+    expect(document.body.style.overflow).toBe('hidden');
+
+    fireEvent.keyDown(scoreDialog, { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: 'MiniMax M3' })).not.toBeInTheDocument();
   });
 
   it('opens task metrics in a floating dialog', () => {
