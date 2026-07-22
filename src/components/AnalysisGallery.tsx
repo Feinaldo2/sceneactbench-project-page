@@ -210,13 +210,16 @@ function AnalysisImage({ item }: { item: AnalysisItem }) {
 export function AnalysisGallery() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [autoAdvance, setAutoAdvance] = useState(true);
+  const [hoverPaused, setHoverPaused] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const openerRef = useRef<HTMLButtonElement | null>(null);
   const titleId = useId();
   const selectedItem = analysisItems[selectedIndex];
 
-  const selectItem = (index: number) => {
+  const selectItem = (index: number, pauseAuto = true) => {
     setSelectedIndex((index + analysisItems.length) % analysisItems.length);
+    if (pauseAuto) setAutoAdvance(false);
   };
 
   const open = (button: HTMLButtonElement) => {
@@ -245,6 +248,20 @@ export function AnalysisGallery() {
       window.removeEventListener('keydown', handleKey);
     };
   }, [lightboxOpen, selectedIndex]);
+
+  useEffect(() => {
+    if (!autoAdvance || hoverPaused || lightboxOpen) return;
+    if (
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+    const timer = window.setInterval(() => {
+      setSelectedIndex((current) => (current + 1) % analysisItems.length);
+    }, 6_500);
+    return () => window.clearInterval(timer);
+  }, [autoAdvance, hoverPaused, lightboxOpen]);
 
   const handleTabKey = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     let nextIndex = index;
@@ -278,7 +295,11 @@ export function AnalysisGallery() {
 
   return (
     <>
-      <div className="analysis-navigator">
+      <div
+        className="analysis-navigator"
+        onMouseEnter={() => setHoverPaused(true)}
+        onMouseLeave={() => setHoverPaused(false)}
+      >
         <div className="analysis-tabs" role="tablist" aria-label="Analysis figures">
           {analysisItems.map((item, index) => (
             <button
@@ -328,6 +349,14 @@ export function AnalysisGallery() {
           <div className="analysis-panel-foot">
             <span>{selectedItem.title}</span>
             <div>
+              <button
+                type="button"
+                className="analysis-auto-toggle"
+                aria-pressed={!autoAdvance}
+                onClick={() => setAutoAdvance((value) => !value)}
+              >
+                {autoAdvance ? 'Pause auto' : 'Resume auto'}
+              </button>
               <button type="button" onClick={() => selectItem(selectedIndex - 1)}>
                 ← Previous
               </button>

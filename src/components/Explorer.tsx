@@ -270,29 +270,35 @@ function CameraOutput({ example }: { example?: BenchmarkExample }) {
   const poseJson = example?.task === 'camera' ? example.poseJson : undefined;
   return (
     <div className="camera-output">
-      <div className="pose-card">
-        <div className="pose-card-head">
-          <FileIcon />
-          <span>
-            <strong>camera_pose.json</strong>
-            <small>structured output</small>
-          </span>
-        </div>
-        {poseJson ? (
-          <pre>{poseJson}</pre>
-        ) : (
-          <div className="pose-empty">
-            <code>{'{\n  "position": pending,\n  "orientation": pending,\n  "fov": pending\n}'}</code>
-            <p>Camera examples use pose JSON and rendered images—not GLB geometry.</p>
-          </div>
-        )}
-      </div>
       <ImageSlot
         asset={example?.outputImages[0]}
         label="Rendered verification"
         emptyTitle="No verification render"
         detail="The pose is still available as structured JSON."
       />
+      <details className="pose-card">
+        <summary className="pose-card-head">
+          <FileIcon />
+          <span>
+            <strong>camera_pose.json</strong>
+            <small>structured output</small>
+          </span>
+          <span className="pose-toggle">
+            <span className="pose-view">View JSON</span>
+            <span className="pose-hide">Hide JSON</span>
+          </span>
+        </summary>
+        <div className="pose-card-body">
+          {poseJson ? (
+            <pre>{poseJson}</pre>
+          ) : (
+            <div className="pose-empty">
+              <code>{'{\n  "position": pending,\n  "orientation": pending,\n  "fov": pending\n}'}</code>
+              <p>Camera examples use pose JSON and rendered images—not GLB geometry.</p>
+            </div>
+          )}
+        </div>
+      </details>
     </div>
   );
 }

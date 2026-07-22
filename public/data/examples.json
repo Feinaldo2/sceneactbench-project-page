@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-21T15:10:10.168811Z",
+  "generatedAt": "2026-07-22T02:17:53.710282Z",
   "assetBase": "/assets/examples/",
   "examples": [
     {
@@ -84,6 +84,7 @@
         }
       ],
       "poseJson": "{\n  \"agent_position\": [\n    -4.0,\n    -1.5,\n    1.2000000476837158\n  ],\n  \"agent_look_dir\": [\n    -0.9353047013282776,\n    -0.35073935985565186,\n    0.04676547273993492\n  ],\n  \"agent_matrix_world\": [\n    [\n      -0.35112354159355164,\n      0.04378790035843849,\n      0.9353047013282776,\n      -4.0\n    ],\n    [\n      0.9363291263580322,\n      0.0164203979074955,\n      0.35073935985565186,\n      -1.5\n    ],\n    [\n      6.539171693020762e-08,\n      0.9989058971405029,\n      -0.04676547273993492,\n      1.2000000476837158\n    ],\n    [\n      0.0,\n      0.0,\n      0.0,\n      1.0\n    ]\n  ],\n  \"agent_fov_x_deg\": 39.6\n}",
+      "notes": "The predicted camera has 155.4\u00b0 angular error and faces away from the furnished scene, so its verification render is nearly uniform grey.",
       "referenceGlb": {
         "src": "/assets/references/camera/gt-scene.glb",
         "alt": "Interactive ground-truth camera scene."

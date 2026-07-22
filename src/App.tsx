@@ -208,8 +208,8 @@ function AbstractSection() {
             210 source instances, yielding 520 task cases including paired input conditions. Every
             task runs through one fixed agent loop to keep the comparison fair. Across eleven
             proprietary VLM configurations, Overall scores range from 38.6 to 50.2, and no
-            configuration succeeds consistently across tasks. We further analyse where and how
-            failures manifest.
+            configuration succeeds consistently across tasks. We further analyse where and{' '}
+            <span className="nowrap">how failures manifest.</span>
           </p>
         </div>
       </div>

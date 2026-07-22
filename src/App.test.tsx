@@ -80,7 +80,11 @@ describe('SceneActBench project page', () => {
     expect(screen.getByText(/Recover measurable 3D geometry/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Camera' }));
-    expect(screen.getByText('camera_pose.json')).toBeInTheDocument();
+    const poseDetails = screen.getByText('camera_pose.json').closest('details');
+    expect(poseDetails).toBeInTheDocument();
+    expect(poseDetails).not.toHaveAttribute('open');
+    fireEvent.click(within(poseDetails!).getByText('View JSON'));
+    expect(poseDetails).toHaveAttribute('open');
     expect(screen.getByText(/Camera examples use pose JSON and rendered images/i)).toBeInTheDocument();
   });
 
@@ -99,6 +103,7 @@ describe('SceneActBench project page', () => {
     const analysisTabs = screen.getByRole('tablist', { name: 'Analysis figures' });
     const tabs = within(analysisTabs).getAllByRole('tab');
     expect(tabs).toHaveLength(6);
+    expect(screen.getByRole('button', { name: 'Pause auto' })).toBeInTheDocument();
     fireEvent.click(within(analysisTabs).getByRole('tab', { name: 'Step curves' }));
     expect(
       screen.getByRole('heading', {
@@ -110,6 +115,7 @@ describe('SceneActBench project page', () => {
       screen.getByRole('img', { name: 'Animated Overall score curves from 10 to 150 agent steps' }),
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Replay' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Resume auto' })).toBeInTheDocument();
   });
 
   it('does not expose superseded metric labels', () => {

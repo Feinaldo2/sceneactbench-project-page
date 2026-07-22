@@ -379,6 +379,13 @@ def build_camera(
     agent_name = f"{CASES['camera'][1]}__agent_view.png"
     agent = copy_asset(case_dir / agent_name, output_dir / "agent-view.png")
     pose = load_json(case_dir / "agent_camera.json")
+    angle_error = float(score["score"]["cam_angle_error_deg"])
+    notes = None
+    if angle_error >= 120:
+        notes = (
+            f"The predicted camera has {angle_error:.1f}° angular error and faces away "
+            "from the furnished scene, so its verification render is nearly uniform grey."
+        )
     return {
         "id": identifier,
         "task": "camera",
@@ -392,6 +399,7 @@ def build_camera(
         "referenceImages": references,
         "outputImages": [media(agent, f"Rendered view from {model_name}'s predicted camera.")],
         "poseJson": json.dumps(pose, indent=2),
+        **({"notes": notes} if notes else {}),
     }
 
 
