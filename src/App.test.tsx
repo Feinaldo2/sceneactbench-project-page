@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { links } from './data/site';
@@ -338,7 +338,7 @@ describe('SceneActBench project page', () => {
     expect(screen.queryByRole('dialog', { name: 'MiniMax M3' })).not.toBeInTheDocument();
   });
 
-  it('opens task metrics in a floating dialog', () => {
+  it('opens task metrics in a floating dialog', async () => {
     render(<App />);
 
     expect(screen.queryByRole('heading', { level: 2, name: 'Metrics' })).not.toBeInTheDocument();
@@ -357,7 +357,12 @@ describe('SceneActBench project page', () => {
     expect(
       within(layoutDialog).getByRole('heading', { level: 4, name: 'Calculation' }),
     ).toBeInTheDocument();
-    expect(within(layoutDialog).getByText(/ADD-S =/i)).toBeInTheDocument();
+    const renderedFormula = layoutDialog.querySelector<HTMLElement>('.metric-formula-render');
+    expect(renderedFormula).toBeInTheDocument();
+    await waitFor(() => {
+      expect(renderedFormula?.querySelector('.katex')).toBeInTheDocument();
+    });
+    expect(renderedFormula).toHaveTextContent('ADD-S');
     expect(document.querySelector('.task-panel')).not.toContainElement(layoutDialog);
     expect(document.body.style.overflow).toBe('hidden');
     fireEvent.keyDown(layoutDialog, { key: 'Escape' });

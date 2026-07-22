@@ -5,6 +5,37 @@ import { taskById } from '../data/tasks';
 import type { MetricDefinition, TaskId } from '../data/types';
 import { CloseIcon } from './Icons';
 
+function MetricFormula({ source }: { source: string }) {
+  const [markup, setMarkup] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    void Promise.all([
+      import('katex'),
+      import('katex/dist/katex.min.css'),
+    ]).then(([module]) => {
+      if (!active) return;
+      setMarkup(
+        module.default.renderToString(source, {
+          displayMode: true,
+          throwOnError: false,
+          strict: false,
+        }),
+      );
+    });
+    return () => {
+      active = false;
+    };
+  }, [source]);
+
+  return (
+    <div
+      className={markup ? 'metric-formula-render' : 'metric-formula-render loading'}
+      dangerouslySetInnerHTML={markup ? { __html: markup } : undefined}
+    />
+  );
+}
+
 export function TaskMetrics({ taskId }: { taskId: TaskId }) {
   const [selectedMetric, setSelectedMetric] = useState<MetricDefinition | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -126,7 +157,7 @@ export function TaskMetrics({ taskId }: { taskId: TaskId }) {
                 <p className="metric-dialog-summary">{selectedMetric.summary}</p>
                 <div className="metric-dialog-formula">
                   <h4>Calculation</h4>
-                  <pre><code>{selectedMetric.formula}</code></pre>
+                  <MetricFormula source={selectedMetric.formula} />
                   <p>{selectedMetric.calculation}</p>
                 </div>
                 <div className="metric-dialog-detail">
