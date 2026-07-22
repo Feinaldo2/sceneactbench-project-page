@@ -78,25 +78,6 @@ function usePageMotion() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const numbers = Array.from(
-      document.querySelectorAll<HTMLElement>('.hero-facts [data-count]'),
-    );
-    const startedAt = performance.now();
-    let frameId = 0;
-    const animate = (time: number) => {
-      const progress = Math.min(1, (time - startedAt) / 850);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      numbers.forEach((element) => {
-        const target = Number(element.dataset.count ?? 0);
-        element.textContent = String(Math.round(target * eased));
-      });
-      if (progress < 1) frameId = window.requestAnimationFrame(animate);
-    };
-    frameId = window.requestAnimationFrame(animate);
-    return () => window.cancelAnimationFrame(frameId);
-  }, []);
 }
 
 function SectionHeading({
@@ -309,19 +290,19 @@ function Hero() {
         <dl className="hero-facts">
           <div>
             <dt>Tasks</dt>
-            <dd data-count="5">5</dd>
+            <dd>5</dd>
           </div>
           <div>
             <dt>Source instances</dt>
-            <dd data-count="210">210</dd>
+            <dd>210</dd>
           </div>
           <div>
             <dt>Task cases</dt>
-            <dd data-count="520">520</dd>
+            <dd>520</dd>
           </div>
           <div>
             <dt>VLM configurations</dt>
-            <dd data-count="11">11</dd>
+            <dd>11</dd>
           </div>
         </dl>
         <div className="provenance-strip" aria-label="Dataset provenance">
