@@ -75,11 +75,11 @@ describe('SceneActBench project page', () => {
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', {
+      screen.queryByRole('heading', {
         level: 3,
         name: 'Close Overall scores conceal different capabilities.',
       }),
-    ).toBeInTheDocument();
+    ).not.toBeInTheDocument();
     expect(
       screen.getByRole('heading', {
         level: 3,

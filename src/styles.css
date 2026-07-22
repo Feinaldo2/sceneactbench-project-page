@@ -4497,7 +4497,6 @@ footer {
 }
 
 .narrative-block > h2,
-.results-narrative h3,
 .benchmark-narrative h3 {
   margin: 11px 0 20px;
   color: var(--ink);
@@ -4509,7 +4508,6 @@ footer {
 }
 
 .narrative-columns,
-.results-narrative,
 .benchmark-narrative {
   display: grid;
   gap: 18px 38px;
@@ -4517,20 +4515,11 @@ footer {
 }
 
 .narrative-columns p,
-.results-narrative p,
 .benchmark-narrative p {
   margin: 0;
   color: var(--ink-soft);
 }
 
-.results-narrative {
-  max-width: 980px;
-  margin: 0 auto 34px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid var(--line);
-}
-
-.results-narrative h3,
 .benchmark-narrative h3 {
   grid-column: 1 / -1;
 }
@@ -4629,7 +4618,6 @@ footer {
 .section-heading > p,
 .abstract-copy p,
 .narrative-columns p,
-.results-narrative p,
 .benchmark-narrative p,
 .task-description,
 .metric-card > p,
@@ -4785,7 +4773,6 @@ footer {
   }
 
   .narrative-columns,
-  .results-narrative,
   .benchmark-narrative {
     grid-template-columns: 1fr;
   }
@@ -4865,7 +4852,6 @@ footer {
   }
 
   .narrative-block > h2,
-  .results-narrative h3,
   .benchmark-narrative h3 {
     font-size: clamp(1.9rem, 9vw, 2.45rem);
   }

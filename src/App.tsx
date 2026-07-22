@@ -252,21 +252,6 @@ function LeaderboardSection() {
           Overall averages five fixed task scores; the figure explains the aggregate and the table
           preserves every exact score.
         </SectionHeading>
-        <div className="results-narrative">
-          <h3>Close Overall scores conceal different capabilities.</h3>
-          <p>
-            Doubao leads at 50.2 Overall, followed by Claude Opus at 48.9 and GPT 5.4 Medium at
-            48.7. The three leaders are separated by only 1.5 points, yet they exchange task
-            leadership: Doubao leads Layout, Camera, and Dynamic; Claude Opus leads Articulated;
-            GPT 5.4 Medium leads Reconstruction.
-          </p>
-          <p>
-            Overall rewards balance across tasks rather than the number of task wins. GPT 5.4 High
-            leads three tasks but ranks fourth because its Dynamic score trails GPT 5.4 Medium by
-            21.8 points. This is why the page keeps both the stacked decomposition and the complete
-            task-level table.
-          </p>
-        </div>
         <Leaderboard />
       </div>
     </section>
