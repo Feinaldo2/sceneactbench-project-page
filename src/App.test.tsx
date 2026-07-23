@@ -45,7 +45,11 @@ describe('SceneActBench project page', () => {
     expect(hero).toBeInTheDocument();
     expect(within(hero!).queryByAltText('Tencent Hunyuan')).not.toBeInTheDocument();
     const authorLine = within(hero!).getByLabelText('Authors');
-    expect(authorLine.querySelectorAll('sup')).toHaveLength(14);
+    expect(authorLine.querySelectorAll('sup')).toHaveLength(13);
+    expect(within(authorLine).queryByText('Tianyu Pang')).not.toBeInTheDocument();
+    expect(
+      within(authorLine).getByRole('link', { name: 'Wenxi Zhu' }).closest('span'),
+    ).toHaveTextContent('†');
     const authorBreak = authorLine.querySelector('.author-row-break');
     expect(authorBreak?.nextElementSibling).toHaveTextContent('Haowei Lin');
     const affiliationLine = hero!.querySelector('.affiliation-line');

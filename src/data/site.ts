@@ -19,8 +19,7 @@ export const authors = [
   { name: 'Wenkai Lyu', affiliations: [1] },
   { name: 'Jianzhu Ma', affiliations: [2] },
   { name: 'Xueqian Wang', affiliations: [2] },
-  { name: 'Wenxi Zhu', affiliations: [1] },
-  { name: 'Tianyu Pang', affiliations: [1], corresponding: true },
+  { name: 'Wenxi Zhu', affiliations: [1], corresponding: true },
 ] as const;
 
 export const affiliations = [
@@ -34,7 +33,7 @@ export const affiliations = [
 
 export const bibtex = `@misc{sceneactbench2026,
   title  = {SceneActBench: Can Agents Act on the 3D Scenes They See?},
-  author = {Zhao, Yifei and Zhou, Xiangxin and Yang, Wenhao and Tang, Jiaqi and Jian, Pu and Yao, Huanjin and Yao, Jiarui and Lin, Haowei and Chen, Zhuo and Lyu, Wenkai and Ma, Jianzhu and Wang, Xueqian and Zhu, Wenxi and Pang, Tianyu},
+  author = {Zhao, Yifei and Zhou, Xiangxin and Yang, Wenhao and Tang, Jiaqi and Jian, Pu and Yao, Huanjin and Yao, Jiarui and Lin, Haowei and Chen, Zhuo and Lyu, Wenkai and Ma, Jianzhu and Wang, Xueqian and Zhu, Wenxi},
   year   = {2026},
   note   = {Preprint},
   url    = {https://feinaldo2.github.io/sceneactbench-project-page/}
