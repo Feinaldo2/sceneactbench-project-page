@@ -45,13 +45,16 @@ describe('SceneActBench project page', () => {
     expect(hero).toBeInTheDocument();
     expect(within(hero!).queryByAltText('Tencent Hunyuan')).not.toBeInTheDocument();
     const authorLine = within(hero!).getByLabelText('Authors');
-    expect(authorLine.querySelectorAll('sup')).toHaveLength(13);
+    expect(authorLine.querySelectorAll('sup')).toHaveLength(14);
     expect(within(authorLine).queryByText('Tianyu Pang')).not.toBeInTheDocument();
     expect(
       within(authorLine).getByRole('link', { name: 'Wenxi Zhu' }).closest('span'),
     ).toHaveTextContent('†');
     const authorBreak = authorLine.querySelector('.author-row-break');
     expect(authorBreak?.nextElementSibling).toHaveTextContent('Haowei Lin');
+    const chunchao = within(authorLine).getByRole('link', { name: 'Chunchao Guo' }).closest('span');
+    expect(chunchao).toHaveTextContent('1');
+    expect(chunchao?.nextElementSibling).toHaveTextContent('Zhuo Chen');
     const affiliationLine = hero!.querySelector('.affiliation-line');
     expect(affiliationLine).toHaveTextContent('Tencent Hunyuan');
     expect(affiliationLine).toHaveTextContent('THU');
